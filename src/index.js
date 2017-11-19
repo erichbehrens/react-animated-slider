@@ -74,9 +74,9 @@ class Slider extends React.PureComponent {
     }
     
 	render(){
-		const { children } = this.props;
+		const { children, className } = this.props;
 		const { classNames } = this.state;
-		return <div>
+		return <div className={className}>
 			<button onClick={this.previous}>prev</button>
 			<button onClick={this.next}>next</button>
 			<div className="track">

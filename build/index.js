@@ -130,12 +130,14 @@ var Slider = function (_React$PureComponent) {
 		value: function render() {
 			var _this2 = this;
 
-			var children = this.props.children;
+			var _props = this.props,
+			    children = _props.children,
+			    className = _props.className;
 			var classNames = this.state.classNames;
 
 			return _react2.default.createElement(
 				'div',
-				null,
+				{ className: className },
 				_react2.default.createElement(
 					'button',
 					{ onClick: this.previous },
