@@ -1,7 +1,7 @@
 {
-  "name": "react-slider",
-  "version": "0.0.0",
-  "description": "Simple react slider component",
+  "name": "react-animated-slider",
+  "version": "0.0.1",
+  "description": "Animated slider component for react",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,16 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/erichbehrens/react-slider.git"
+    "url": "git+https://github.com/erichbehrens/react-animated-slider.git"
   },
   "author": "Erich Behrens <me@eb1.it>",
   "license": "",
   "bugs": {
-    "url": "https://github.com/erichbehrens/react-slider/issues"
+    "url": "https://github.com/erichbehrens/react-animated-slider/issues"
   },
-  "homepage": "https://github.com/erichbehrens/react-slider#readme",
+  "homepage": "https://github.com/erichbehrens/react-animated-slider#readme",
   "dependencies": {
-    "react": "^16.1.1"
+    "react": "^15.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

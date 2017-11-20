@@ -87,7 +87,7 @@ class Slider extends React.PureComponent {
                         className: `${item.props.className} ${classNames.slide} ${this.getSlideClass(index)}`,
                      }))}
 			</div>
-	</div>;
-}
+		</div>;
+	}
 }
 export default Slider;
