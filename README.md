@@ -11,6 +11,8 @@ npm install react-animated-slider --save
 
 ```jsx
 import Slider from 'react-animated-slider';
+import 'react-animated-slider/build/horizontal.css';
+
 <Slider>
   {content.map((article, index) => <div key={index}>
     <h2>{article.title}</h2>
@@ -19,29 +21,44 @@ import Slider from 'react-animated-slider';
 </Slider>
 ```
 ## Properties:
-**slideIndex** - default 0
+**slideIndex** - number, default 0
 
 Index of the slide that will be initially displayed.
 
-**classNames**
+**previousButton** - ReactElement, default "previous"
 
-default
+Will be rendered inside the previous button
+
+**nextButton** - ReactElement, default "next"
+
+Will be rendered inside the next button
+
+**classNames** object, default
 
 ```js
 {
-    slide: 'slide',
-    hidden: 'hidden',
-    previous: 'previous',
-    current: 'current',
-    next: 'next',
-    animateIn: 'animateIn',
-    animateOut: 'animateOut',
+	previousButton: 'previousButton',
+	nextButton: 'nextButton',
+	track: 'track',
+  slide: 'slide',
+  hidden: 'hidden',
+  previous: 'previous',
+  current: 'current',
+  next: 'next',
+  animateIn: 'animateIn',
+  animateOut: 'animateOut',
 }
 ```
 
 CSS classnames that will be apllied to the slides.
 
 ### Classnames
+
+**previousButton**
+
+**nextButton**
+
+**track** element wrapping all slides 
 
 **slide** apllied to every item (child)
 

@@ -75,6 +75,8 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -91,6 +93,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var PREVIOUS = 'previous';
 var NEXT = 'next';
+var DEFAULT_CLASSNAMES = {
+	previousButton: 'previousButton',
+	nextButton: 'nextButton',
+	track: 'track',
+	slide: 'slide',
+	hidden: 'hidden',
+	previous: 'previous',
+	current: 'current',
+	next: 'next',
+	animateIn: 'animateIn',
+	animateOut: 'animateOut'
+};
+
+function addClassname(value) {
+	return value ? ' ' + value : '';
+}
 
 var Slider = function (_React$PureComponent) {
 	_inherits(Slider, _React$PureComponent);
@@ -106,19 +124,11 @@ var Slider = function (_React$PureComponent) {
 		    _this$props$slideInde = _this$props.slideIndex,
 		    slideIndex = _this$props$slideInde === undefined ? 0 : _this$props$slideInde,
 		    _this$props$className = _this$props.classNames,
-		    classNames = _this$props$className === undefined ? {
-			slide: 'slide',
-			hidden: 'hidden',
-			previous: 'previous',
-			current: 'current',
-			next: 'next',
-			animateIn: 'animateIn',
-			animateOut: 'animateOut'
-		} : _this$props$className;
+		    classNames = _this$props$className === undefined ? {} : _this$props$className;
 
 		_this.state = {
 			currentSlideIndex: slideIndex,
-			classNames: classNames,
+			classNames: _extends({}, DEFAULT_CLASSNAMES, classNames),
 			animating: false
 		};
 		_this.animatedSlideCount = 0;
@@ -132,7 +142,11 @@ var Slider = function (_React$PureComponent) {
 
 			var _props = this.props,
 			    children = _props.children,
-			    className = _props.className;
+			    className = _props.className,
+			    _props$previousButton = _props.previousButton,
+			    previousButton = _props$previousButton === undefined ? 'previous' : _props$previousButton,
+			    _props$nextButton = _props.nextButton,
+			    nextButton = _props$nextButton === undefined ? 'next' : _props$nextButton;
 			var classNames = this.state.classNames;
 
 			return _react2.default.createElement(
@@ -140,22 +154,28 @@ var Slider = function (_React$PureComponent) {
 				{ className: className },
 				_react2.default.createElement(
 					'button',
-					{ onClick: this.previous },
-					'prev'
+					{
+						onClick: this.previous,
+						className: classNames.previousButton
+					},
+					previousButton
 				),
 				_react2.default.createElement(
 					'button',
-					{ onClick: this.next },
-					'next'
+					{
+						onClick: this.next,
+						className: classNames.nextButton
+					},
+					nextButton
 				),
 				_react2.default.createElement(
 					'div',
-					{ className: 'track' },
+					{ className: classNames.track },
 					_react2.default.Children.map(children, function (item, index) {
 						return _react2.default.cloneElement(item, {
 							key: index,
 							onAnimationEnd: _this2.onAnimationEnd,
-							className: item.props.className + ' ' + classNames.slide + ' ' + _this2.getSlideClass(index)
+							className: classNames.slide + ' ' + _this2.getSlideClass(index) + addClassname(item.props.className)
 						});
 					})
 				)
