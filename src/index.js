@@ -54,7 +54,7 @@ class Slider extends React.PureComponent {
 
 	previous = () => {
 		const nextSlideIndex = this.state.currentSlideIndex - 1;
-		const actualNextSlide = nextSlideIndex > 0 ? nextSlideIndex : this.props.children.length - 1;
+		const actualNextSlide = nextSlideIndex >= 0 ? nextSlideIndex : this.props.children.length - 1;
 		this.goTo(actualNextSlide, PREVIOUS);
 	}
 
