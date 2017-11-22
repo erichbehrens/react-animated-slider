@@ -37,9 +37,9 @@ Will be rendered inside the next button
 
 ```js
 {
-	previousButton: 'previousButton',
-	nextButton: 'nextButton',
-	track: 'track',
+  previousButton: 'previousButton',
+  nextButton: 'nextButton',
+  track: 'track',
   slide: 'slide',
   hidden: 'hidden',
   previous: 'previous',
