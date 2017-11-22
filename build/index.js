@@ -209,7 +209,7 @@ var _initialiseProps = function _initialiseProps() {
 
 	this.previous = function () {
 		var nextSlideIndex = _this3.state.currentSlideIndex - 1;
-		var actualNextSlide = nextSlideIndex > 0 ? nextSlideIndex : _this3.props.children.length - 1;
+		var actualNextSlide = nextSlideIndex >= 0 ? nextSlideIndex : _this3.props.children.length - 1;
 		_this3.goTo(actualNextSlide, PREVIOUS);
 	};
 
