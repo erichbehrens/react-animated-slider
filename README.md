@@ -1,7 +1,9 @@
 # react-animated-slider
 Animated slider component for react
 
-## [Demo](https://p582xl40j.codesandbox.io/)
+
+[Demo](https://p582xl40j.codesandbox.io/)
+
 [Playground](https://codesandbox.io/s/p582xl40j)
 
 ## Install:
@@ -61,7 +63,7 @@ CSS classnames that will be apllied to the slides.
 
 **nextButton**
 
-**track** element wrapping all slides 
+**track** element wrapping all slides
 
 **slide** apllied to every item (child)
 
