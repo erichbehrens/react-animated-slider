@@ -88,6 +88,47 @@ class Slider extends React.PureComponent {
 		return classNames.hidden;
 	};
 
+	startPageX;
+	startLeft;
+	left = 0;
+
+	handleTouchStart = e => {
+		const touch = e.touches[0];
+		this.startPageX = touch.pageX;
+		this.startLeft = e.target.getBoundingClientRect().left;
+		e.currentTarget.addEventListener('touchmove', this.handleTouchMove, {
+			passive: false
+		});
+		e.target.style.transition = `none`;
+	};
+
+	animating = false;
+	handleTouchMove = e => {
+		e.preventDefault();
+		this.animating =
+			this.animating ||
+			requestAnimationFrame(() => {
+				const touch = e.touches[0];
+				this.left = this.startLeft + touch.pageX - this.startPageX;
+				e.target.style.left = `${this.left}px`;
+				this.animating = false;
+			});
+	};
+
+	handleTouchEnd = e => {
+		e.currentTarget.removeEventListener('touchmove', this.handleTouchMove);
+		console.log('this.startLeft < this.left', this.startLeft, this.left);
+		e.target.style.removeProperty('left');
+		e.target.style.removeProperty('transition');
+		if (this.startLeft < this.left) {
+			this.previous();
+		} else {
+			this.next();
+		}
+		this.startLeft = undefined;
+		this.startPageX = undefined;
+	};
+
 	render() {
 		const {
 			children,
@@ -108,10 +149,13 @@ class Slider extends React.PureComponent {
 					{React.Children.map(children, (item, index) =>
 						React.cloneElement(item, {
 							key: index,
+							onTouchStart: this.handleTouchStart,
+							onTouchEnd: this.handleTouchEnd,
 							onAnimationEnd: this.onAnimationEnd,
-							className: `${classNames.slide} ${this.getSlideClass(
-								index
-							)}${addClassname(item.props.className)}`,
+							className:
+								classNames.slide + ' ' +
+								this.getSlideClass(index) +
+								addClassname(item.props.className),
 						})
 					)}
 				</div>
