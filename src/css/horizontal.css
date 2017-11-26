@@ -3,79 +3,43 @@
 	height: 100%;
 	position: absolute;
 	overflow: hidden;
-	
+
 	&.hidden {
 		opacity: .0;
 	}
 
 	&.previous {
-		transform: translateX(-100%);
+		left: -100%;
 	}
 
 	&.current {
-		transform: translateX(0);
+		left: 0;
 	}
 
 	&.next {
-		transform: translateX(100%);
+		left: 100%;
+	}
+
+	&.animateIn,
+	&.animateOut {
+		transition: all 2s ease;
 	}
 
 	&.animateIn {
-		&.previous {
-			animation: animateInPrevious 2000ms ease;
-		}
-
+		&.previous,
 		&.next {
-			animation: animateInNext 2000ms ease;
+			left: 0;
+			visibility: visible;
 		}
 	}
 
 	&.animateOut {
 		&.previous {
-			animation: animateOutPrevious 2000ms ease;
+			left: 100%;
 		}
 
 		&.next {
-			animation: animateOutNext 2000ms ease;
+			left: -100%;
 		}
-	}
-}
-
-@keyframes animateInPrevious {
-	0% {
-		transform: translateX(-100%);
-	}
-
-	100% {
-		transform: translateX(0);
-	}
-}
-
-@keyframes animateInNext {
-	0% {
-		transform: translateX(100%);
-	}
-
-	100% {
-		transform: translateX(0);
-	}
-}
-@keyframes animateOutPrevious {
-	0% {
-		transform: translateX(0);
-	}
-
-	100% {
-		transform: translateX(100%);
-	}
-}
-
-@keyframes animateOutNext {
-	0% {
-		transform: translateX(0);
-	}
-
-	100% {
-		transform: translateX(-100%);
 	}
 }
