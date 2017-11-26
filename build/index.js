@@ -93,6 +93,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var PREVIOUS = 'previous';
 var NEXT = 'next';
+var HORIZONTAL = 'horizontal';
+var VERTICAL = 'vertical';
 var DEFAULT_CLASSNAMES = {
 	previousButton: 'previousButton',
 	nextButton: 'nextButton',
@@ -126,15 +128,20 @@ var Slider = function (_React$PureComponent) {
 		    _this$props$className = _this$props.classNames,
 		    classNames = _this$props$className === undefined ? {} : _this$props$className,
 		    _this$props$duration = _this$props.duration,
-		    duration = _this$props$duration === undefined ? 2000 : _this$props$duration;
+		    duration = _this$props$duration === undefined ? 2000 : _this$props$duration,
+		    _this$props$direction = _this$props.direction,
+		    direction = _this$props$direction === undefined ? HORIZONTAL : _this$props$direction;
 
 		_this.state = {
 			currentSlideIndex: slideIndex,
 			classNames: _extends({}, DEFAULT_CLASSNAMES, classNames),
 			animating: false,
-			duration: duration
+			duration: duration,
+			direction: direction
 		};
 		_this.slideCount = _react2.default.Children.count(_this.props.children);
+		_this.swipeProperty = direction === HORIZONTAL ? 'left' : 'top';
+		_this.swipeEventProperty = direction === HORIZONTAL ? 'clientX' : 'clientY'; // client Y possibly not working in ie
 		return _this;
 	}
 
@@ -184,8 +191,8 @@ var Slider = function (_React$PureComponent) {
 					_react2.default.Children.map(children, function (item, index) {
 						return _react2.default.cloneElement(item, {
 							key: index,
-							onTouchStart: !isDisabled && _this2.handleTouchStart,
-							onTouchEnd: !isDisabled && _this2.handleTouchEnd,
+							onTouchStart: !isDisabled ? _this2.handleTouchStart : undefined,
+							onTouchEnd: !isDisabled ? _this2.handleTouchEnd : undefined,
 							className: classNames.slide + ' ' + _this2.getSlideClass(index) + addClassname(item.props.className)
 						});
 					})
@@ -280,25 +287,24 @@ var _initialiseProps = function _initialiseProps() {
 		    next = _state$classNames.next;
 
 		var touch = e.touches[0];
-		_this3.startPageX = touch.pageX;
+		_this3.startPageX = touch[_this3.swipeEventProperty];
 		_this3.currentElement = _this3.sliderRef.getElementsByClassName(current)[0];
 		_this3.previousElement = _this3.sliderRef.getElementsByClassName(previous)[0];
 		_this3.nextElement = _this3.sliderRef.getElementsByClassName(next)[0];
-		_this3.startLeft = _this3.currentElement.getBoundingClientRect().left;
-		_this3.currentElement.addEventListener('touchmove', _this3.handleTouchMove, {
+		_this3.startLeft = _this3.currentElement.getBoundingClientRect()[_this3.swipeProperty];
+		_this3.sliderRef.addEventListener('touchmove', _this3.handleTouchMove, {
 			passive: false
 		});
 		_this3.currentElement.style.transition = 'none';
 		if (_this3.previousElement) {
 			_this3.previousElement.style.transition = 'none';
 			_this3.previousElement.style.visibility = 'visible';
-
-			_this3.previousElementStartLeft = _this3.previousElement.getBoundingClientRect().left;
+			_this3.previousElementStartLeft = _this3.previousElement.getBoundingClientRect()[_this3.swipeProperty];
 		}
 		if (_this3.nextElement) {
 			_this3.nextElement.style.visibility = 'visible';
 			_this3.nextElement.style.transition = 'none';
-			_this3.nextElementStartLeft = _this3.nextElement.getBoundingClientRect().left;
+			_this3.nextElementStartLeft = _this3.nextElement.getBoundingClientRect()[_this3.swipeProperty];
 		}
 	};
 
@@ -308,33 +314,34 @@ var _initialiseProps = function _initialiseProps() {
 		e.preventDefault();
 		_this3.animating = _this3.animating || requestAnimationFrame(function () {
 			var touch = e.touches[0];
-			_this3.left = _this3.startLeft + touch.pageX - _this3.startPageX;
-			_this3.currentElement.style.left = _this3.left + 'px';
+			var newLeft = touch[_this3.swipeEventProperty] - _this3.startPageX;
+			_this3.left = _this3.startLeft + newLeft;
+			_this3.currentElement.style[_this3.swipeProperty] = _this3.left + 'px';
 			if (_this3.previousElement) {
-				_this3.previousElementLeft = _this3.previousElementStartLeft + touch.pageX - _this3.startPageX;
-				_this3.previousElement.style.left = _this3.previousElementLeft + 'px';
+				_this3.previousElementLeft = _this3.previousElementStartLeft + newLeft;
+				_this3.previousElement.style[_this3.swipeProperty] = _this3.previousElementLeft + 'px';
 			}
 			if (_this3.nextElement) {
-				_this3.nextElementLeft = _this3.nextElementStartLeft + touch.pageX - _this3.startPageX;
-				_this3.nextElement.style.left = _this3.nextElementLeft + 'px';
+				_this3.nextElementLeft = _this3.nextElementStartLeft + newLeft;
+				_this3.nextElement.style[_this3.swipeProperty] = _this3.nextElementLeft + 'px';
 			}
 			_this3.animating = false;
 		});
 	};
 
 	this.handleTouchEnd = function (e) {
-		_this3.currentElement.removeEventListener('touchmove', _this3.handleTouchMove);
-		_this3.currentElement.style.removeProperty('left');
+		_this3.sliderRef.removeEventListener('touchmove', _this3.handleTouchMove);
+		_this3.currentElement.style.removeProperty(_this3.swipeProperty);
 		_this3.currentElement.style.removeProperty('transition');
 		if (_this3.previousElement) {
 			_this3.previousElement.style.removeProperty('visibility');
 			_this3.previousElement.style.removeProperty('transition');
-			_this3.previousElement.style.removeProperty('left');
+			_this3.previousElement.style.removeProperty(_this3.swipeProperty);
 		}
 		if (_this3.nextElement) {
 			_this3.nextElement.style.removeProperty('visibility');
 			_this3.nextElement.style.removeProperty('transition');
-			_this3.nextElement.style.removeProperty('left');
+			_this3.nextElement.style.removeProperty(_this3.swipeProperty);
 		}
 		if (_this3.startLeft < _this3.left) {
 			_this3.previous();
