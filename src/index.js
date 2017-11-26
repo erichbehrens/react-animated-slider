@@ -98,7 +98,8 @@ class Slider extends React.PureComponent {
 	nextElementLeft;
 
 	handleTouchStart = e => {
-		const { previous, next } = this.state.classNames;
+		if (this.state.animating) return;
+		const { previous, next } = classNames;
 		const touch = e.touches[0];
 		this.startPageX = touch.pageX;
 		this.startLeft = e.target.getBoundingClientRect().left;

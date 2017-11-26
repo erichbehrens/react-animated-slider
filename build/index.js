@@ -159,12 +159,20 @@ var Slider = function (_React$PureComponent) {
 				{ className: className },
 				_react2.default.createElement(
 					'button',
-					{ onClick: this.previous, className: classNames.previousButton },
+					{
+						onClick: this.previous,
+						className: classNames.previousButton,
+						disabled: animating
+					},
 					previousButton
 				),
 				_react2.default.createElement(
 					'button',
-					{ onClick: this.next, className: classNames.nextButton },
+					{
+						onClick: this.next,
+						className: classNames.nextButton,
+						disabled: animating
+					},
 					nextButton
 				),
 				_react2.default.createElement(
@@ -241,9 +249,10 @@ var _initialiseProps = function _initialiseProps() {
 	this.left = 0;
 
 	this.handleTouchStart = function (e) {
-		var _state$classNames = _this3.state.classNames,
-		    previous = _state$classNames.previous,
-		    next = _state$classNames.next;
+		if (_this3.state.animating) return;
+		var _classNames = classNames,
+		    previous = _classNames.previous,
+		    next = _classNames.next;
 
 		var touch = e.touches[0];
 		_this3.startPageX = touch.pageX;
