@@ -134,7 +134,7 @@ var Slider = function (_React$PureComponent) {
 			animating: false,
 			duration: duration
 		};
-		_this.animatedSlideCount = 0;
+		_this.slideCount = _react2.default.Children.count(_this.props.children);
 		return _this;
 	}
 
@@ -152,8 +152,9 @@ var Slider = function (_React$PureComponent) {
 			    nextButton = _props$nextButton === undefined ? 'next' : _props$nextButton;
 			var _state = this.state,
 			    classNames = _state.classNames,
-			    animating = _state.animating;
+			    currentSlideIndex = _state.currentSlideIndex;
 
+			var isDisabled = this.isDisabled();
 			return _react2.default.createElement(
 				'div',
 				{ className: className },
@@ -162,7 +163,7 @@ var Slider = function (_React$PureComponent) {
 					{
 						onClick: this.previous,
 						className: classNames.previousButton,
-						disabled: animating
+						disabled: isDisabled || !this.canGoPrevious()
 					},
 					previousButton
 				),
@@ -171,7 +172,7 @@ var Slider = function (_React$PureComponent) {
 					{
 						onClick: this.next,
 						className: classNames.nextButton,
-						disabled: animating
+						disabled: isDisabled || !this.canGoNext()
 					},
 					nextButton
 				),
@@ -181,8 +182,8 @@ var Slider = function (_React$PureComponent) {
 					_react2.default.Children.map(children, function (item, index) {
 						return _react2.default.cloneElement(item, {
 							key: index,
-							onTouchStart: _this2.handleTouchStart,
-							onTouchEnd: _this2.handleTouchEnd,
+							onTouchStart: !isDisabled && _this2.handleTouchStart,
+							onTouchEnd: !isDisabled && _this2.handleTouchEnd,
 							className: classNames.slide + ' ' + _this2.getSlideClass(index) + addClassname(item.props.className)
 						});
 					})
@@ -205,21 +206,39 @@ var _initialiseProps = function _initialiseProps() {
 		});
 	};
 
+	this.isDisabled = function () {
+		return _this3.slideCount < 2 || _this3.state.animating || _this3.props.disabled;
+	};
+
+	this.isInfinite = function () {
+		return _this3.slideCount > 2 && _this3.props.infinite !== false;
+	};
+
+	this.canGoPrevious = function () {
+		return _this3.isInfinite() || _this3.state.currentSlideIndex > 0;
+	};
+
+	this.canGoNext = function () {
+		return _this3.isInfinite() || _this3.state.currentSlideIndex < _this3.slideCount - 1;
+	};
+
 	this.goTo = function (index, animation) {
-		if (_this3.state.animating) return;
+		if (_this3.isDisabled()) return;
 		_this3.nextSlideIndex = index;
 		_this3.setState({ animating: true, animation: animation });
 		setTimeout(_this3.onAnimationEnd, _this3.state.duration);
 	};
 
 	this.previous = function () {
+		if (!_this3.canGoPrevious()) return;
 		var nextSlideIndex = _this3.state.currentSlideIndex - 1;
-		var actualNextSlide = nextSlideIndex >= 0 ? nextSlideIndex : _this3.props.children.length - 1;
+		var actualNextSlide = nextSlideIndex >= 0 ? nextSlideIndex : _this3.slideCount - 1;
 		_this3.goTo(actualNextSlide, PREVIOUS);
 	};
 
 	this.next = function () {
-		var nextSlideIndex = (_this3.state.currentSlideIndex + 1) % _this3.props.children.length;
+		if (!_this3.canGoNext()) return;
+		var nextSlideIndex = (_this3.state.currentSlideIndex + 1) % _this3.slideCount;
 		_this3.goTo(nextSlideIndex, NEXT);
 	};
 
@@ -230,10 +249,13 @@ var _initialiseProps = function _initialiseProps() {
 		    animating = _state2.animating,
 		    animation = _state2.animation;
 
-		var lastSlideIndex = _this3.props.children.length - 1;
+		var lastSlideIndex = _this3.slideCount - 1;
 		if (index === currentSlideIndex) {
 			if (animation) return classNames.animateOut + ' ' + classNames[animation];
 			return classNames.current;
+		} else if (_this3.slideCount === 2) {
+			if (animation) return classNames.animateIn + ' ' + classNames[animation];
+			return index < currentSlideIndex ? classNames.previous : classNames.next;
 		} else if (index === currentSlideIndex - 1 || currentSlideIndex === 0 && index === lastSlideIndex) {
 			if (animation === PREVIOUS) return classNames.animateIn + ' ' + classNames.previous;
 			if (animation === NEXT) return classNames.hidden;
@@ -249,7 +271,7 @@ var _initialiseProps = function _initialiseProps() {
 	this.left = 0;
 
 	this.handleTouchStart = function (e) {
-		if (_this3.state.animating) return;
+		if (_this3.isDisabled()) return;
 		var _state$classNames = _this3.state.classNames,
 		    previous = _state$classNames.previous,
 		    next = _state$classNames.next;
@@ -289,7 +311,6 @@ var _initialiseProps = function _initialiseProps() {
 
 	this.handleTouchEnd = function (e) {
 		e.currentTarget.removeEventListener('touchmove', _this3.handleTouchMove);
-		console.log('this.startLeft < this.left', _this3.startLeft, _this3.left);
 		e.target.style.removeProperty('left');
 		e.target.style.removeProperty('transition');
 		_this3.previousElement.style.removeProperty('visibility');

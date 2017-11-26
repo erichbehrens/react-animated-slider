@@ -29,7 +29,7 @@ class Slider extends React.PureComponent {
 			animating: false,
 			duration,
 		};
-		this.animatedSlideCount = 0;
+		this.slideCount = React.Children.count(this.props.children);
 	}
 
 	onAnimationEnd = () => {
@@ -40,32 +40,46 @@ class Slider extends React.PureComponent {
 		});
 	};
 
+	isDisabled = () =>
+		this.slideCount < 2 ||
+		this.state.animating ||
+		this.props.disabled;
+
+	isInfinite = () => this.slideCount > 2 && this.props.infinite !== false;
+	canGoPrevious = () => this.isInfinite() || this.state.currentSlideIndex > 0;
+	canGoNext = () => this.isInfinite() || this.state.currentSlideIndex < this.slideCount - 1;
+
 	goTo = (index, animation) => {
-		if (this.state.animating) return;
+		if (this.isDisabled()) return;
 		this.nextSlideIndex = index;
 		this.setState({ animating: true, animation });
 		setTimeout(this.onAnimationEnd, this.state.duration);
 	};
 
 	previous = () => {
+		if (!this.canGoPrevious()) return;
 		const nextSlideIndex = this.state.currentSlideIndex - 1;
 		const actualNextSlide =
-			nextSlideIndex >= 0 ? nextSlideIndex : this.props.children.length - 1;
+			nextSlideIndex >= 0 ? nextSlideIndex : this.slideCount - 1;
 		this.goTo(actualNextSlide, PREVIOUS);
 	};
 
 	next = () => {
+		if (!this.canGoNext()) return;
 		const nextSlideIndex =
-			(this.state.currentSlideIndex + 1) % this.props.children.length;
+			(this.state.currentSlideIndex + 1) % this.slideCount;
 		this.goTo(nextSlideIndex, NEXT);
 	};
 
 	getSlideClass = index => {
 		const { currentSlideIndex, classNames, animating, animation } = this.state;
-		const lastSlideIndex = this.props.children.length - 1;
+		const lastSlideIndex = this.slideCount - 1;
 		if (index === currentSlideIndex) {
 			if (animation) return `${classNames.animateOut} ${classNames[animation]}`;
 			return classNames.current;
+		} else if (this.slideCount === 2) {
+			if (animation) return `${classNames.animateIn} ${classNames[animation]}`;
+			return index < currentSlideIndex ? classNames.previous : classNames.next;
 		} else if (
 			index === currentSlideIndex - 1 ||
 			(currentSlideIndex === 0 && index === lastSlideIndex)
@@ -98,7 +112,7 @@ class Slider extends React.PureComponent {
 	nextElementLeft;
 
 	handleTouchStart = e => {
-		if (this.state.animating) return;
+		if (this.isDisabled()) return;
 		const { previous, next } = this.state.classNames;
 		const touch = e.touches[0];
 		this.startPageX = touch.pageX;
@@ -138,7 +152,6 @@ class Slider extends React.PureComponent {
 
 	handleTouchEnd = e => {
 		e.currentTarget.removeEventListener('touchmove', this.handleTouchMove);
-		console.log('this.startLeft < this.left', this.startLeft, this.left);
 		e.target.style.removeProperty('left');
 		e.target.style.removeProperty('transition');
 		this.previousElement.style.removeProperty('visibility');
@@ -161,22 +174,23 @@ class Slider extends React.PureComponent {
 			children,
 			className,
 			previousButton = 'previous',
-			nextButton = 'next'
+			nextButton = 'next',
 		} = this.props;
-		const { classNames, animating } = this.state;
+		const { classNames, currentSlideIndex } = this.state;
+		const isDisabled = this.isDisabled();
 		return (
 			<div className={className}>
 				<button
 					onClick={this.previous}
 					className={classNames.previousButton}
-					disabled={animating}
+					disabled={isDisabled || !this.canGoPrevious()}
 				>
 					{previousButton}
 				</button>
 				<button
 					onClick={this.next}
 					className={classNames.nextButton}
-					disabled={animating}
+					disabled={isDisabled || !this.canGoNext()}
 				>
 					{nextButton}
 				</button>
@@ -184,8 +198,8 @@ class Slider extends React.PureComponent {
 					{React.Children.map(children, (item, index) =>
 						React.cloneElement(item, {
 							key: index,
-							onTouchStart: this.handleTouchStart,
-							onTouchEnd: this.handleTouchEnd,
+							onTouchStart: !isDisabled && this.handleTouchStart,
+							onTouchEnd: !isDisabled && this.handleTouchEnd,
 							className:
 								classNames.slide +
 								' ' +

@@ -1,5 +1,5 @@
 # react-animated-slider
-Animated slider component for react
+Animated slider component for react. 
 
 [Demo](https://p582xl40j.codesandbox.io/) - [Playground](https://codesandbox.io/s/p582xl40j)
 
@@ -25,23 +25,31 @@ import 'react-animated-slider/build/horizontal.css';
 </Slider>
 ```
 ## Properties:
-**slideIndex** - number, default 0
+**slideIndex** - `number`, default `0`
 
 Index of the slide that will be initially displayed.
 
-**duration** - number, default 2000
+**duration** - `number`, default `2000`(ms)
 
-Number of milliseconds before removing the `animateIn` and `animateOut` classes and adding `current`
+Duration of the animation in milliseconds. It is used to remove the `animateIn` and `animateOut` classNames and assign `current` after the transition has completed.
 
-**previousButton** - ReactElement, default "previous"
+**disabled** - `boolean`, default `false`
+
+Disable slider navigation
+
+**infinite** - `boolean`, default `true`
+
+Enable or disable infinite loop through slides. Sliders with only 2 children will have this option set to `false`
+
+**previousButton** - `ReactElement`, default  `string "previous"`
 
 Will be rendered inside the previous button
 
-**nextButton** - ReactElement, default "next"
+**nextButton** - `ReactElement`, default `string "next"`
 
 Will be rendered inside the next button
 
-**classNames** object, default
+**classNames** `object`, default
 
 ```js
 {
@@ -58,7 +66,7 @@ Will be rendered inside the next button
 }
 ```
 
-CSS classnames that will be apllied to the slides.
+Object representing the CSS classNames that will be apllied to the slides.
 
 ### Classnames
 
