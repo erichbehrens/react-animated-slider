@@ -249,6 +249,7 @@ var _initialiseProps = function _initialiseProps() {
 	this.left = 0;
 
 	this.handleTouchStart = function (e) {
+		if (_this3.state.animating) return;
 		var _state$classNames = _this3.state.classNames,
 		    previous = _state$classNames.previous,
 		    next = _state$classNames.next;
