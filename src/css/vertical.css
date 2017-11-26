@@ -5,7 +5,7 @@
 	overflow: hidden;
 	
 	&.hidden {
-		opacity: .0;
+		visibility: hidden;
 	}
 
 	&.previous {
