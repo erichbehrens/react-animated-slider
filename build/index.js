@@ -159,12 +159,20 @@ var Slider = function (_React$PureComponent) {
 				{ className: className },
 				_react2.default.createElement(
 					'button',
-					{ onClick: this.previous, className: classNames.previousButton },
+					{
+						onClick: this.previous,
+						className: classNames.previousButton,
+						disabled: animating
+					},
 					previousButton
 				),
 				_react2.default.createElement(
 					'button',
-					{ onClick: this.next, className: classNames.nextButton },
+					{
+						onClick: this.next,
+						className: classNames.nextButton,
+						disabled: animating
+					},
 					nextButton
 				),
 				_react2.default.createElement(
