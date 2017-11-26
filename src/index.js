@@ -40,8 +40,13 @@ class Slider extends React.PureComponent {
 		});
 	};
 
+	isDisabled = () => 
+		this.state.animating || 
+		this.props.disabled || 
+		React.Children.count(this.props.children) < 2;
+
 	goTo = (index, animation) => {
-		if (this.state.animating) return;
+		if (this.isDisabled()) return;
 		this.nextSlideIndex = index;
 		this.setState({ animating: true, animation });
 		setTimeout(this.onAnimationEnd, this.state.duration);
@@ -161,22 +166,23 @@ class Slider extends React.PureComponent {
 			children,
 			className,
 			previousButton = 'previous',
-			nextButton = 'next'
+			nextButton = 'next',
 		} = this.props;
-		const { classNames, animating } = this.state;
+		const { classNames } = this.state;
+		const isDisabled = this.isDisabled();
 		return (
 			<div className={className}>
 				<button
 					onClick={this.previous}
 					className={classNames.previousButton}
-					disabled={animating}
+					disabled={isDisabled}
 				>
 					{previousButton}
 				</button>
 				<button
 					onClick={this.next}
 					className={classNames.nextButton}
-					disabled={animating}
+					disabled={isDisabled}
 				>
 					{nextButton}
 				</button>
@@ -184,8 +190,8 @@ class Slider extends React.PureComponent {
 					{React.Children.map(children, (item, index) =>
 						React.cloneElement(item, {
 							key: index,
-							onTouchStart: this.handleTouchStart,
-							onTouchEnd: this.handleTouchEnd,
+							[!isDisabled && 'onTouchStart']: this.handleTouchStart,
+							[!isDisabled && 'onTouchEnd']: this.handleTouchEnd,
 							className:
 								classNames.slide +
 								' ' +

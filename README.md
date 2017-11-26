@@ -33,6 +33,10 @@ Index of the slide that will be initially displayed.
 
 Number of milliseconds before removing the `animateIn` and `animateOut` classes and adding `current`
 
+**disabled** - boolean, default `false`
+
+Disable slider navigation through buttons and touch
+
 **previousButton** - ReactElement, default "previous"
 
 Will be rendered inside the previous button
