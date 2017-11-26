@@ -47,7 +47,7 @@ class Slider extends React.PureComponent {
 
 	isInfinite = () => this.slideCount > 2 && this.props.infinite !== false;
 	canGoPrevious = () => this.isInfinite() || this.state.currentSlideIndex > 0;
-	canGoNext = () => this.isInfinite() || this.state.currentSlideIndex < this.slideCount -1;
+	canGoNext = () => this.isInfinite() || this.state.currentSlideIndex < this.slideCount - 1;
 
 	goTo = (index, animation) => {
 		if (this.isDisabled()) return;
@@ -198,8 +198,8 @@ class Slider extends React.PureComponent {
 					{React.Children.map(children, (item, index) =>
 						React.cloneElement(item, {
 							key: index,
-							[!isDisabled && 'onTouchStart']: this.handleTouchStart,
-							[!isDisabled && 'onTouchEnd']: this.handleTouchEnd,
+							onTouchStart: !isDisabled && this.handleTouchStart,
+							onTouchEnd: !isDisabled && this.handleTouchEnd,
 							className:
 								classNames.slide +
 								' ' +
