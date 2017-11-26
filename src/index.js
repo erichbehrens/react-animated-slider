@@ -40,9 +40,9 @@ class Slider extends React.PureComponent {
 		});
 	};
 
-	isDisabled = () => 
-		this.state.animating || 
-		this.props.disabled || 
+	isDisabled = () =>
+		this.state.animating ||
+		this.props.disabled ||
 		React.Children.count(this.props.children) < 2;
 
 	goTo = (index, animation) => {
@@ -103,7 +103,7 @@ class Slider extends React.PureComponent {
 	nextElementLeft;
 
 	handleTouchStart = e => {
-		if (this.state.animating) return;
+		if (this.isDisabled()) return;
 		const { previous, next } = this.state.classNames;
 		const touch = e.touches[0];
 		this.startPageX = touch.pageX;
@@ -143,7 +143,6 @@ class Slider extends React.PureComponent {
 
 	handleTouchEnd = e => {
 		e.currentTarget.removeEventListener('touchmove', this.handleTouchMove);
-		console.log('this.startLeft < this.left', this.startLeft, this.left);
 		e.target.style.removeProperty('left');
 		e.target.style.removeProperty('transition');
 		this.previousElement.style.removeProperty('visibility');
