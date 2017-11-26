@@ -224,8 +224,8 @@ class Slider extends React.PureComponent {
 					{React.Children.map(children, (item, index) =>
 						React.cloneElement(item, {
 							key: index,
-							onTouchStart: !isDisabled && this.handleTouchStart,
-							onTouchEnd: !isDisabled && this.handleTouchEnd,
+							onTouchStart: !isDisabled ? this.handleTouchStart : undefined,
+							onTouchEnd: !isDisabled ? this.handleTouchEnd : undefined,
 							className:
 								classNames.slide +
 								' ' +
