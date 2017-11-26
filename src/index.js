@@ -29,7 +29,7 @@ class Slider extends React.PureComponent {
 			animating: false,
 			duration,
 		};
-		this.animatedSlideCount = 0;
+		this.slideCount = React.Children.count(this.props.children);
 	}
 
 	onAnimationEnd = () => {
@@ -41,9 +41,13 @@ class Slider extends React.PureComponent {
 	};
 
 	isDisabled = () =>
+		this.slideCount < 2 ||
 		this.state.animating ||
-		this.props.disabled ||
-		React.Children.count(this.props.children) < 2;
+		this.props.disabled;
+
+	isInfinite = () => this.slideCount > 2 && this.props.infinite !== false;
+	canGoPrevious = () => this.isInfinite() || this.state.currentSlideIndex > 0;
+	canGoNext = () => this.isInfinite() || this.state.currentSlideIndex < this.slideCount -1;
 
 	goTo = (index, animation) => {
 		if (this.isDisabled()) return;
@@ -53,24 +57,29 @@ class Slider extends React.PureComponent {
 	};
 
 	previous = () => {
+		if (!this.canGoPrevious()) return;
 		const nextSlideIndex = this.state.currentSlideIndex - 1;
 		const actualNextSlide =
-			nextSlideIndex >= 0 ? nextSlideIndex : this.props.children.length - 1;
+			nextSlideIndex >= 0 ? nextSlideIndex : this.slideCount - 1;
 		this.goTo(actualNextSlide, PREVIOUS);
 	};
 
 	next = () => {
+		if (!this.canGoNext()) return;
 		const nextSlideIndex =
-			(this.state.currentSlideIndex + 1) % this.props.children.length;
+			(this.state.currentSlideIndex + 1) % this.slideCount;
 		this.goTo(nextSlideIndex, NEXT);
 	};
 
 	getSlideClass = index => {
 		const { currentSlideIndex, classNames, animating, animation } = this.state;
-		const lastSlideIndex = this.props.children.length - 1;
+		const lastSlideIndex = this.slideCount - 1;
 		if (index === currentSlideIndex) {
 			if (animation) return `${classNames.animateOut} ${classNames[animation]}`;
 			return classNames.current;
+		} else if (this.slideCount === 2) {
+			if (animation) return `${classNames.animateIn} ${classNames[animation]}`;
+			return index < currentSlideIndex ? classNames.previous : classNames.next;
 		} else if (
 			index === currentSlideIndex - 1 ||
 			(currentSlideIndex === 0 && index === lastSlideIndex)
@@ -167,21 +176,21 @@ class Slider extends React.PureComponent {
 			previousButton = 'previous',
 			nextButton = 'next',
 		} = this.props;
-		const { classNames } = this.state;
+		const { classNames, currentSlideIndex } = this.state;
 		const isDisabled = this.isDisabled();
 		return (
 			<div className={className}>
 				<button
 					onClick={this.previous}
 					className={classNames.previousButton}
-					disabled={isDisabled}
+					disabled={isDisabled || !this.canGoPrevious()}
 				>
 					{previousButton}
 				</button>
 				<button
 					onClick={this.next}
 					className={classNames.nextButton}
-					disabled={isDisabled}
+					disabled={isDisabled || !this.canGoNext()}
 				>
 					{nextButton}
 				</button>
