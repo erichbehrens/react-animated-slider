@@ -30,6 +30,10 @@ import 'react-animated-slider/build/horizontal.css';
 
 Index of the slide that will be initially displayed.
 
+**duration** - number, default 2000
+
+Number of milliseconds before removing the `animateIn` and `animateOut` classes and adding `current`
+
 **previousButton** - ReactElement, default "previous"
 
 Will be rendered inside the previous button
