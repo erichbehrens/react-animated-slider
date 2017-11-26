@@ -105,6 +105,7 @@ class Slider extends React.PureComponent {
 	startLeft;
 	left = 0;
 
+	currentElement;
 	previousElement;
 	nextElement;
 	previousElementStartLeft;
@@ -114,18 +115,19 @@ class Slider extends React.PureComponent {
 
 	handleTouchStart = e => {
 		if (this.isDisabled()) return;
-		const { previous, next } = this.state.classNames;
+		const { current, previous, next } = this.state.classNames;
 		const touch = e.touches[0];
 		this.startPageX = touch.pageX;
-		this.startLeft = e.target.getBoundingClientRect().left;
+		this.currentElement = this.sliderRef.getElementsByClassName(current)[0];
 		this.previousElement = this.sliderRef.getElementsByClassName(previous)[0];
 		this.nextElement = this.sliderRef.getElementsByClassName(next)[0];
+		this.startLeft = this.currentElement.getBoundingClientRect().left;
 		this.previousElementStartLeft = this.previousElement.getBoundingClientRect().left;
 		this.nextElementStartLeft = this.nextElement.getBoundingClientRect().left;
-		e.currentTarget.addEventListener('touchmove', this.handleTouchMove, {
+		this.currentElement.addEventListener('touchmove', this.handleTouchMove, {
 			passive: false
 		});
-		e.target.style.transition = `none`;
+		this.currentElement.style.transition = `none`;
 		this.previousElement.style.transition = `none`;
 		this.nextElement.style.transition = `none`;
 		this.previousElement.style.visibility = `visible`;
@@ -144,7 +146,7 @@ class Slider extends React.PureComponent {
 					this.previousElementStartLeft + touch.pageX - this.startPageX;
 				this.nextElementLeft =
 					this.nextElementStartLeft + touch.pageX - this.startPageX;
-				e.target.style.left = `${this.left}px`;
+				this.currentElement.style.left = `${this.left}px`;
 				this.previousElement.style.left = `${this.previousElementLeft}px`;
 				this.nextElement.style.left = `${this.nextElementLeft}px`;
 				this.animating = false;
@@ -152,9 +154,9 @@ class Slider extends React.PureComponent {
 	};
 
 	handleTouchEnd = e => {
-		e.currentTarget.removeEventListener('touchmove', this.handleTouchMove);
-		e.target.style.removeProperty('left');
-		e.target.style.removeProperty('transition');
+		this.currentElement.removeEventListener('touchmove', this.handleTouchMove);
+		this.currentElement.style.removeProperty('left');
+		this.currentElement.style.removeProperty('transition');
 		this.previousElement.style.removeProperty('visibility');
 		this.nextElement.style.removeProperty('visibility');
 		this.previousElement.style.removeProperty('transition');
@@ -168,6 +170,13 @@ class Slider extends React.PureComponent {
 		}
 		this.startLeft = undefined;
 		this.startPageX = undefined;
+		this.currentElement;
+		this.previousElement;
+		this.nextElement;
+		this.previousElementStartLeft;
+		this.nextElementStartLeft;
+		this.previousElementLeft;
+		this.nextElementLeft;
 	};
 
 	render() {
