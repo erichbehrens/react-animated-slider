@@ -124,12 +124,15 @@ var Slider = function (_React$PureComponent) {
 		    _this$props$slideInde = _this$props.slideIndex,
 		    slideIndex = _this$props$slideInde === undefined ? 0 : _this$props$slideInde,
 		    _this$props$className = _this$props.classNames,
-		    classNames = _this$props$className === undefined ? {} : _this$props$className;
+		    classNames = _this$props$className === undefined ? {} : _this$props$className,
+		    _this$props$duration = _this$props.duration,
+		    duration = _this$props$duration === undefined ? 2000 : _this$props$duration;
 
 		_this.state = {
 			currentSlideIndex: slideIndex,
 			classNames: _extends({}, DEFAULT_CLASSNAMES, classNames),
-			animating: false
+			animating: false,
+			duration: duration
 		};
 		_this.animatedSlideCount = 0;
 		return _this;
@@ -147,7 +150,9 @@ var Slider = function (_React$PureComponent) {
 			    previousButton = _props$previousButton === undefined ? 'previous' : _props$previousButton,
 			    _props$nextButton = _props.nextButton,
 			    nextButton = _props$nextButton === undefined ? 'next' : _props$nextButton;
-			var classNames = this.state.classNames;
+			var _state = this.state,
+			    classNames = _state.classNames,
+			    animating = _state.animating;
 
 			return _react2.default.createElement(
 				'div',
@@ -156,7 +161,8 @@ var Slider = function (_React$PureComponent) {
 					'button',
 					{
 						onClick: this.previous,
-						className: classNames.previousButton
+						className: classNames.previousButton,
+						disabled: animating
 					},
 					previousButton
 				),
@@ -164,7 +170,8 @@ var Slider = function (_React$PureComponent) {
 					'button',
 					{
 						onClick: this.next,
-						className: classNames.nextButton
+						className: classNames.nextButton,
+						disabled: animating
 					},
 					nextButton
 				),
@@ -174,7 +181,8 @@ var Slider = function (_React$PureComponent) {
 					_react2.default.Children.map(children, function (item, index) {
 						return _react2.default.cloneElement(item, {
 							key: index,
-							onAnimationEnd: _this2.onAnimationEnd,
+							onTouchStart: _this2.handleTouchStart,
+							onTouchEnd: _this2.handleTouchEnd,
 							className: classNames.slide + ' ' + _this2.getSlideClass(index) + addClassname(item.props.className)
 						});
 					})
@@ -189,22 +197,19 @@ var Slider = function (_React$PureComponent) {
 var _initialiseProps = function _initialiseProps() {
 	var _this3 = this;
 
-	this.onAnimationEnd = function (event) {
-		_this3.animatedSlideCount = _this3.animatedSlideCount + 1;
-		if (_this3.animatedSlideCount === 2) {
-			_this3.setState({
-				currentSlideIndex: _this3.nextSlideIndex,
-				animating: false,
-				animation: undefined
-			});
-		}
+	this.onAnimationEnd = function () {
+		_this3.setState({
+			currentSlideIndex: _this3.nextSlideIndex,
+			animating: false,
+			animation: undefined
+		});
 	};
 
 	this.goTo = function (index, animation) {
 		if (_this3.state.animating) return;
-		_this3.nextSlideIndex = index; // todo simplify logic into prev/next functions
-		_this3.animatedSlideCount = 0;
+		_this3.nextSlideIndex = index;
 		_this3.setState({ animating: true, animation: animation });
+		setTimeout(_this3.onAnimationEnd, _this3.state.duration);
 	};
 
 	this.previous = function () {
@@ -219,11 +224,11 @@ var _initialiseProps = function _initialiseProps() {
 	};
 
 	this.getSlideClass = function (index) {
-		var _state = _this3.state,
-		    currentSlideIndex = _state.currentSlideIndex,
-		    classNames = _state.classNames,
-		    animating = _state.animating,
-		    animation = _state.animation;
+		var _state2 = _this3.state,
+		    currentSlideIndex = _state2.currentSlideIndex,
+		    classNames = _state2.classNames,
+		    animating = _state2.animating,
+		    animation = _state2.animation;
 
 		var lastSlideIndex = _this3.props.children.length - 1;
 		if (index === currentSlideIndex) {
@@ -239,6 +244,66 @@ var _initialiseProps = function _initialiseProps() {
 			return classNames.next;
 		}
 		return classNames.hidden;
+	};
+
+	this.left = 0;
+
+	this.handleTouchStart = function (e) {
+		var _state$classNames = _this3.state.classNames,
+		    previous = _state$classNames.previous,
+		    next = _state$classNames.next;
+
+		var touch = e.touches[0];
+		_this3.startPageX = touch.pageX;
+		_this3.startLeft = e.target.getBoundingClientRect().left;
+		_this3.previousElement = document.getElementsByClassName(previous)[0];
+		_this3.nextElement = document.getElementsByClassName(next)[0];
+		_this3.previousElementStartLeft = _this3.previousElement.getBoundingClientRect().left;
+		_this3.nextElementStartLeft = _this3.nextElement.getBoundingClientRect().left;
+		e.currentTarget.addEventListener('touchmove', _this3.handleTouchMove, {
+			passive: false
+		});
+		e.target.style.transition = 'none';
+		_this3.previousElement.style.transition = 'none';
+		_this3.nextElement.style.transition = 'none';
+		_this3.previousElement.style.visibility = 'visible';
+		_this3.nextElement.style.visibility = 'visible';
+	};
+
+	this.animating = false;
+
+	this.handleTouchMove = function (e) {
+		e.preventDefault();
+		_this3.animating = _this3.animating || requestAnimationFrame(function () {
+			var touch = e.touches[0];
+			_this3.left = _this3.startLeft + touch.pageX - _this3.startPageX;
+			_this3.previousElementLeft = _this3.previousElementStartLeft + touch.pageX - _this3.startPageX;
+			_this3.nextElementLeft = _this3.nextElementStartLeft + touch.pageX - _this3.startPageX;
+			e.target.style.left = _this3.left + 'px';
+			_this3.previousElement.style.left = _this3.previousElementLeft + 'px';
+			_this3.nextElement.style.left = _this3.nextElementLeft + 'px';
+			_this3.animating = false;
+		});
+	};
+
+	this.handleTouchEnd = function (e) {
+		e.currentTarget.removeEventListener('touchmove', _this3.handleTouchMove);
+		console.log('this.startLeft < this.left', _this3.startLeft, _this3.left);
+		e.target.style.removeProperty('left');
+		e.target.style.removeProperty('transition');
+		_this3.previousElement.style.removeProperty('visibility');
+		_this3.nextElement.style.removeProperty('visibility');
+		_this3.previousElement.style.removeProperty('transition');
+		_this3.nextElement.style.removeProperty('transition');
+		_this3.previousElement.style.removeProperty('left');
+		_this3.nextElement.style.removeProperty('left');
+		if (_this3.startLeft < _this3.left) {
+			_this3.previous();
+		} else {
+			_this3.next();
+		}
+		_this3.startLeft = undefined;
+		_this3.startPageX = undefined;
 	};
 };
 
