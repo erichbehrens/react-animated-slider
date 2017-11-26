@@ -5,7 +5,7 @@
 	overflow: hidden
 }
 .slide.hidden {
-	opacity: .0;
+	visibility: hidden;
 }
 .slide.previous {
 	left: -100%;
