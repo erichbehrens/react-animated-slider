@@ -157,7 +157,9 @@ var Slider = function (_React$PureComponent) {
 			var isDisabled = this.isDisabled();
 			return _react2.default.createElement(
 				'div',
-				{ className: className },
+				{ className: className, ref: function ref(_ref) {
+						return _this2.sliderRef = _ref;
+					} },
 				_react2.default.createElement(
 					'button',
 					{
@@ -279,8 +281,8 @@ var _initialiseProps = function _initialiseProps() {
 		var touch = e.touches[0];
 		_this3.startPageX = touch.pageX;
 		_this3.startLeft = e.target.getBoundingClientRect().left;
-		_this3.previousElement = document.getElementsByClassName(previous)[0];
-		_this3.nextElement = document.getElementsByClassName(next)[0];
+		_this3.previousElement = _this3.sliderRef.getElementsByClassName(previous)[0];
+		_this3.nextElement = _this3.sliderRef.getElementsByClassName(next)[0];
 		_this3.previousElementStartLeft = _this3.previousElement.getBoundingClientRect().left;
 		_this3.nextElementStartLeft = _this3.nextElement.getBoundingClientRect().left;
 		e.currentTarget.addEventListener('touchmove', _this3.handleTouchMove, {
