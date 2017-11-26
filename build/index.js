@@ -275,24 +275,31 @@ var _initialiseProps = function _initialiseProps() {
 	this.handleTouchStart = function (e) {
 		if (_this3.isDisabled()) return;
 		var _state$classNames = _this3.state.classNames,
+		    current = _state$classNames.current,
 		    previous = _state$classNames.previous,
 		    next = _state$classNames.next;
 
 		var touch = e.touches[0];
 		_this3.startPageX = touch.pageX;
-		_this3.startLeft = e.target.getBoundingClientRect().left;
+		_this3.currentElement = _this3.sliderRef.getElementsByClassName(current)[0];
 		_this3.previousElement = _this3.sliderRef.getElementsByClassName(previous)[0];
 		_this3.nextElement = _this3.sliderRef.getElementsByClassName(next)[0];
-		_this3.previousElementStartLeft = _this3.previousElement.getBoundingClientRect().left;
-		_this3.nextElementStartLeft = _this3.nextElement.getBoundingClientRect().left;
-		e.currentTarget.addEventListener('touchmove', _this3.handleTouchMove, {
+		_this3.startLeft = _this3.currentElement.getBoundingClientRect().left;
+		_this3.currentElement.addEventListener('touchmove', _this3.handleTouchMove, {
 			passive: false
 		});
-		e.target.style.transition = 'none';
-		_this3.previousElement.style.transition = 'none';
-		_this3.nextElement.style.transition = 'none';
-		_this3.previousElement.style.visibility = 'visible';
-		_this3.nextElement.style.visibility = 'visible';
+		_this3.currentElement.style.transition = 'none';
+		if (_this3.previousElement) {
+			_this3.previousElement.style.transition = 'none';
+			_this3.previousElement.style.visibility = 'visible';
+
+			_this3.previousElementStartLeft = _this3.previousElement.getBoundingClientRect().left;
+		}
+		if (_this3.nextElement) {
+			_this3.nextElement.style.visibility = 'visible';
+			_this3.nextElement.style.transition = 'none';
+			_this3.nextElementStartLeft = _this3.nextElement.getBoundingClientRect().left;
+		}
 	};
 
 	this.animating = false;
@@ -302,25 +309,33 @@ var _initialiseProps = function _initialiseProps() {
 		_this3.animating = _this3.animating || requestAnimationFrame(function () {
 			var touch = e.touches[0];
 			_this3.left = _this3.startLeft + touch.pageX - _this3.startPageX;
-			_this3.previousElementLeft = _this3.previousElementStartLeft + touch.pageX - _this3.startPageX;
-			_this3.nextElementLeft = _this3.nextElementStartLeft + touch.pageX - _this3.startPageX;
-			e.target.style.left = _this3.left + 'px';
-			_this3.previousElement.style.left = _this3.previousElementLeft + 'px';
-			_this3.nextElement.style.left = _this3.nextElementLeft + 'px';
+			_this3.currentElement.style.left = _this3.left + 'px';
+			if (_this3.previousElement) {
+				_this3.previousElementLeft = _this3.previousElementStartLeft + touch.pageX - _this3.startPageX;
+				_this3.previousElement.style.left = _this3.previousElementLeft + 'px';
+			}
+			if (_this3.nextElement) {
+				_this3.nextElementLeft = _this3.nextElementStartLeft + touch.pageX - _this3.startPageX;
+				_this3.nextElement.style.left = _this3.nextElementLeft + 'px';
+			}
 			_this3.animating = false;
 		});
 	};
 
 	this.handleTouchEnd = function (e) {
-		e.currentTarget.removeEventListener('touchmove', _this3.handleTouchMove);
-		e.target.style.removeProperty('left');
-		e.target.style.removeProperty('transition');
-		_this3.previousElement.style.removeProperty('visibility');
-		_this3.nextElement.style.removeProperty('visibility');
-		_this3.previousElement.style.removeProperty('transition');
-		_this3.nextElement.style.removeProperty('transition');
-		_this3.previousElement.style.removeProperty('left');
-		_this3.nextElement.style.removeProperty('left');
+		_this3.currentElement.removeEventListener('touchmove', _this3.handleTouchMove);
+		_this3.currentElement.style.removeProperty('left');
+		_this3.currentElement.style.removeProperty('transition');
+		if (_this3.previousElement) {
+			_this3.previousElement.style.removeProperty('visibility');
+			_this3.previousElement.style.removeProperty('transition');
+			_this3.previousElement.style.removeProperty('left');
+		}
+		if (_this3.nextElement) {
+			_this3.nextElement.style.removeProperty('visibility');
+			_this3.nextElement.style.removeProperty('transition');
+			_this3.nextElement.style.removeProperty('left');
+		}
 		if (_this3.startLeft < _this3.left) {
 			_this3.previous();
 		} else {
@@ -328,6 +343,13 @@ var _initialiseProps = function _initialiseProps() {
 		}
 		_this3.startLeft = undefined;
 		_this3.startPageX = undefined;
+		_this3.currentElement;
+		_this3.previousElement;
+		_this3.nextElement;
+		_this3.previousElementStartLeft;
+		_this3.nextElementStartLeft;
+		_this3.previousElementLeft;
+		_this3.nextElementLeft;
 	};
 };
 
