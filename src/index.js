@@ -34,7 +34,7 @@ class Slider extends React.PureComponent {
 		};
 		this.slideCount = React.Children.count(this.props.children);
 		this.swipeProperty = direction === HORIZONTAL ? 'left' : 'top';
-		this.swipeEventProperty = direction === HORIZONTAL ? 'pageX' : 'pageY';
+		this.swipeEventProperty = direction === HORIZONTAL ? 'clientX' : 'clientY'; // client Y possibly not working in ie
 	}
 
 	onAnimationEnd = () => {
@@ -150,14 +150,15 @@ class Slider extends React.PureComponent {
 			this.animating ||
 			requestAnimationFrame(() => {
 				const touch = e.touches[0];
-				this.left = this.startLeft + touch[this.swipeEventProperty] - this.startPageX;
+				const newLeft = touch[this.swipeEventProperty] - this.startPageX;
+				this.left = this.startLeft + newLeft;
 				this.currentElement.style[this.swipeProperty] = `${this.left}px`;
 				if (this.previousElement) {
-					this.previousElementLeft = this.previousElementStartLeft + touch[this.swipeEventProperty] - this.startPageX;
+					this.previousElementLeft = this.previousElementStartLeft + newLeft;
 					this.previousElement.style[this.swipeProperty] = `${this.previousElementLeft}px`;
 				}
 				if (this.nextElement) {
-					this.nextElementLeft = this.nextElementStartLeft + touch[this.swipeEventProperty] - this.startPageX;
+					this.nextElementLeft = this.nextElementStartLeft + newLeft;
 					this.nextElement.style[this.swipeProperty] = `${this.nextElementLeft}px`;
 				}
 				this.animating = false;
@@ -204,7 +205,7 @@ class Slider extends React.PureComponent {
 		const { classNames, currentSlideIndex } = this.state;
 		const isDisabled = this.isDisabled();
 		return (
-			<div className={className}>
+			<div className={className} ref={ref => this.sliderRef = ref}>
 				<button
 					onClick={this.previous}
 					className={classNames.previousButton}
@@ -219,7 +220,7 @@ class Slider extends React.PureComponent {
 				>
 					{nextButton}
 				</button>
-				<div className={classNames.track} ref={ref => this.sliderRef = ref}>
+				<div className={classNames.track}>
 					{React.Children.map(children, (item, index) =>
 						React.cloneElement(item, {
 							key: index,
