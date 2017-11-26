@@ -122,16 +122,21 @@ class Slider extends React.PureComponent {
 		this.previousElement = this.sliderRef.getElementsByClassName(previous)[0];
 		this.nextElement = this.sliderRef.getElementsByClassName(next)[0];
 		this.startLeft = this.currentElement.getBoundingClientRect().left;
-		this.previousElementStartLeft = this.previousElement.getBoundingClientRect().left;
-		this.nextElementStartLeft = this.nextElement.getBoundingClientRect().left;
 		this.currentElement.addEventListener('touchmove', this.handleTouchMove, {
 			passive: false
 		});
 		this.currentElement.style.transition = `none`;
-		this.previousElement.style.transition = `none`;
-		this.nextElement.style.transition = `none`;
-		this.previousElement.style.visibility = `visible`;
-		this.nextElement.style.visibility = `visible`;
+		if (this.previousElement) {
+			this.previousElement.style.transition = `none`;
+			this.previousElement.style.visibility = `visible`;
+
+			this.previousElementStartLeft = this.previousElement.getBoundingClientRect().left;
+		}
+		if (this.nextElement) {
+			this.nextElement.style.visibility = `visible`;
+			this.nextElement.style.transition = `none`;
+			this.nextElementStartLeft = this.nextElement.getBoundingClientRect().left;
+		}
 	};
 
 	animating = false;
@@ -142,13 +147,15 @@ class Slider extends React.PureComponent {
 			requestAnimationFrame(() => {
 				const touch = e.touches[0];
 				this.left = this.startLeft + touch.pageX - this.startPageX;
-				this.previousElementLeft =
-					this.previousElementStartLeft + touch.pageX - this.startPageX;
-				this.nextElementLeft =
-					this.nextElementStartLeft + touch.pageX - this.startPageX;
 				this.currentElement.style.left = `${this.left}px`;
-				this.previousElement.style.left = `${this.previousElementLeft}px`;
-				this.nextElement.style.left = `${this.nextElementLeft}px`;
+				if (this.previousElement) {
+					this.previousElementLeft = this.previousElementStartLeft + touch.pageX - this.startPageX;
+					this.previousElement.style.left = `${this.previousElementLeft}px`;
+				}
+				if (this.nextElement) {
+					this.nextElementLeft = this.nextElementStartLeft + touch.pageX - this.startPageX;
+					this.nextElement.style.left = `${this.nextElementLeft}px`;
+				}
 				this.animating = false;
 			});
 	};
@@ -157,12 +164,16 @@ class Slider extends React.PureComponent {
 		this.currentElement.removeEventListener('touchmove', this.handleTouchMove);
 		this.currentElement.style.removeProperty('left');
 		this.currentElement.style.removeProperty('transition');
-		this.previousElement.style.removeProperty('visibility');
-		this.nextElement.style.removeProperty('visibility');
-		this.previousElement.style.removeProperty('transition');
-		this.nextElement.style.removeProperty('transition');
-		this.previousElement.style.removeProperty('left');
-		this.nextElement.style.removeProperty('left');
+		if (this.previousElement) {
+			this.previousElement.style.removeProperty('visibility');
+			this.previousElement.style.removeProperty('transition');
+			this.previousElement.style.removeProperty('left');
+		}
+		if (this.nextElement) {
+			this.nextElement.style.removeProperty('visibility');
+			this.nextElement.style.removeProperty('transition');
+			this.nextElement.style.removeProperty('left');
+		}
 		if (this.startLeft < this.left) {
 			this.previous();
 		} else {
