@@ -3,7 +3,7 @@ Animated slider component for react
 
 [Demo](https://p582xl40j.codesandbox.io/) - [Playground](https://codesandbox.io/s/p582xl40j)
 
-![Preview](https://im4.ezgif.com/tmp/ezgif-4-bb60192ed9.webp)
+![Preview](https://res.cloudinary.com/riangle/image/upload/v1511700118/react-animated-slider_qqedfm.png)
 
 ## Install:
 
