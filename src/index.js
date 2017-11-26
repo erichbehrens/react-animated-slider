@@ -100,6 +100,7 @@ class Slider extends React.PureComponent {
 		return classNames.hidden;
 	};
 
+	sliderRef;
 	startPageX;
 	startLeft;
 	left = 0;
@@ -117,8 +118,8 @@ class Slider extends React.PureComponent {
 		const touch = e.touches[0];
 		this.startPageX = touch.pageX;
 		this.startLeft = e.target.getBoundingClientRect().left;
-		this.previousElement = document.getElementsByClassName(previous)[0];
-		this.nextElement = document.getElementsByClassName(next)[0];
+		this.previousElement = this.sliderRef.getElementsByClassName(previous)[0];
+		this.nextElement = this.sliderRef.getElementsByClassName(next)[0];
 		this.previousElementStartLeft = this.previousElement.getBoundingClientRect().left;
 		this.nextElementStartLeft = this.nextElement.getBoundingClientRect().left;
 		e.currentTarget.addEventListener('touchmove', this.handleTouchMove, {
@@ -179,7 +180,7 @@ class Slider extends React.PureComponent {
 		const { classNames, currentSlideIndex } = this.state;
 		const isDisabled = this.isDisabled();
 		return (
-			<div className={className}>
+			<div className={className} ref={ref => this.sliderRef = ref}>
 				<button
 					onClick={this.previous}
 					className={classNames.previousButton}
