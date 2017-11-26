@@ -250,9 +250,9 @@ var _initialiseProps = function _initialiseProps() {
 
 	this.handleTouchStart = function (e) {
 		if (_this3.state.animating) return;
-		var _classNames = classNames,
-		    previous = _classNames.previous,
-		    next = _classNames.next;
+		var _state$classNames = _this3.state.classNames,
+		    previous = _state$classNames.previous,
+		    next = _state$classNames.next;
 
 		var touch = e.touches[0];
 		_this3.startPageX = touch.pageX;
