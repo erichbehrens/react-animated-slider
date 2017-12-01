@@ -1,9 +1,20 @@
 # react-animated-slider
-Animated slider component for react. 
+Animated slider component for react.
 
 [Demo](https://p582xl40j.codesandbox.io/) - [Playground](https://codesandbox.io/s/p582xl40j)
 
 ![Preview](https://res.cloudinary.com/riangle/image/upload/v1511700118/react-animated-slider_qqedfm.png)
+
+## Features:
+- Ready to use slider component with animations
+- Easy customization
+- Horizontal or vertical navigation
+- Swipe navigation on touch devices
+- Infinite slider
+- Supports any element as children
+- Clean DOM without dirty manipulations
+- Works with SSR
+- Works on IE11
 
 ## Install:
 
