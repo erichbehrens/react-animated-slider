@@ -18,10 +18,7 @@ const DEFAULT_CLASSNAMES = {
 	animateIn: 'animateIn',
 	animateOut: 'animateOut',
 };
-
-function addClassname(value) {
-	return value ? ` ${value}` : '';
-}
+const DEFAULT_DURATION = 2000;
 
 class Slider extends React.PureComponent {
 	constructor(props) {
@@ -29,14 +26,11 @@ class Slider extends React.PureComponent {
 		const {
 			slideIndex = 0,
 			classNames = {},
-			duration = 2000,
 			direction = HORIZONTAL,
 		} = this.props;
 		this.state = {
 			currentSlideIndex: slideIndex,
-			classNames: { ...DEFAULT_CLASSNAMES, ...classNames },
 			animating: false,
-			duration,
 		};
 		this.slideCount = React.Children.count(this.props.children);
 		this.swipeProperty = direction === HORIZONTAL ? 'left' : 'top';
@@ -64,7 +58,7 @@ class Slider extends React.PureComponent {
 		if (this.isDisabled()) return;
 		this.nextSlideIndex = index;
 		this.setState({ animating: true, animation });
-		setTimeout(this.onAnimationEnd, this.state.duration);
+		setTimeout(this.onAnimationEnd, this.props.duration || DEFAULT_DURATION);
 	};
 
 	previous = () => {
@@ -85,9 +79,9 @@ class Slider extends React.PureComponent {
 	getSlideClass = (index) => {
 		const {
 			currentSlideIndex,
-			classNames,
 			animation,
 		} = this.state;
+		const classNames = this.getClassNames();
 		const lastSlideIndex = this.slideCount - 1;
 		if (index === currentSlideIndex) {
 			if (animation) return `${classNames.animateOut} ${classNames[animation]}`;
@@ -128,7 +122,7 @@ class Slider extends React.PureComponent {
 
 	handleTouchStart = (e) => {
 		if (this.isDisabled()) return;
-		const { current, previous, next } = this.state.classNames;
+		const { current, previous, next } = this.getClassNames();
 		const touch = e.touches[0];
 		this.pageStartPosition = touch[this.swipeEventProperty];
 		this.currentElement = this.sliderRef.getElementsByClassName(current)[0];
@@ -206,6 +200,8 @@ class Slider extends React.PureComponent {
 		this.nextElementPosition = undefined;
 	};
 
+	getClassNames = () => ({ ...DEFAULT_CLASSNAMES, ...this.props.classNames })
+
 	render() {
 		const {
 			children,
@@ -213,7 +209,7 @@ class Slider extends React.PureComponent {
 			previousButton = 'previous',
 			nextButton = 'next',
 		} = this.props;
-		const { classNames, currentSlideIndex } = this.state;
+		const classNames = this.getClassNames();
 		const isDisabled = this.isDisabled();
 		return (
 			<div className={className} ref={ref => this.sliderRef = ref}>
@@ -237,11 +233,7 @@ class Slider extends React.PureComponent {
 							key: index,
 							onTouchStart: !isDisabled ? this.handleTouchStart : undefined,
 							onTouchEnd: !isDisabled ? this.handleTouchEnd : undefined,
-							className:
-								`${classNames.slide
-								} ${
-									this.getSlideClass(index)
-								}${addClassname(item.props.className)}`,
+							className: [classNames.slide, this.getSlideClass(index), item.props.className].filter(v => v).join(' '),
 						}))}
 				</div>
 			</div>
