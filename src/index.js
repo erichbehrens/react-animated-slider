@@ -2,8 +2,10 @@ import React from 'react';
 
 const PREVIOUS = 'previous';
 const NEXT = 'next';
-const HORIZONTAL = 'horizontal';
-const VERTICAL = 'vertical';
+
+export const HORIZONTAL = 'horizontal';
+export const VERTICAL = 'vertical';
+
 const DEFAULT_CLASSNAMES = {
 	previousButton: 'previousButton',
 	nextButton: 'nextButton',
@@ -14,7 +16,7 @@ const DEFAULT_CLASSNAMES = {
 	current: 'current',
 	next: 'next',
 	animateIn: 'animateIn',
-	animateOut: 'animateOut'
+	animateOut: 'animateOut',
 };
 
 function addClassname(value) {
@@ -24,24 +26,28 @@ function addClassname(value) {
 class Slider extends React.PureComponent {
 	constructor(props) {
 		super(props);
-		const { slideIndex = 0, classNames = {}, duration = 2000, direction = HORIZONTAL } = this.props;
+		const {
+			slideIndex = 0,
+			classNames = {},
+			duration = 2000,
+			direction = HORIZONTAL,
+		} = this.props;
 		this.state = {
 			currentSlideIndex: slideIndex,
 			classNames: { ...DEFAULT_CLASSNAMES, ...classNames },
 			animating: false,
 			duration,
-			direction,
 		};
 		this.slideCount = React.Children.count(this.props.children);
 		this.swipeProperty = direction === HORIZONTAL ? 'left' : 'top';
-		this.swipeEventProperty = direction === HORIZONTAL ? 'clientX' : 'clientY'; // client Y possibly not working in ie
+		this.swipeEventProperty = direction === HORIZONTAL ? 'clientX' : 'clientY';
 	}
 
 	onAnimationEnd = () => {
 		this.setState({
 			currentSlideIndex: this.nextSlideIndex,
 			animating: false,
-			animation: undefined
+			animation: undefined,
 		});
 	};
 
@@ -76,8 +82,12 @@ class Slider extends React.PureComponent {
 		this.goTo(nextSlideIndex, NEXT);
 	};
 
-	getSlideClass = index => {
-		const { currentSlideIndex, classNames, animating, animation } = this.state;
+	getSlideClass = (index) => {
+		const {
+			currentSlideIndex,
+			classNames,
+			animation,
+		} = this.state;
 		const lastSlideIndex = this.slideCount - 1;
 		if (index === currentSlideIndex) {
 			if (animation) return `${classNames.animateOut} ${classNames[animation]}`;
@@ -89,16 +99,14 @@ class Slider extends React.PureComponent {
 			index === currentSlideIndex - 1 ||
 			(currentSlideIndex === 0 && index === lastSlideIndex)
 		) {
-			if (animation === PREVIOUS)
-				return `${classNames.animateIn} ${classNames.previous}`;
+			if (animation === PREVIOUS) return `${classNames.animateIn} ${classNames.previous}`;
 			if (animation === NEXT) return classNames.hidden;
 			return classNames.previous;
 		} else if (
 			index === currentSlideIndex + 1 ||
 			(index === 0 && currentSlideIndex === lastSlideIndex)
 		) {
-			if (animation === NEXT)
-				return `${classNames.animateIn} ${classNames.next}`;
+			if (animation === NEXT) return `${classNames.animateIn} ${classNames.next}`;
 			if (animation === PREVIOUS) return classNames.hidden;
 			return classNames.next;
 		}
@@ -106,66 +114,68 @@ class Slider extends React.PureComponent {
 	};
 
 	sliderRef;
-	startPageX;
-	startLeft;
-	left = 0;
+	pageStartPosition;
 
 	currentElement;
+	currentElementStartPosition;
+	currentElementPosition;
 	previousElement;
+	previousElementStartPosition;
+	previousElementPosition;
 	nextElement;
-	previousElementStartLeft;
-	nextElementStartLeft;
-	previousElementLeft;
-	nextElementLeft;
+	nextElementStartPosition;
+	nextElementPosition;
 
-	handleTouchStart = e => {
+	handleTouchStart = (e) => {
 		if (this.isDisabled()) return;
 		const { current, previous, next } = this.state.classNames;
 		const touch = e.touches[0];
-		this.startPageX = touch[this.swipeEventProperty];
+		this.pageStartPosition = touch[this.swipeEventProperty];
 		this.currentElement = this.sliderRef.getElementsByClassName(current)[0];
 		this.previousElement = this.sliderRef.getElementsByClassName(previous)[0];
 		this.nextElement = this.sliderRef.getElementsByClassName(next)[0];
-		this.startLeft = this.currentElement.getBoundingClientRect()[this.swipeProperty];
+		const touchDelta = this.currentElement.getBoundingClientRect()[this.swipeProperty];
+		this.currentElementStartPosition = 0;
+		this.currentElementPosition = 0;
 		this.sliderRef.addEventListener('touchmove', this.handleTouchMove, {
-			passive: false
+			passive: false,
 		});
-		this.currentElement.style.transition = `none`;
+		this.currentElement.style.transition = 'none';
 		if (this.previousElement) {
-			this.previousElement.style.transition = `none`;
-			this.previousElement.style.visibility = `visible`;
-			this.previousElementStartLeft = this.previousElement.getBoundingClientRect()[this.swipeProperty];
+			this.previousElement.style.transition = 'none';
+			this.previousElement.style.visibility = 'visible';
+			this.previousElementStartPosition = this.previousElement.getBoundingClientRect()[this.swipeProperty] - touchDelta;
 		}
 		if (this.nextElement) {
-			this.nextElement.style.visibility = `visible`;
-			this.nextElement.style.transition = `none`;
-			this.nextElementStartLeft = this.nextElement.getBoundingClientRect()[this.swipeProperty];
+			this.nextElement.style.visibility = 'visible';
+			this.nextElement.style.transition = 'none';
+			this.nextElementStartPosition = this.nextElement.getBoundingClientRect()[this.swipeProperty] - touchDelta;
 		}
 	};
 
 	animating = false;
-	handleTouchMove = e => {
+	handleTouchMove = (e) => {
 		e.preventDefault();
 		this.animating =
 			this.animating ||
 			requestAnimationFrame(() => {
 				const touch = e.touches[0];
-				const newLeft = touch[this.swipeEventProperty] - this.startPageX;
-				this.left = this.startLeft + newLeft;
-				this.currentElement.style[this.swipeProperty] = `${this.left}px`;
+				const newLeft = touch[this.swipeEventProperty] - this.pageStartPosition;
+				this.currentElementPosition = this.currentElementStartPosition + newLeft;
+				this.currentElement.style[this.swipeProperty] = `${this.currentElementPosition}px`;
 				if (this.previousElement) {
-					this.previousElementLeft = this.previousElementStartLeft + newLeft;
-					this.previousElement.style[this.swipeProperty] = `${this.previousElementLeft}px`;
+					this.previousElementPosition = this.previousElementStartPosition + newLeft;
+					this.previousElement.style[this.swipeProperty] = `${this.previousElementPosition}px`;
 				}
 				if (this.nextElement) {
-					this.nextElementLeft = this.nextElementStartLeft + newLeft;
-					this.nextElement.style[this.swipeProperty] = `${this.nextElementLeft}px`;
+					this.nextElementPosition = this.nextElementStartPosition + newLeft;
+					this.nextElement.style[this.swipeProperty] = `${this.nextElementPosition}px`;
 				}
 				this.animating = false;
 			});
 	};
 
-	handleTouchEnd = e => {
+	handleTouchEnd = () => {
 		this.sliderRef.removeEventListener('touchmove', this.handleTouchMove);
 		this.currentElement.style.removeProperty(this.swipeProperty);
 		this.currentElement.style.removeProperty('transition');
@@ -179,20 +189,21 @@ class Slider extends React.PureComponent {
 			this.nextElement.style.removeProperty('transition');
 			this.nextElement.style.removeProperty(this.swipeProperty);
 		}
-		if (this.startLeft < this.left) {
+		if (this.currentElementStartPosition < this.currentElementPosition) {
 			this.previous();
 		} else {
 			this.next();
 		}
-		this.startLeft = undefined;
-		this.startPageX = undefined;
-		this.currentElement;
-		this.previousElement;
-		this.nextElement;
-		this.previousElementStartLeft;
-		this.nextElementStartLeft;
-		this.previousElementLeft;
-		this.nextElementLeft;
+		this.pageStartPosition = undefined;
+		this.currentElement = undefined;
+		this.currentElementStartPosition = undefined;
+		this.currentElementPosition = undefined;
+		this.previousElement = undefined;
+		this.previousElementStartPosition = undefined;
+		this.previousElementPosition = undefined;
+		this.nextElement = undefined;
+		this.nextElementStartPosition = undefined;
+		this.nextElementPosition = undefined;
 	};
 
 	render() {
@@ -227,12 +238,11 @@ class Slider extends React.PureComponent {
 							onTouchStart: !isDisabled ? this.handleTouchStart : undefined,
 							onTouchEnd: !isDisabled ? this.handleTouchEnd : undefined,
 							className:
-								classNames.slide +
-								' ' +
-								this.getSlideClass(index) +
-								addClassname(item.props.className)
-						})
-					)}
+								`${classNames.slide
+								} ${
+									this.getSlideClass(index)
+								}${addClassname(item.props.className)}`,
+						}))}
 				</div>
 			</div>
 		);
