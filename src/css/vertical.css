@@ -3,7 +3,7 @@
 	height: 100%;
 	position: absolute;
 	overflow: hidden;
-	
+
 	&.hidden {
 		visibility: hidden;
 	}
