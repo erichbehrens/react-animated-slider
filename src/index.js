@@ -107,6 +107,7 @@ class Slider extends React.PureComponent {
 		return classNames.hidden;
 	};
 
+	isSwiping = false;
 	sliderRef;
 	pageStartPosition;
 
@@ -124,6 +125,7 @@ class Slider extends React.PureComponent {
 		if (this.isDisabled()) return;
 		const { current, previous, next } = this.getClassNames();
 		const touch = e.touches[0];
+		this.isSwiping = true;
 		this.pageStartPosition = touch[this.swipeEventProperty];
 		this.currentElement = this.sliderRef.getElementsByClassName(current)[0];
 		this.previousElement = this.sliderRef.getElementsByClassName(previous)[0];
@@ -153,6 +155,9 @@ class Slider extends React.PureComponent {
 		this.animating =
 			this.animating ||
 			requestAnimationFrame(() => {
+				if (!this.isSwiping) {
+					return;
+				}
 				const touch = e.touches[0];
 				const newLeft = touch[this.swipeEventProperty] - this.pageStartPosition;
 				this.currentElementPosition = this.currentElementStartPosition + newLeft;
@@ -170,6 +175,7 @@ class Slider extends React.PureComponent {
 	};
 
 	handleTouchEnd = () => {
+		this.isSwiping = false;
 		this.sliderRef.removeEventListener('touchmove', this.handleTouchMove);
 		this.currentElement.style.removeProperty(this.swipeProperty);
 		this.currentElement.style.removeProperty('transition');
@@ -188,16 +194,6 @@ class Slider extends React.PureComponent {
 		} else {
 			this.next();
 		}
-		this.pageStartPosition = undefined;
-		this.currentElement = undefined;
-		this.currentElementStartPosition = undefined;
-		this.currentElementPosition = undefined;
-		this.previousElement = undefined;
-		this.previousElementStartPosition = undefined;
-		this.previousElementPosition = undefined;
-		this.nextElement = undefined;
-		this.nextElementStartPosition = undefined;
-		this.nextElementPosition = undefined;
 	};
 
 	getClassNames = () => ({ ...DEFAULT_CLASSNAMES, ...this.props.classNames })
