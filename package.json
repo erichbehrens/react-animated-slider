@@ -12,8 +12,22 @@
     "type": "git",
     "url": "git+https://github.com/erichbehrens/react-animated-slider.git"
   },
+  "keywords": [
+    "react",
+    "component",
+    "slider",
+    "gallery",
+    "slideshow",
+    "react-component",
+    "react-slider",
+    "react-gallery",
+    "react-slideshow",
+    "image slider",
+    "image gallery",
+    "animations"
+  ],
   "author": "Erich Behrens <me@eb1.it>",
-  "license": "",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/erichbehrens/react-animated-slider/issues"
   },
