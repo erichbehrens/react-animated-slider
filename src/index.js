@@ -156,6 +156,7 @@ class Slider extends React.PureComponent {
 			this.animating ||
 			requestAnimationFrame(() => {
 				if (!this.isSwiping) {
+					this.animating = false;
 					return;
 				}
 				const touch = e.touches[0];
@@ -175,6 +176,7 @@ class Slider extends React.PureComponent {
 	};
 
 	handleTouchEnd = () => {
+		this.animating = false;
 		this.isSwiping = false;
 		this.sliderRef.removeEventListener('touchmove', this.handleTouchMove);
 		this.currentElement.style.removeProperty(this.swipeProperty);
