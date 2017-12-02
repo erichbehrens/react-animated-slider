@@ -1,4 +1,8 @@
-# react-animated-slider [![CircleCI](https://circleci.com/gh/erichbehrens/react-animated-slider/tree/master.svg?style=svg)](https://circleci.com/gh/erichbehrens/react-animated-slider/tree/master)
+# react-animated-slider
+
+[![CircleCI](https://circleci.com/gh/erichbehrens/react-animated-slider/tree/master.svg?style=shield)](https://circleci.com/gh/erichbehrens/react-animated-slider/tree/master)
+[![dependencies](https://david-dm.org/erichbehrens/react-animated-slider.svg)](https://david-dm.org/erichbehrens/react-animated-slider)
+[![devDependencies](https://david-dm.org/erichbehrens/react-animated-slider/dev-status.svg)](https://david-dm.org/erichbehrens/react-animated-slider#info=devDependencies)
 
 Animated slider component for react.
 
