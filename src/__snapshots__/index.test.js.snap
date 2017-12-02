@@ -1,0 +1,351 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`animate next classNames 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    className="previousButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    previous
+  </button>
+  <button
+    className="nextButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    next
+  </button>
+  <div
+    className="track"
+  >
+    <div
+      className="slide animateOut next"
+      onTouchEnd={undefined}
+      onTouchStart={undefined}
+    />
+    <div
+      className="slide animateIn next"
+      onTouchEnd={undefined}
+      onTouchStart={undefined}
+    />
+    <div
+      className="slide hidden"
+      onTouchEnd={undefined}
+      onTouchStart={undefined}
+    />
+  </div>
+</div>
+`;
+
+exports[`animate previous classNames 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    className="previousButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    previous
+  </button>
+  <button
+    className="nextButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    next
+  </button>
+  <div
+    className="track"
+  >
+    <div
+      className="slide animateOut previous"
+      onTouchEnd={undefined}
+      onTouchStart={undefined}
+    />
+    <div
+      className="slide hidden"
+      onTouchEnd={undefined}
+      onTouchStart={undefined}
+    />
+    <div
+      className="slide animateIn previous"
+      onTouchEnd={undefined}
+      onTouchStart={undefined}
+    />
+  </div>
+</div>
+`;
+
+exports[`renders one child 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    className="previousButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    previous
+  </button>
+  <button
+    className="nextButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    next
+  </button>
+  <div
+    className="track"
+  >
+    <div
+      className="slide current"
+      onTouchEnd={undefined}
+      onTouchStart={undefined}
+    />
+  </div>
+</div>
+`;
+
+exports[`renders three children 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    className="previousButton"
+    disabled={false}
+    onClick={[Function]}
+  >
+    previous
+  </button>
+  <button
+    className="nextButton"
+    disabled={false}
+    onClick={[Function]}
+  >
+    next
+  </button>
+  <div
+    className="track"
+  >
+    <div
+      className="slide current"
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+    />
+    <div
+      className="slide next"
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+    />
+    <div
+      className="slide previous"
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+    />
+  </div>
+</div>
+`;
+
+exports[`renders two children 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    className="previousButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    previous
+  </button>
+  <button
+    className="nextButton"
+    disabled={false}
+    onClick={[Function]}
+  >
+    next
+  </button>
+  <div
+    className="track"
+  >
+    <div
+      className="slide current"
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+    />
+    <div
+      className="slide next"
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+    />
+  </div>
+</div>
+`;
+
+exports[`with one child can not navigate to next 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    className="previousButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    previous
+  </button>
+  <button
+    className="nextButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    next
+  </button>
+  <div
+    className="track"
+  >
+    <div
+      className="slide current"
+      onTouchEnd={undefined}
+      onTouchStart={undefined}
+    />
+  </div>
+</div>
+`;
+
+exports[`with one child can not navigate to previuous 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    className="previousButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    previous
+  </button>
+  <button
+    className="nextButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    next
+  </button>
+  <div
+    className="track"
+  >
+    <div
+      className="slide current"
+      onTouchEnd={undefined}
+      onTouchStart={undefined}
+    />
+  </div>
+</div>
+`;
+
+exports[`with two children can navigate to next 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    className="previousButton"
+    disabled={false}
+    onClick={[Function]}
+  >
+    previous
+  </button>
+  <button
+    className="nextButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    next
+  </button>
+  <div
+    className="track"
+  >
+    <div
+      className="slide previous"
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+    />
+    <div
+      className="slide current"
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+    />
+  </div>
+</div>
+`;
+
+exports[`with two children can navigate to next only once 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    className="previousButton"
+    disabled={false}
+    onClick={[Function]}
+  >
+    previous
+  </button>
+  <button
+    className="nextButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    next
+  </button>
+  <div
+    className="track"
+  >
+    <div
+      className="slide previous"
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+    />
+    <div
+      className="slide current"
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+    />
+  </div>
+</div>
+`;
+
+exports[`with two children can not navigate to previuous 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    className="previousButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    previous
+  </button>
+  <button
+    className="nextButton"
+    disabled={false}
+    onClick={[Function]}
+  >
+    next
+  </button>
+  <div
+    className="track"
+  >
+    <div
+      className="slide current"
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+    />
+    <div
+      className="slide next"
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+    />
+  </div>
+</div>
+`;
