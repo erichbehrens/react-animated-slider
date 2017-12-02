@@ -27,7 +27,7 @@
     "animations"
   ],
   "author": "Erich Behrens <me@eb1.it>",
-  "license": "",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/erichbehrens/react-animated-slider/issues"
   },
