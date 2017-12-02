@@ -1,4 +1,5 @@
-# react-animated-slider
+# react-animated-slider [![CircleCI](https://circleci.com/gh/erichbehrens/react-animated-slider/tree/master.svg?style=svg)](https://circleci.com/gh/erichbehrens/react-animated-slider/tree/master)
+
 Animated slider component for react.
 
 [Demo](https://p582xl40j.codesandbox.io/) - [Playground](https://codesandbox.io/s/p582xl40j)
