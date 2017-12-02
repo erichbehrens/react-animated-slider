@@ -2,7 +2,7 @@
 
 exports[`animate next classNames 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
   <button
     className="previousButton"
@@ -36,7 +36,7 @@ exports[`animate next classNames 1`] = `
 
 exports[`animate previous classNames 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
   <button
     className="previousButton"
@@ -70,7 +70,7 @@ exports[`animate previous classNames 1`] = `
 
 exports[`renders one child 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
   <button
     className="previousButton"
@@ -98,7 +98,7 @@ exports[`renders one child 1`] = `
 
 exports[`renders three children 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
   <button
     className="previousButton"
@@ -132,7 +132,7 @@ exports[`renders three children 1`] = `
 
 exports[`renders two children 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
   <button
     className="previousButton"
@@ -163,7 +163,7 @@ exports[`renders two children 1`] = `
 
 exports[`with one child can not navigate to next 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
   <button
     className="previousButton"
@@ -191,7 +191,7 @@ exports[`with one child can not navigate to next 1`] = `
 
 exports[`with one child can not navigate to previuous 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
   <button
     className="previousButton"
@@ -219,7 +219,7 @@ exports[`with one child can not navigate to previuous 1`] = `
 
 exports[`with two children can navigate to next 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
   <button
     className="previousButton"
@@ -250,7 +250,7 @@ exports[`with two children can navigate to next 1`] = `
 
 exports[`with two children can navigate to next only once 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
   <button
     className="previousButton"
@@ -281,7 +281,7 @@ exports[`with two children can navigate to next only once 1`] = `
 
 exports[`with two children can not navigate to previuous 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
   <button
     className="previousButton"
