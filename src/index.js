@@ -188,16 +188,6 @@ class Slider extends React.PureComponent {
 		} else {
 			this.next();
 		}
-		this.pageStartPosition = undefined;
-		this.currentElement = undefined;
-		this.currentElementStartPosition = undefined;
-		this.currentElementPosition = undefined;
-		this.previousElement = undefined;
-		this.previousElementStartPosition = undefined;
-		this.previousElementPosition = undefined;
-		this.nextElement = undefined;
-		this.nextElementStartPosition = undefined;
-		this.nextElementPosition = undefined;
 	};
 
 	getClassNames = () => ({ ...DEFAULT_CLASSNAMES, ...this.props.classNames })
