@@ -1,6 +1,6 @@
 {
   "name": "react-animated-slider",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Animated slider component for react",
   "main": "build/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/erichbehrens/react-animated-slider#readme",
   "dependencies": {
-    "react": "^15.0.0"
+    "react": "^16.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -36,7 +36,7 @@
     "postcss-cssnext": "^3.0.2",
     "postcss-loader": "^2.0.8",
     "raw-loader": "^0.5.1",
-    "react-test-renderer": "^15.0.0",
+    "react-test-renderer": "^16.2.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4"
   }
