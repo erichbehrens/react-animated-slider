@@ -133,9 +133,6 @@ class Slider extends React.PureComponent {
 		const touchDelta = this.currentElement.getBoundingClientRect()[this.swipeProperty];
 		this.currentElementStartPosition = 0;
 		this.currentElementPosition = 0;
-		this.sliderRef.addEventListener('touchmove', this.handleTouchMove, {
-			passive: false,
-		});
 		this.currentElement.style.transition = 'none';
 		if (this.previousElement) {
 			this.previousElement.style.transition = 'none';
@@ -178,7 +175,6 @@ class Slider extends React.PureComponent {
 	handleTouchEnd = () => {
 		this.animating = false;
 		this.isSwiping = false;
-		this.sliderRef.removeEventListener('touchmove', this.handleTouchMove);
 		this.currentElement.style.removeProperty(this.swipeProperty);
 		this.currentElement.style.removeProperty('transition');
 		if (this.previousElement) {
@@ -198,7 +194,17 @@ class Slider extends React.PureComponent {
 		}
 	};
 
-	getClassNames = () => ({ ...DEFAULT_CLASSNAMES, ...this.props.classNames })
+	getClassNames = () => ({ ...DEFAULT_CLASSNAMES, ...this.props.classNames });
+
+	initTouchEvents = (sliderRef) => {
+		if (this.isDisabled() || !sliderRef) return;
+		this.sliderRef = sliderRef;
+		this.sliderRef.addEventListener('touchstart', this.handleTouchStart);
+		this.sliderRef.addEventListener('touchmove', this.handleTouchMove, {
+			passive: false,
+		});
+		this.sliderRef.addEventListener('touchend', this.handleTouchEnd);
+	}
 
 	render() {
 		const {
@@ -210,7 +216,7 @@ class Slider extends React.PureComponent {
 		const classNames = this.getClassNames();
 		const isDisabled = this.isDisabled();
 		return (
-			<div className={className} ref={ref => this.sliderRef = ref}>
+			<div className={className} ref={this.initTouchEvents}>
 				<button
 					onClick={this.previous}
 					className={classNames.previousButton}
@@ -229,8 +235,6 @@ class Slider extends React.PureComponent {
 					{React.Children.map(children, (item, index) =>
 						React.cloneElement(item, {
 							key: index,
-							onTouchStart: !isDisabled ? this.handleTouchStart : undefined,
-							onTouchEnd: !isDisabled ? this.handleTouchEnd : undefined,
 							className: [classNames.slide, this.getSlideClass(index), item.props.className].filter(v => v).join(' '),
 						}))}
 				</div>
