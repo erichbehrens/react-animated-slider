@@ -2,6 +2,43 @@
 	position: relative;
 	width: 100%;
 	overflow: hidden;
+
+	& button {
+		&.previousButton, &.next {
+			background: #FFF;
+			border: none;
+			border-bottom: solid 16px transparent;
+			border-left: solid 16px #000;
+			border-right: unset;
+			border-top: solid 16px transparent;
+			cursor: pointer;
+			height: 22px;
+			outline: none;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			transition: all .3s ease;
+			width: 22px;
+			z-index: 1;
+		}
+
+		&.previousButton {
+			left: 20px;
+			transform: translateY(-50%) rotate(-180deg);
+
+			&:hover {
+				transform: translateY(-50%) rotate(-180deg) scale(1.1);
+			}
+		}
+
+		&.nextButton {
+			right: 20px;
+
+			&:hover {
+				transform: translateY(-50%) scale(1.1);
+			}
+		}
+	}
 }
 
 .slide {

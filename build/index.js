@@ -147,19 +147,18 @@ var Slider = function (_React$PureComponent) {
 
 			var _props = this.props,
 			    children = _props.children,
-			    className = _props.className,
+			    _props$className = _props.className,
+			    className = _props$className === undefined ? 'slider' : _props$className,
 			    _props$previousButton = _props.previousButton,
-			    previousButton = _props$previousButton === undefined ? 'previous' : _props$previousButton,
+			    previousButton = _props$previousButton === undefined ? '' : _props$previousButton,
 			    _props$nextButton = _props.nextButton,
-			    nextButton = _props$nextButton === undefined ? 'next' : _props$nextButton;
+			    nextButton = _props$nextButton === undefined ? '' : _props$nextButton;
 
 			var classNames = this.getClassNames();
 			var isDisabled = this.isDisabled();
 			return _react2.default.createElement(
 				'div',
-				{ className: className, ref: function ref(_ref) {
-						return _this2.sliderRef = _ref;
-					} },
+				{ className: className, ref: this.initTouchEvents },
 				_react2.default.createElement(
 					'button',
 					{
@@ -184,8 +183,6 @@ var Slider = function (_React$PureComponent) {
 					_react2.default.Children.map(children, function (item, index) {
 						return _react2.default.cloneElement(item, {
 							key: index,
-							onTouchStart: !isDisabled ? _this2.handleTouchStart : undefined,
-							onTouchEnd: !isDisabled ? _this2.handleTouchEnd : undefined,
 							className: [classNames.slide, _this2.getSlideClass(index), item.props.className].filter(function (v) {
 								return v;
 							}).join(' ')
@@ -271,6 +268,8 @@ var _initialiseProps = function _initialiseProps() {
 		return classNames.hidden;
 	};
 
+	this.isSwiping = false;
+
 	this.handleTouchStart = function (e) {
 		if (_this3.isDisabled()) return;
 
@@ -280,6 +279,7 @@ var _initialiseProps = function _initialiseProps() {
 		    next = _getClassNames.next;
 
 		var touch = e.touches[0];
+		_this3.isSwiping = true;
 		_this3.pageStartPosition = touch[_this3.swipeEventProperty];
 		_this3.currentElement = _this3.sliderRef.getElementsByClassName(current)[0];
 		_this3.previousElement = _this3.sliderRef.getElementsByClassName(previous)[0];
@@ -287,9 +287,6 @@ var _initialiseProps = function _initialiseProps() {
 		var touchDelta = _this3.currentElement.getBoundingClientRect()[_this3.swipeProperty];
 		_this3.currentElementStartPosition = 0;
 		_this3.currentElementPosition = 0;
-		_this3.sliderRef.addEventListener('touchmove', _this3.handleTouchMove, {
-			passive: false
-		});
 		_this3.currentElement.style.transition = 'none';
 		if (_this3.previousElement) {
 			_this3.previousElement.style.transition = 'none';
@@ -308,6 +305,10 @@ var _initialiseProps = function _initialiseProps() {
 	this.handleTouchMove = function (e) {
 		e.preventDefault();
 		_this3.animating = _this3.animating || requestAnimationFrame(function () {
+			if (!_this3.isSwiping) {
+				_this3.animating = false;
+				return;
+			}
 			var touch = e.touches[0];
 			var newLeft = touch[_this3.swipeEventProperty] - _this3.pageStartPosition;
 			_this3.currentElementPosition = _this3.currentElementStartPosition + newLeft;
@@ -325,7 +326,8 @@ var _initialiseProps = function _initialiseProps() {
 	};
 
 	this.handleTouchEnd = function () {
-		_this3.sliderRef.removeEventListener('touchmove', _this3.handleTouchMove);
+		_this3.animating = false;
+		_this3.isSwiping = false;
 		_this3.currentElement.style.removeProperty(_this3.swipeProperty);
 		_this3.currentElement.style.removeProperty('transition');
 		if (_this3.previousElement) {
@@ -343,20 +345,20 @@ var _initialiseProps = function _initialiseProps() {
 		} else {
 			_this3.next();
 		}
-		_this3.pageStartPosition = undefined;
-		_this3.currentElement = undefined;
-		_this3.currentElementStartPosition = undefined;
-		_this3.currentElementPosition = undefined;
-		_this3.previousElement = undefined;
-		_this3.previousElementStartPosition = undefined;
-		_this3.previousElementPosition = undefined;
-		_this3.nextElement = undefined;
-		_this3.nextElementStartPosition = undefined;
-		_this3.nextElementPosition = undefined;
 	};
 
 	this.getClassNames = function () {
 		return _extends({}, DEFAULT_CLASSNAMES, _this3.props.classNames);
+	};
+
+	this.initTouchEvents = function (sliderRef) {
+		if (_this3.isDisabled() || !sliderRef) return;
+		_this3.sliderRef = sliderRef;
+		_this3.sliderRef.addEventListener('touchstart', _this3.handleTouchStart);
+		_this3.sliderRef.addEventListener('touchmove', _this3.handleTouchMove, {
+			passive: false
+		});
+		_this3.sliderRef.addEventListener('touchend', _this3.handleTouchEnd);
 	};
 };
 
