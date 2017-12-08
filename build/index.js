@@ -137,17 +137,9 @@ var Slider = function (_React$PureComponent) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: className },
-				_react2.default.createElement(
-					'button',
-					{ onClick: this.previous },
-					'prev'
-				),
-				_react2.default.createElement(
-					'button',
-					{ onClick: this.next },
-					'next'
-				),
+				{ className: 'slider ' + className },
+				_react2.default.createElement('button', { onClick: this.previous, className: 'previous' }),
+				_react2.default.createElement('button', { onClick: this.next, className: 'next' }),
 				_react2.default.createElement(
 					'div',
 					{ className: 'track' },

@@ -26,24 +26,24 @@ class Slider extends React.PureComponent {
 		this.animatedSlideCount = 0;
 	}
 
-    onAnimationEnd = event => {
-        this.animatedSlideCount = this.animatedSlideCount + 1;
-        if (this.animatedSlideCount === 2) {
-            this.setState({
-                currentSlideIndex: this.nextSlideIndex, 
-                animating: false, 
-                animation: undefined,
-            });
-        }
-    }
-    
+	onAnimationEnd = event => {
+		this.animatedSlideCount = this.animatedSlideCount + 1;
+		if (this.animatedSlideCount === 2) {
+			this.setState({
+				currentSlideIndex: this.nextSlideIndex, 
+				animating: false, 
+				animation: undefined,
+			});
+		}
+	}
+	
 	goTo = (index, animation) => {
-        if (this.state.animating) return;
-        this.nextSlideIndex = index; // todo simplify logic into prev/next functions
-        this.animatedSlideCount = 0;
+		if (this.state.animating) return;
+		this.nextSlideIndex = index; // todo simplify logic into prev/next functions
+		this.animatedSlideCount = 0;
 		this.setState({ animating: true, animation });
-    }
-    
+	}
+	
 	previous = () => {
 		const nextSlideIndex = this.state.currentSlideIndex - 1;
 		const actualNextSlide = nextSlideIndex > 0 ? nextSlideIndex : this.props.children.length - 1;
@@ -71,21 +71,21 @@ class Slider extends React.PureComponent {
 			return classNames.next;
 		}
 		return classNames.hidden;
-    }
-    
+	}
+	
 	render(){
 		const { children, className } = this.props;
 		const { classNames } = this.state;
-		return <div className={className}>
-			<button onClick={this.previous}>prev</button>
-			<button onClick={this.next}>next</button>
+		return <div className={`slider ${className}`}>
+			<button onClick={this.previous} className="previous" />
+			<button onClick={this.next} className="next" />
 			<div className="track">
 				{React.Children.map(children, (item, index) => React.cloneElement(
-                    item, { 
-                        key: index,
-                        onAnimationEnd: this.onAnimationEnd,
-                        className: `${item.props.className} ${classNames.slide} ${this.getSlideClass(index)}`,
-                     }))}
+					item, { 
+						key: index,
+						onAnimationEnd: this.onAnimationEnd,
+						className: `${item.props.className} ${classNames.slide} ${this.getSlideClass(index)}`,
+					}))}
 			</div>
 		</div>;
 	}
