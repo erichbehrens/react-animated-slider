@@ -3,27 +3,25 @@
 	width: 100%;
 	overflow: hidden;
 
-	& button {
+	& a {
 		&.previousButton, &.nextButton {
-			background: transparent;
-			border: none;
-			height: 22px;
-			width: 22px;
 			font-size: 22px;
 			line-height: 0;
-			outline: none;
+			display: block;
 			position: absolute;
 			left: 50%;
 			transform: translateX(-50%) rotate(90deg);
 			transition: all .3s ease;
 			z-index: 1;
 			color: #333;
-			padding: 0;
-			margin: 0;
+			padding: 10px;
 
-			&:hover:enabled {
-				cursor: pointer;
+			&:not(.disabled):hover {
 				transform: translateX(-50%) rotate(90deg) scale(1.25);
+			}
+
+			&.disabled {
+				cursor: default;
 			}
 		}
 

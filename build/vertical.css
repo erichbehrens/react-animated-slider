@@ -4,44 +4,36 @@
 	overflow: hidden
 }
 
-.slider button.previousButton, .slider button.next {
-	background: #FFF;
-	border: none;
-	border-bottom: solid 16px transparent;
-	border-left: solid 16px #000;
-	border-right: unset;
-	border-top: solid 16px transparent;
-	cursor: pointer;
-	height: 22px;
-	outline: none;
+.slider a.previousButton, .slider a.nextButton {
+	font-size: 22px;
+	line-height: 0;
+	display: block;
 	position: absolute;
-	top: 50%;
-	-webkit-transform: translateY(-50%);
-	        transform: translateY(-50%);
+	left: 50%;
+	-webkit-transform: translateX(-50%) rotate(90deg);
+	        transform: translateX(-50%) rotate(90deg);
 	-webkit-transition: all .3s ease;
 	transition: all .3s ease;
-	width: 22px;
 	z-index: 1;
+	color: #333;
+	padding: 10px
 }
 
-.slider button.previousButton {
-	left: 20px;
-	-webkit-transform: translateY(-50%) rotate(-180deg);
-	        transform: translateY(-50%) rotate(-180deg)
+.slider a.previousButton:not(.disabled):hover, .slider a.nextButton:not(.disabled):hover {
+	-webkit-transform: translateX(-50%) rotate(90deg) scale(1.25);
+	        transform: translateX(-50%) rotate(90deg) scale(1.25);
 }
 
-.slider button.previousButton:hover {
-	-webkit-transform: translateY(-50%) rotate(-180deg) scale(1.1);
-	        transform: translateY(-50%) rotate(-180deg) scale(1.1);
+.slider a.previousButton.disabled, .slider a.nextButton.disabled {
+	cursor: default;
 }
 
-.slider button.nextButton {
-	right: 20px
+.slider a.previousButton {
+	top: 20px;
 }
 
-.slider button.nextButton:hover {
-	-webkit-transform: translateY(-50%) scale(1.1);
-	        transform: translateY(-50%) scale(1.1);
+.slider a.nextButton {
+	bottom: 20px;
 }
 
 .slide {

@@ -7,8 +7,11 @@ export const HORIZONTAL = 'horizontal';
 export const VERTICAL = 'vertical';
 
 const DEFAULT_CLASSNAMES = {
-	previousButton: 'previousButton',
-	nextButton: 'nextButton',
+	buttons: {
+		previous: 'previousButton',
+		next: 'nextButton',
+		disabled: 'disabled',
+	},
 	track: 'track',
 	slide: 'slide',
 	hidden: 'hidden',
@@ -217,20 +220,20 @@ class Slider extends React.PureComponent {
 		const isDisabled = this.isDisabled();
 		return (
 			<div className={className} ref={this.initTouchEvents}>
-				<button
+				<a
+					href="javascript:void()"
 					onClick={this.previous}
-					className={classNames.previousButton}
-					disabled={isDisabled || !this.canGoPrevious()}
+					className={`${classNames.buttons.previous}${isDisabled || !this.canGoPrevious() ? ` ${classNames.buttons.disabled}` : ''}`}
 				>
 					{previousButton}
-				</button>
-				<button
+				</a>
+				<a
+					href="javascript:void()"
 					onClick={this.next}
-					className={classNames.nextButton}
-					disabled={isDisabled || !this.canGoNext()}
+					className={`${classNames.buttons.next}${isDisabled || !this.canGoNext() ? ` ${classNames.buttons.disabled}` : ''}`}
 				>
 					{nextButton}
-				</button>
+				</a>
 				<div className={classNames.track}>
 					{React.Children.map(children, (item, index) =>
 						React.cloneElement(item, {

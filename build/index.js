@@ -99,8 +99,11 @@ var HORIZONTAL = exports.HORIZONTAL = 'horizontal';
 var VERTICAL = exports.VERTICAL = 'vertical';
 
 var DEFAULT_CLASSNAMES = {
-	previousButton: 'previousButton',
-	nextButton: 'nextButton',
+	buttons: {
+		previous: 'previousButton',
+		next: 'nextButton',
+		disabled: 'disabled'
+	},
 	track: 'track',
 	slide: 'slide',
 	hidden: 'hidden',
@@ -150,9 +153,9 @@ var Slider = function (_React$PureComponent) {
 			    _props$className = _props.className,
 			    className = _props$className === undefined ? 'slider' : _props$className,
 			    _props$previousButton = _props.previousButton,
-			    previousButton = _props$previousButton === undefined ? '' : _props$previousButton,
+			    previousButton = _props$previousButton === undefined ? '‹' : _props$previousButton,
 			    _props$nextButton = _props.nextButton,
-			    nextButton = _props$nextButton === undefined ? '' : _props$nextButton;
+			    nextButton = _props$nextButton === undefined ? '›' : _props$nextButton;
 
 			var classNames = this.getClassNames();
 			var isDisabled = this.isDisabled();
@@ -160,20 +163,20 @@ var Slider = function (_React$PureComponent) {
 				'div',
 				{ className: className, ref: this.initTouchEvents },
 				_react2.default.createElement(
-					'button',
+					'a',
 					{
+						href: 'javascript:void()',
 						onClick: this.previous,
-						className: classNames.previousButton,
-						disabled: isDisabled || !this.canGoPrevious()
+						className: '' + classNames.buttons.previous + (isDisabled || !this.canGoPrevious() ? ' ' + classNames.buttons.disabled : '')
 					},
 					previousButton
 				),
 				_react2.default.createElement(
-					'button',
+					'a',
 					{
+						href: 'javascript:void()',
 						onClick: this.next,
-						className: classNames.nextButton,
-						disabled: isDisabled || !this.canGoNext()
+						className: '' + classNames.buttons.next + (isDisabled || !this.canGoNext() ? ' ' + classNames.buttons.disabled : '')
 					},
 					nextButton
 				),

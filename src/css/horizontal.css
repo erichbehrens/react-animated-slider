@@ -3,27 +3,27 @@
 	width: 100%;
 	overflow: hidden;
 
-	& button {
+	& a {
 		&.previousButton, &.nextButton {
-			background: transparent;
-			border: none;
-			height: 22px;
-			width: 22px;
 			font-size: 22px;
 			line-height: 0;
-			outline: none;
+			display: block;
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
-			transition: all .3s ease;
+			transition: all .3s linear;
 			z-index: 1;
 			color: #333;
-			padding: 0;
-			margin: 0;
+			padding: 10px;
+			text-decoration: none;
+			backface-visibility: hidden; /* prevent jump effect when scaling */
 
-			&:hover:enabled {
-				cursor: pointer;
+			&:not(.disabled):hover {
 				transform: translateY(-50%) scale(1.25);
+			}
+
+			&.disabled {
+				cursor: default;
 			}
 		}
 
