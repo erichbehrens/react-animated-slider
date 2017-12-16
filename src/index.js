@@ -221,14 +221,14 @@ class Slider extends React.PureComponent {
 		return (
 			<div className={className} ref={this.initTouchEvents}>
 				<a
-					href="javascript:void()"
+					href="javascript:void(0)"
 					onClick={this.previous}
 					className={`${classNames.buttons.previous}${isDisabled || !this.canGoPrevious() ? ` ${classNames.buttons.disabled}` : ''}`}
 				>
 					{previousButton}
 				</a>
 				<a
-					href="javascript:void()"
+					href="javascript:void(0)"
 					onClick={this.next}
 					className={`${classNames.buttons.next}${isDisabled || !this.canGoNext() ? ` ${classNames.buttons.disabled}` : ''}`}
 				>

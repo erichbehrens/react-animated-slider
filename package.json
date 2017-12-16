@@ -1,6 +1,6 @@
 {
   "name": "react-animated-slider",
-  "version": "0.4.3",
+  "version": "0.5.0-beta1",
   "description": "Animated slider component for react",
   "main": "build/index.js",
   "scripts": {
