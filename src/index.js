@@ -210,8 +210,8 @@ class Slider extends React.PureComponent {
 		const {
 			children,
 			className = 'slider',
-			previousButton = '',
-			nextButton = '',
+			previousButton = '‹',
+			nextButton = '›',
 		} = this.props;
 		const classNames = this.getClassNames();
 		const isDisabled = this.isDisabled();

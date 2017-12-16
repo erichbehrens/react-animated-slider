@@ -9,14 +9,14 @@ exports[`animate next classNames 1`] = `
     disabled={true}
     onClick={[Function]}
   >
-    previous
+    ‹
   </button>
   <button
     className="nextButton"
     disabled={true}
     onClick={[Function]}
   >
-    next
+    ›
   </button>
   <div
     className="track"
@@ -43,14 +43,14 @@ exports[`animate previous classNames 1`] = `
     disabled={true}
     onClick={[Function]}
   >
-    previous
+    ‹
   </button>
   <button
     className="nextButton"
     disabled={true}
     onClick={[Function]}
   >
-    next
+    ›
   </button>
   <div
     className="track"
@@ -77,14 +77,14 @@ exports[`renders one child 1`] = `
     disabled={true}
     onClick={[Function]}
   >
-    previous
+    ‹
   </button>
   <button
     className="nextButton"
     disabled={true}
     onClick={[Function]}
   >
-    next
+    ›
   </button>
   <div
     className="track"
@@ -105,14 +105,14 @@ exports[`renders three children 1`] = `
     disabled={false}
     onClick={[Function]}
   >
-    previous
+    ‹
   </button>
   <button
     className="nextButton"
     disabled={false}
     onClick={[Function]}
   >
-    next
+    ›
   </button>
   <div
     className="track"
@@ -139,14 +139,14 @@ exports[`renders two children 1`] = `
     disabled={true}
     onClick={[Function]}
   >
-    previous
+    ‹
   </button>
   <button
     className="nextButton"
     disabled={false}
     onClick={[Function]}
   >
-    next
+    ›
   </button>
   <div
     className="track"
@@ -170,14 +170,14 @@ exports[`with one child can not navigate to next 1`] = `
     disabled={true}
     onClick={[Function]}
   >
-    previous
+    ‹
   </button>
   <button
     className="nextButton"
     disabled={true}
     onClick={[Function]}
   >
-    next
+    ›
   </button>
   <div
     className="track"
@@ -198,14 +198,14 @@ exports[`with one child can not navigate to previuous 1`] = `
     disabled={true}
     onClick={[Function]}
   >
-    previous
+    ‹
   </button>
   <button
     className="nextButton"
     disabled={true}
     onClick={[Function]}
   >
-    next
+    ›
   </button>
   <div
     className="track"
@@ -226,14 +226,14 @@ exports[`with two children can navigate to next 1`] = `
     disabled={false}
     onClick={[Function]}
   >
-    previous
+    ‹
   </button>
   <button
     className="nextButton"
     disabled={true}
     onClick={[Function]}
   >
-    next
+    ›
   </button>
   <div
     className="track"
@@ -257,14 +257,14 @@ exports[`with two children can navigate to next only once 1`] = `
     disabled={false}
     onClick={[Function]}
   >
-    previous
+    ‹
   </button>
   <button
     className="nextButton"
     disabled={true}
     onClick={[Function]}
   >
-    next
+    ›
   </button>
   <div
     className="track"
@@ -288,14 +288,14 @@ exports[`with two children can not navigate to previuous 1`] = `
     disabled={true}
     onClick={[Function]}
   >
-    previous
+    ‹
   </button>
   <button
     className="nextButton"
     disabled={false}
     onClick={[Function]}
   >
-    next
+    ›
   </button>
   <div
     className="track"
