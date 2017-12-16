@@ -187,10 +187,14 @@ class Slider extends React.PureComponent {
 			this.nextElement.style.removeProperty('transition');
 			this.nextElement.style.removeProperty(this.swipeProperty);
 		}
-		if (this.currentElementStartPosition < this.currentElementPosition) {
-			this.previous();
-		} else {
-			this.next();
+		const touchDelta = this.currentElementStartPosition - this.currentElementPosition;
+		const minSwipeOffset = this.props.minSwipeOffset || 15;
+		if (Math.abs(touchDelta) > minSwipeOffset) {
+			if (touchDelta < 0) {
+				this.previous();
+			} else {
+				this.next();
+			}
 		}
 	};
 
