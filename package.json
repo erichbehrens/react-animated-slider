@@ -1,6 +1,6 @@
 {
   "name": "react-animated-slider",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Animated slider component for react",
   "main": "build/index.js",
   "scripts": {
@@ -46,7 +46,7 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
-    "jest": "^21.2.1",
+    "jest": "^22.0.4",
     "postcss-cssnext": "^3.0.2",
     "postcss-loader": "^2.0.8",
     "raw-loader": "^0.5.1",
