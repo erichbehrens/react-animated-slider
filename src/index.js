@@ -23,6 +23,14 @@ const DEFAULT_CLASSNAMES = {
 };
 const DEFAULT_DURATION = 2000;
 
+function Arrow () {
+	return(
+	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="30" viewBox="0 0 20 30">
+		<polygon fill="#FFF" points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30" transform="rotate(0 10 15)" />
+	</svg>
+	)
+}
+
 class Slider extends React.PureComponent {
 	constructor(props) {
 		super(props);
@@ -213,8 +221,8 @@ class Slider extends React.PureComponent {
 		const {
 			children,
 			className = 'slider',
-			previousButton = '‹',
-			nextButton = '›',
+			previousButton = <Arrow />,
+			nextButton = <Arrow />,
 		} = this.props;
 		const classNames = this.getClassNames();
 		const isDisabled = this.isDisabled();
