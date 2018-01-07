@@ -23,11 +23,17 @@ const DEFAULT_CLASSNAMES = {
 };
 const DEFAULT_DURATION = 2000;
 
-function Arrow () {
-	return(
-	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="30" viewBox="0 0 20 30">
-		<polygon fill="#FFF" points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30" transform="rotate(0 10 15)" />
-	</svg>
+const arrowTransforms = {
+	up: 'rotate(90 10 15)',
+	down: 'rotate(270 10 15)',
+	left: 'rotate(180 10 15)',
+	right: 'rotate(0 10 15)',
+}
+function Arrow({ direction = 'right' }) {
+	return (
+		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="30" viewBox="0 0 20 30">
+			<polygon fill="#000" points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30" transform={arrowTransforms[direction]} />
+		</svg>
 	)
 }
 
@@ -44,6 +50,7 @@ class Slider extends React.PureComponent {
 			animating: false,
 		};
 		this.slideCount = React.Children.count(this.props.children);
+		this.direction = direction;
 		this.swipeProperty = direction === HORIZONTAL ? 'left' : 'top';
 		this.swipeEventProperty = direction === HORIZONTAL ? 'clientX' : 'clientY';
 	}
@@ -221,8 +228,8 @@ class Slider extends React.PureComponent {
 		const {
 			children,
 			className = 'slider',
-			previousButton = <Arrow />,
-			nextButton = <Arrow />,
+			previousButton = <Arrow direction={this.direction === HORIZONTAL ? 'left' : 'down'} />,
+			nextButton = <Arrow direction={this.direction === HORIZONTAL ? 'right' : 'up'} />,
 		} = this.props;
 		const classNames = this.getClassNames();
 		const isDisabled = this.isDisabled();

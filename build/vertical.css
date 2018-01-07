@@ -11,8 +11,8 @@
 	display: block;
 	position: absolute;
 	left: 50%;
-	-webkit-transform: translateX(-50%) rotate(90deg);
-	        transform: translateX(-50%) rotate(90deg);
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
 	-webkit-transition: all .3s ease;
 	transition: all .3s ease;
 	z-index: 1;
@@ -21,8 +21,8 @@
 }
 
 .slider a.previousButton:not(.disabled):hover, .slider a.nextButton:not(.disabled):hover {
-	-webkit-transform: translateX(-50%) rotate(90deg) scale(1.25);
-	        transform: translateX(-50%) rotate(90deg) scale(1.25);
+	-webkit-transform: translateX(-50%) scale(1.25);
+	        transform: translateX(-50%) scale(1.25);
 }
 
 .slider a.previousButton.disabled, .slider a.nextButton.disabled {
