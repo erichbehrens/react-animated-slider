@@ -105,5 +105,20 @@ test('does not allow navigation if disabled', () => {
 	const initialSnapshot = slider.toJSON();
 	slider.getInstance().next();
 	expect(initialSnapshot).toEqual(slider.toJSON());
-	jest.runAllTimers(); expect(initialSnapshot).toEqual(slider.toJSON());
+	jest.runAllTimers(); 
+	expect(initialSnapshot).toEqual(slider.toJSON());
 });
+
+test('test autoslide disabled', () => {
+	const slider = ReactTestRenderer.create(<Slider><div /><div /></Slider>);
+	expect(setInterval).toHaveBeenCalledTimes(0);
+});
+
+test('test autoslide enabled', () => {
+	const slider = ReactTestRenderer.create(<Slider autoslide="1"><div /><div /></Slider>);
+	expect(setInterval).toHaveBeenCalledTimes(1);
+});
+
+
+
+
