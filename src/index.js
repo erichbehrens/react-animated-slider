@@ -38,22 +38,27 @@ class Slider extends React.PureComponent {
 	}
 
 	componentDidMount() {
-		if (this.props.autoslide){
-			this.timerID = setInterval(
-				() => this.tick(), 
-				parseInt(this.props.autoslide)
+		this.setupAutoplay();
+	}
+
+	componentWillUnmount() {
+		this.stopAutoplay();
+	}
+
+	setupAutoplay = () => {
+		if (this.props.autoplay && !this.isMouseOver) {
+			this.stopAutoplay();
+			this.autoplayTimerId = setInterval(
+				this.next,
+				parseInt(this.props.autoplay)
 			);
 		}
 	}
 
-	componentWillUnmount() {
-		if (this.timerID){
-			clearInterval(this.timerID);
+	stopAutoplay = () => {
+		if (this.autoplayTimerId) {
+			clearInterval(this.autoplayTimerId);
 		}
-	}
-	
-	tick() {
-		this.next();
 	}
 
 	onAnimationEnd = () => {
@@ -62,6 +67,7 @@ class Slider extends React.PureComponent {
 			animating: false,
 			animation: undefined,
 		});
+		this.setupAutoplay();
 	};
 
 	isDisabled = () =>
@@ -142,6 +148,7 @@ class Slider extends React.PureComponent {
 
 	handleTouchStart = (e) => {
 		if (this.isDisabled()) return;
+		this.stopAutoplay();
 		const { current, previous, next } = this.getClassNames();
 		const touch = e.touches[0];
 		this.isSwiping = true;
@@ -214,6 +221,8 @@ class Slider extends React.PureComponent {
 			} else {
 				this.next();
 			}
+		} else {
+			this.setupAutoplay();
 		}
 	};
 
@@ -229,17 +238,35 @@ class Slider extends React.PureComponent {
 		this.sliderRef.addEventListener('touchend', this.handleTouchEnd);
 	}
 
+	handleMouseOver = () => {
+		this.isMouseOver = true;
+		this.stopAutoplay();
+	}
+
+	handleMouseOut = () => {
+		this.isMouseOver = false;
+		this.setupAutoplay()
+	}
+
 	render() {
 		const {
 			children,
 			className,
 			previousButton = 'previous',
 			nextButton = 'next',
+			autoplay,
 		} = this.props;
 		const classNames = this.getClassNames();
 		const isDisabled = this.isDisabled();
 		return (
-			<div className={className} ref={this.initTouchEvents}>
+			<div
+				className={className}
+				ref={this.initTouchEvents}
+				{...autoplay && {
+					onMouseOver: this.handleMouseOver,
+					onMouseOut: this.handleMouseOut,
+				}}
+			>
 				<button
 					onClick={this.previous}
 					className={classNames.previousButton}
@@ -261,7 +288,7 @@ class Slider extends React.PureComponent {
 							className: [classNames.slide, this.getSlideClass(index), item.props.className].filter(v => v).join(' '),
 						}))}
 				</div>
-			</div>
+			</div >
 		);
 	}
 }
