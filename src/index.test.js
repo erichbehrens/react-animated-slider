@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactTestRenderer from 'react-test-renderer';
-import Slider, { DEFAULT_CLASSNAMES as classNames } from './';
+import Slider from './';
 
 jest.useFakeTimers();
 
@@ -128,7 +128,3 @@ test('test autoslide enabled', () => {
 	expect(animatedSnapshot).toMatchSnapshot();
 	expect(animatedSnapshot).not.toEqual(initialSnapshot);
 });
-
-
-
-

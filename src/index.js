@@ -25,7 +25,6 @@ class Slider extends React.PureComponent {
 		super(props);
 		const {
 			slideIndex = 0,
-			classNames = {},
 			direction = HORIZONTAL,
 		} = this.props;
 		this.state = {
@@ -50,7 +49,7 @@ class Slider extends React.PureComponent {
 			this.stopAutoplay();
 			this.autoplayTimerId = setInterval(
 				this.next,
-				parseInt(this.props.autoplay)
+				parseInt(this.props.autoplay, 10),
 			);
 		}
 	}
@@ -153,9 +152,11 @@ class Slider extends React.PureComponent {
 		const touch = e.touches[0];
 		this.isSwiping = true;
 		this.pageStartPosition = touch[this.swipeEventProperty];
+		/* eslint-disable prefer-destructuring */
 		this.currentElement = this.sliderRef.getElementsByClassName(current)[0];
 		this.previousElement = this.sliderRef.getElementsByClassName(previous)[0];
 		this.nextElement = this.sliderRef.getElementsByClassName(next)[0];
+		/* eslint-enable prefer-destructuring */
 		const touchDelta = this.currentElement.getBoundingClientRect()[this.swipeProperty];
 		this.currentElementStartPosition = 0;
 		this.currentElementPosition = 0;
@@ -163,11 +164,13 @@ class Slider extends React.PureComponent {
 		if (this.previousElement) {
 			this.previousElement.style.transition = 'none';
 			this.previousElement.style.visibility = 'visible';
+			// eslint-disable-next-line max-len
 			this.previousElementStartPosition = this.previousElement.getBoundingClientRect()[this.swipeProperty] - touchDelta;
 		}
 		if (this.nextElement) {
 			this.nextElement.style.visibility = 'visible';
 			this.nextElement.style.transition = 'none';
+			// eslint-disable-next-line max-len
 			this.nextElementStartPosition = this.nextElement.getBoundingClientRect()[this.swipeProperty] - touchDelta;
 		}
 	};
@@ -245,7 +248,7 @@ class Slider extends React.PureComponent {
 
 	handleMouseOut = () => {
 		this.isMouseOver = false;
-		this.setupAutoplay()
+		this.setupAutoplay();
 	}
 
 	render() {
