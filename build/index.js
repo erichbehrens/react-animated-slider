@@ -141,6 +141,16 @@ var Slider = function (_React$PureComponent) {
 	}
 
 	_createClass(Slider, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.setupAutoplay();
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			this.stopAutoplay();
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			var _this2 = this;
@@ -151,13 +161,20 @@ var Slider = function (_React$PureComponent) {
 			    _props$previousButton = _props.previousButton,
 			    previousButton = _props$previousButton === undefined ? 'previous' : _props$previousButton,
 			    _props$nextButton = _props.nextButton,
-			    nextButton = _props$nextButton === undefined ? 'next' : _props$nextButton;
+			    nextButton = _props$nextButton === undefined ? 'next' : _props$nextButton,
+			    autoplay = _props.autoplay;
 
 			var classNames = this.getClassNames();
 			var isDisabled = this.isDisabled();
 			return _react2.default.createElement(
 				'div',
-				{ className: className, ref: this.initTouchEvents },
+				_extends({
+					className: className,
+					ref: this.initTouchEvents
+				}, autoplay && {
+					onMouseOver: this.handleMouseOver,
+					onMouseOut: this.handleMouseOut
+				}),
 				_react2.default.createElement(
 					'button',
 					{
@@ -198,12 +215,26 @@ var Slider = function (_React$PureComponent) {
 var _initialiseProps = function _initialiseProps() {
 	var _this3 = this;
 
+	this.setupAutoplay = function () {
+		if (_this3.props.autoplay && !_this3.isMouseOver) {
+			_this3.stopAutoplay();
+			_this3.autoplayTimerId = setInterval(_this3.next, parseInt(_this3.props.autoplay));
+		}
+	};
+
+	this.stopAutoplay = function () {
+		if (_this3.autoplayTimerId) {
+			clearInterval(_this3.autoplayTimerId);
+		}
+	};
+
 	this.onAnimationEnd = function () {
 		_this3.setState({
 			currentSlideIndex: _this3.nextSlideIndex,
 			animating: false,
 			animation: undefined
 		});
+		_this3.setupAutoplay();
 	};
 
 	this.isDisabled = function () {
@@ -271,6 +302,7 @@ var _initialiseProps = function _initialiseProps() {
 
 	this.handleTouchStart = function (e) {
 		if (_this3.isDisabled()) return;
+		_this3.stopAutoplay();
 
 		var _getClassNames = _this3.getClassNames(),
 		    current = _getClassNames.current,
@@ -347,6 +379,8 @@ var _initialiseProps = function _initialiseProps() {
 			} else {
 				_this3.next();
 			}
+		} else {
+			_this3.setupAutoplay();
 		}
 	};
 
@@ -362,6 +396,16 @@ var _initialiseProps = function _initialiseProps() {
 			passive: false
 		});
 		_this3.sliderRef.addEventListener('touchend', _this3.handleTouchEnd);
+	};
+
+	this.handleMouseOver = function () {
+		_this3.isMouseOver = true;
+		_this3.stopAutoplay();
+	};
+
+	this.handleMouseOut = function () {
+		_this3.isMouseOver = false;
+		_this3.setupAutoplay();
 	};
 };
 
