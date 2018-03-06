@@ -33,7 +33,6 @@
   },
   "homepage": "https://github.com/erichbehrens/react-animated-slider#readme",
   "dependencies": {
-    "path": "^0.12.7",
     "react": "^16.2.0"
   },
   "devDependencies": {
