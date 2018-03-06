@@ -1,0 +1,36 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true,
+        "jest": true
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2017,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "extends": "airbnb-base",
+    "rules": {
+        "no-tabs":"off",
+        "indent": ["error", "tab", { "SwitchCase": 1 }],
+        "no-console": "error", // airbnb = warn
+        "object-curly-newline":"off", // airbnb = min 4
+        "consistent-return": "off",
+        "import/order": ["off", {
+            "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+            "newlines-between": "never"
+        }],
+        "default-case": "off",
+        "react/jsx-uses-react": [1],
+        "react/jsx-uses-vars": [1],
+        "react/react-in-jsx-scope": [1]
+    }
+}

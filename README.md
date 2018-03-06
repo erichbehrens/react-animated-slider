@@ -18,6 +18,7 @@ Animated slider component for react.
 - Horizontal or vertical navigation
 - Swipe navigation on touch devices
 - Infinite slider
+- Autoplay
 - Supports any element as children
 - Clean DOM without dirty manipulations
 - Works with SSR
@@ -60,6 +61,10 @@ Disable slider navigation
 **infinite** - `boolean`, default `true`
 
 Enable or disable infinite loop through slides. Sliders with only 2 children will have this option set to `false`
+
+**autoplay** - `number`, default `undefined`
+
+Autoplay interval in miliseconds. If `undefined` the slider will not play automatically. The timer will be paused and reset during user interactions such as mouse over or touch, to avoid sliding away the elements when the user wants to click them.
 
 **minSwipeOffset** - `number`, default `15`(px)
 

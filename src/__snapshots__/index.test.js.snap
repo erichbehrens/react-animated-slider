@@ -161,6 +161,39 @@ exports[`renders two children 1`] = `
 </div>
 `;
 
+exports[`test autoslide enabled 1`] = `
+<div
+  className={undefined}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <button
+    className="previousButton"
+    disabled={false}
+    onClick={[Function]}
+  >
+    previous
+  </button>
+  <button
+    className="nextButton"
+    disabled={true}
+    onClick={[Function]}
+  >
+    next
+  </button>
+  <div
+    className="track"
+  >
+    <div
+      className="slide previous"
+    />
+    <div
+      className="slide current"
+    />
+  </div>
+</div>
+`;
+
 exports[`with one child can not navigate to next 1`] = `
 <div
   className={undefined}
