@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactTestRenderer from 'react-test-renderer';
-import Slider, { DEFAULT_CLASSNAMES as classNames } from './';
+import Slider from './';
 
 jest.useFakeTimers();
 
@@ -105,5 +105,26 @@ test('does not allow navigation if disabled', () => {
 	const initialSnapshot = slider.toJSON();
 	slider.getInstance().next();
 	expect(initialSnapshot).toEqual(slider.toJSON());
-	jest.runAllTimers(); expect(initialSnapshot).toEqual(slider.toJSON());
+	jest.runAllTimers();
+	expect(initialSnapshot).toEqual(slider.toJSON());
+});
+
+test('test autoslide disabled', () => {
+	const slider = ReactTestRenderer.create(<Slider><div /><div /></Slider>);
+	const initialSnapshot = slider.toJSON();
+	expect(setInterval).toHaveBeenCalledTimes(0);
+	jest.runAllTimers();
+	expect(initialSnapshot).toEqual(slider.toJSON());
+});
+
+test('test autoslide enabled', () => {
+	const autoplay = 2000;
+	const slider = ReactTestRenderer.create(<Slider autoplay={autoplay}><div /><div /></Slider>);
+	const initialSnapshot = slider.toJSON();
+	expect(setInterval).toHaveBeenCalledTimes(1);
+	jest.runTimersToTime(autoplay);
+	jest.runOnlyPendingTimers();
+	const animatedSnapshot = slider.toJSON();
+	expect(animatedSnapshot).toMatchSnapshot();
+	expect(animatedSnapshot).not.toEqual(initialSnapshot);
 });

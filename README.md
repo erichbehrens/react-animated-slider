@@ -12,11 +12,13 @@ Animated slider component for react.
 ![Preview](https://res.cloudinary.com/riangle/image/upload/v1511700118/react-animated-slider_qqedfm.png)
 
 ## Features:
+
 - Ready to use slider component with animations
 - Easy customization
 - Horizontal or vertical navigation
 - Swipe navigation on touch devices
 - Infinite slider
+- Autoplay
 - Supports any element as children
 - Clean DOM without dirty manipulations
 - Works with SSR
@@ -41,7 +43,9 @@ import 'react-animated-slider/build/horizontal.css';
   </div>)}
 </Slider>
 ```
+
 ## Properties:
+
 **slideIndex** - `number`, default `0`
 
 Index of the slide that will be initially displayed.
@@ -57,6 +61,18 @@ Disable slider navigation
 **infinite** - `boolean`, default `true`
 
 Enable or disable infinite loop through slides. Sliders with only 2 children will have this option set to `false`
+
+**autoplay** - `number`, default `undefined`
+
+Autoplay interval in miliseconds. If `undefined` the slider will not play automatically. The timer will be paused and reset during user interactions such as mouse over or touch, to avoid sliding away the elements when the user wants to click them.
+
+**touchDisabled** `boolean`, default `false`
+
+Disable slider navigation through touch events
+
+**minSwipeOffset** - `number`, default `15`(px)
+
+Minimum distance to swipe for triggering a navigation event
 
 **previousButton** - `ReactElement`, default  `string "previous"`
 

@@ -271,6 +271,61 @@ exports[`renders two children 1`] = `
 </div>
 `;
 
+exports[`test autoslide enabled 1`] = `
+<div
+  className="slider"
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <a
+    className="previousButton"
+    href="javascript:void(0)"
+    onClick={[Function]}
+  >
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(180 10 15)"
+      />
+    </svg>
+  </a>
+  <a
+    className="nextButton disabled"
+    href="javascript:void(0)"
+    onClick={[Function]}
+  >
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(0 10 15)"
+      />
+    </svg>
+  </a>
+  <div
+    className="track"
+  >
+    <div
+      className="slide previous"
+    />
+    <div
+      className="slide current"
+    />
+  </div>
+</div>
+`;
+
 exports[`with one child can not navigate to next 1`] = `
 <div
   className="slider"
