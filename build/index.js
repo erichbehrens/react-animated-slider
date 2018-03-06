@@ -120,13 +120,206 @@ var Slider = function (_React$PureComponent) {
 
 		var _this = _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).call(this, props));
 
-		_initialiseProps.call(_this);
+		_this.setupAutoplay = function () {
+			if (_this.props.autoplay && !_this.isMouseOver) {
+				_this.stopAutoplay();
+				_this.autoplayTimerId = setInterval(_this.next, parseInt(_this.props.autoplay, 10));
+			}
+		};
+
+		_this.stopAutoplay = function () {
+			if (_this.autoplayTimerId) {
+				clearInterval(_this.autoplayTimerId);
+			}
+		};
+
+		_this.onAnimationEnd = function () {
+			_this.setState({
+				currentSlideIndex: _this.nextSlideIndex,
+				animating: false,
+				animation: undefined
+			});
+			_this.setupAutoplay();
+		};
+
+		_this.isDisabled = function () {
+			return _this.slideCount < 2 || _this.state.animating || _this.props.disabled;
+		};
+
+		_this.isInfinite = function () {
+			return _this.slideCount > 2 && _this.props.infinite !== false;
+		};
+
+		_this.canGoPrevious = function () {
+			return _this.isInfinite() || _this.state.currentSlideIndex > 0;
+		};
+
+		_this.canGoNext = function () {
+			return _this.isInfinite() || _this.state.currentSlideIndex < _this.slideCount - 1;
+		};
+
+		_this.goTo = function (index, animation) {
+			if (_this.isDisabled()) return;
+			_this.nextSlideIndex = index;
+			_this.setState({ animating: true, animation: animation });
+			setTimeout(_this.onAnimationEnd, _this.props.duration || DEFAULT_DURATION);
+		};
+
+		_this.previous = function () {
+			if (!_this.canGoPrevious()) return;
+			var nextSlideIndex = _this.state.currentSlideIndex - 1;
+			var actualNextSlide = nextSlideIndex >= 0 ? nextSlideIndex : _this.slideCount - 1;
+			_this.goTo(actualNextSlide, PREVIOUS);
+		};
+
+		_this.next = function () {
+			if (!_this.canGoNext()) return;
+			var nextSlideIndex = (_this.state.currentSlideIndex + 1) % _this.slideCount;
+			_this.goTo(nextSlideIndex, NEXT);
+		};
+
+		_this.getSlideClass = function (index) {
+			var _this$state = _this.state,
+			    currentSlideIndex = _this$state.currentSlideIndex,
+			    animation = _this$state.animation;
+
+			var classNames = _this.getClassNames();
+			var lastSlideIndex = _this.slideCount - 1;
+			if (index === currentSlideIndex) {
+				if (animation) return classNames.animateOut + ' ' + classNames[animation];
+				return classNames.current;
+			} else if (_this.slideCount === 2) {
+				if (animation) return classNames.animateIn + ' ' + classNames[animation];
+				return index < currentSlideIndex ? classNames.previous : classNames.next;
+			} else if (index === currentSlideIndex - 1 || currentSlideIndex === 0 && index === lastSlideIndex) {
+				if (animation === PREVIOUS) return classNames.animateIn + ' ' + classNames.previous;
+				if (animation === NEXT) return classNames.hidden;
+				return classNames.previous;
+			} else if (index === currentSlideIndex + 1 || index === 0 && currentSlideIndex === lastSlideIndex) {
+				if (animation === NEXT) return classNames.animateIn + ' ' + classNames.next;
+				if (animation === PREVIOUS) return classNames.hidden;
+				return classNames.next;
+			}
+			return classNames.hidden;
+		};
+
+		_this.isSwiping = false;
+
+		_this.handleTouchStart = function (e) {
+			if (_this.isDisabled()) return;
+			_this.stopAutoplay();
+
+			var _this$getClassNames = _this.getClassNames(),
+			    current = _this$getClassNames.current,
+			    previous = _this$getClassNames.previous,
+			    next = _this$getClassNames.next;
+
+			var touch = e.touches[0];
+			_this.isSwiping = true;
+			_this.pageStartPosition = touch[_this.swipeEventProperty];
+			/* eslint-disable prefer-destructuring */
+			_this.currentElement = _this.sliderRef.getElementsByClassName(current)[0];
+			_this.previousElement = _this.sliderRef.getElementsByClassName(previous)[0];
+			_this.nextElement = _this.sliderRef.getElementsByClassName(next)[0];
+			/* eslint-enable prefer-destructuring */
+			var touchDelta = _this.currentElement.getBoundingClientRect()[_this.swipeProperty];
+			_this.currentElementStartPosition = 0;
+			_this.currentElementPosition = 0;
+			_this.currentElement.style.transition = 'none';
+			if (_this.previousElement) {
+				_this.previousElement.style.transition = 'none';
+				_this.previousElement.style.visibility = 'visible';
+				// eslint-disable-next-line max-len
+				_this.previousElementStartPosition = _this.previousElement.getBoundingClientRect()[_this.swipeProperty] - touchDelta;
+			}
+			if (_this.nextElement) {
+				_this.nextElement.style.visibility = 'visible';
+				_this.nextElement.style.transition = 'none';
+				// eslint-disable-next-line max-len
+				_this.nextElementStartPosition = _this.nextElement.getBoundingClientRect()[_this.swipeProperty] - touchDelta;
+			}
+		};
+
+		_this.animating = false;
+
+		_this.handleTouchMove = function (e) {
+			e.preventDefault();
+			_this.animating = _this.animating || requestAnimationFrame(function () {
+				if (!_this.isSwiping) {
+					_this.animating = false;
+					return;
+				}
+				var touch = e.touches[0];
+				var newLeft = touch[_this.swipeEventProperty] - _this.pageStartPosition;
+				_this.currentElementPosition = _this.currentElementStartPosition + newLeft;
+				_this.currentElement.style[_this.swipeProperty] = _this.currentElementPosition + 'px';
+				if (_this.previousElement) {
+					_this.previousElementPosition = _this.previousElementStartPosition + newLeft;
+					_this.previousElement.style[_this.swipeProperty] = _this.previousElementPosition + 'px';
+				}
+				if (_this.nextElement) {
+					_this.nextElementPosition = _this.nextElementStartPosition + newLeft;
+					_this.nextElement.style[_this.swipeProperty] = _this.nextElementPosition + 'px';
+				}
+				_this.animating = false;
+			});
+		};
+
+		_this.handleTouchEnd = function () {
+			_this.animating = false;
+			_this.isSwiping = false;
+			_this.currentElement.style.removeProperty(_this.swipeProperty);
+			_this.currentElement.style.removeProperty('transition');
+			if (_this.previousElement) {
+				_this.previousElement.style.removeProperty('visibility');
+				_this.previousElement.style.removeProperty('transition');
+				_this.previousElement.style.removeProperty(_this.swipeProperty);
+			}
+			if (_this.nextElement) {
+				_this.nextElement.style.removeProperty('visibility');
+				_this.nextElement.style.removeProperty('transition');
+				_this.nextElement.style.removeProperty(_this.swipeProperty);
+			}
+			var touchDelta = _this.currentElementStartPosition - _this.currentElementPosition;
+			var minSwipeOffset = _this.props.minSwipeOffset || 15;
+			if (Math.abs(touchDelta) > minSwipeOffset) {
+				if (touchDelta < 0) {
+					_this.previous();
+				} else {
+					_this.next();
+				}
+			} else {
+				_this.setupAutoplay();
+			}
+		};
+
+		_this.getClassNames = function () {
+			return _extends({}, DEFAULT_CLASSNAMES, _this.props.classNames);
+		};
+
+		_this.initTouchEvents = function (sliderRef) {
+			if (_this.isDisabled() || !sliderRef) return;
+			_this.sliderRef = sliderRef;
+			_this.sliderRef.addEventListener('touchstart', _this.handleTouchStart);
+			_this.sliderRef.addEventListener('touchmove', _this.handleTouchMove, {
+				passive: false
+			});
+			_this.sliderRef.addEventListener('touchend', _this.handleTouchEnd);
+		};
+
+		_this.handleMouseOver = function () {
+			_this.isMouseOver = true;
+			_this.stopAutoplay();
+		};
+
+		_this.handleMouseOut = function () {
+			_this.isMouseOver = false;
+			_this.setupAutoplay();
+		};
 
 		var _this$props = _this.props,
 		    _this$props$slideInde = _this$props.slideIndex,
 		    slideIndex = _this$props$slideInde === undefined ? 0 : _this$props$slideInde,
-		    _this$props$className = _this$props.classNames,
-		    classNames = _this$props$className === undefined ? {} : _this$props$className,
 		    _this$props$direction = _this$props.direction,
 		    direction = _this$props$direction === undefined ? HORIZONTAL : _this$props$direction;
 
@@ -211,203 +404,6 @@ var Slider = function (_React$PureComponent) {
 
 	return Slider;
 }(_react2.default.PureComponent);
-
-var _initialiseProps = function _initialiseProps() {
-	var _this3 = this;
-
-	this.setupAutoplay = function () {
-		if (_this3.props.autoplay && !_this3.isMouseOver) {
-			_this3.stopAutoplay();
-			_this3.autoplayTimerId = setInterval(_this3.next, parseInt(_this3.props.autoplay));
-		}
-	};
-
-	this.stopAutoplay = function () {
-		if (_this3.autoplayTimerId) {
-			clearInterval(_this3.autoplayTimerId);
-		}
-	};
-
-	this.onAnimationEnd = function () {
-		_this3.setState({
-			currentSlideIndex: _this3.nextSlideIndex,
-			animating: false,
-			animation: undefined
-		});
-		_this3.setupAutoplay();
-	};
-
-	this.isDisabled = function () {
-		return _this3.slideCount < 2 || _this3.state.animating || _this3.props.disabled;
-	};
-
-	this.isInfinite = function () {
-		return _this3.slideCount > 2 && _this3.props.infinite !== false;
-	};
-
-	this.canGoPrevious = function () {
-		return _this3.isInfinite() || _this3.state.currentSlideIndex > 0;
-	};
-
-	this.canGoNext = function () {
-		return _this3.isInfinite() || _this3.state.currentSlideIndex < _this3.slideCount - 1;
-	};
-
-	this.goTo = function (index, animation) {
-		if (_this3.isDisabled()) return;
-		_this3.nextSlideIndex = index;
-		_this3.setState({ animating: true, animation: animation });
-		setTimeout(_this3.onAnimationEnd, _this3.props.duration || DEFAULT_DURATION);
-	};
-
-	this.previous = function () {
-		if (!_this3.canGoPrevious()) return;
-		var nextSlideIndex = _this3.state.currentSlideIndex - 1;
-		var actualNextSlide = nextSlideIndex >= 0 ? nextSlideIndex : _this3.slideCount - 1;
-		_this3.goTo(actualNextSlide, PREVIOUS);
-	};
-
-	this.next = function () {
-		if (!_this3.canGoNext()) return;
-		var nextSlideIndex = (_this3.state.currentSlideIndex + 1) % _this3.slideCount;
-		_this3.goTo(nextSlideIndex, NEXT);
-	};
-
-	this.getSlideClass = function (index) {
-		var _state = _this3.state,
-		    currentSlideIndex = _state.currentSlideIndex,
-		    animation = _state.animation;
-
-		var classNames = _this3.getClassNames();
-		var lastSlideIndex = _this3.slideCount - 1;
-		if (index === currentSlideIndex) {
-			if (animation) return classNames.animateOut + ' ' + classNames[animation];
-			return classNames.current;
-		} else if (_this3.slideCount === 2) {
-			if (animation) return classNames.animateIn + ' ' + classNames[animation];
-			return index < currentSlideIndex ? classNames.previous : classNames.next;
-		} else if (index === currentSlideIndex - 1 || currentSlideIndex === 0 && index === lastSlideIndex) {
-			if (animation === PREVIOUS) return classNames.animateIn + ' ' + classNames.previous;
-			if (animation === NEXT) return classNames.hidden;
-			return classNames.previous;
-		} else if (index === currentSlideIndex + 1 || index === 0 && currentSlideIndex === lastSlideIndex) {
-			if (animation === NEXT) return classNames.animateIn + ' ' + classNames.next;
-			if (animation === PREVIOUS) return classNames.hidden;
-			return classNames.next;
-		}
-		return classNames.hidden;
-	};
-
-	this.isSwiping = false;
-
-	this.handleTouchStart = function (e) {
-		if (_this3.isDisabled()) return;
-		_this3.stopAutoplay();
-
-		var _getClassNames = _this3.getClassNames(),
-		    current = _getClassNames.current,
-		    previous = _getClassNames.previous,
-		    next = _getClassNames.next;
-
-		var touch = e.touches[0];
-		_this3.isSwiping = true;
-		_this3.pageStartPosition = touch[_this3.swipeEventProperty];
-		_this3.currentElement = _this3.sliderRef.getElementsByClassName(current)[0];
-		_this3.previousElement = _this3.sliderRef.getElementsByClassName(previous)[0];
-		_this3.nextElement = _this3.sliderRef.getElementsByClassName(next)[0];
-		var touchDelta = _this3.currentElement.getBoundingClientRect()[_this3.swipeProperty];
-		_this3.currentElementStartPosition = 0;
-		_this3.currentElementPosition = 0;
-		_this3.currentElement.style.transition = 'none';
-		if (_this3.previousElement) {
-			_this3.previousElement.style.transition = 'none';
-			_this3.previousElement.style.visibility = 'visible';
-			_this3.previousElementStartPosition = _this3.previousElement.getBoundingClientRect()[_this3.swipeProperty] - touchDelta;
-		}
-		if (_this3.nextElement) {
-			_this3.nextElement.style.visibility = 'visible';
-			_this3.nextElement.style.transition = 'none';
-			_this3.nextElementStartPosition = _this3.nextElement.getBoundingClientRect()[_this3.swipeProperty] - touchDelta;
-		}
-	};
-
-	this.animating = false;
-
-	this.handleTouchMove = function (e) {
-		e.preventDefault();
-		_this3.animating = _this3.animating || requestAnimationFrame(function () {
-			if (!_this3.isSwiping) {
-				_this3.animating = false;
-				return;
-			}
-			var touch = e.touches[0];
-			var newLeft = touch[_this3.swipeEventProperty] - _this3.pageStartPosition;
-			_this3.currentElementPosition = _this3.currentElementStartPosition + newLeft;
-			_this3.currentElement.style[_this3.swipeProperty] = _this3.currentElementPosition + 'px';
-			if (_this3.previousElement) {
-				_this3.previousElementPosition = _this3.previousElementStartPosition + newLeft;
-				_this3.previousElement.style[_this3.swipeProperty] = _this3.previousElementPosition + 'px';
-			}
-			if (_this3.nextElement) {
-				_this3.nextElementPosition = _this3.nextElementStartPosition + newLeft;
-				_this3.nextElement.style[_this3.swipeProperty] = _this3.nextElementPosition + 'px';
-			}
-			_this3.animating = false;
-		});
-	};
-
-	this.handleTouchEnd = function () {
-		_this3.animating = false;
-		_this3.isSwiping = false;
-		_this3.currentElement.style.removeProperty(_this3.swipeProperty);
-		_this3.currentElement.style.removeProperty('transition');
-		if (_this3.previousElement) {
-			_this3.previousElement.style.removeProperty('visibility');
-			_this3.previousElement.style.removeProperty('transition');
-			_this3.previousElement.style.removeProperty(_this3.swipeProperty);
-		}
-		if (_this3.nextElement) {
-			_this3.nextElement.style.removeProperty('visibility');
-			_this3.nextElement.style.removeProperty('transition');
-			_this3.nextElement.style.removeProperty(_this3.swipeProperty);
-		}
-		var touchDelta = _this3.currentElementStartPosition - _this3.currentElementPosition;
-		var minSwipeOffset = _this3.props.minSwipeOffset || 15;
-		if (Math.abs(touchDelta) > minSwipeOffset) {
-			if (touchDelta < 0) {
-				_this3.previous();
-			} else {
-				_this3.next();
-			}
-		} else {
-			_this3.setupAutoplay();
-		}
-	};
-
-	this.getClassNames = function () {
-		return _extends({}, DEFAULT_CLASSNAMES, _this3.props.classNames);
-	};
-
-	this.initTouchEvents = function (sliderRef) {
-		if (_this3.isDisabled() || !sliderRef) return;
-		_this3.sliderRef = sliderRef;
-		_this3.sliderRef.addEventListener('touchstart', _this3.handleTouchStart);
-		_this3.sliderRef.addEventListener('touchmove', _this3.handleTouchMove, {
-			passive: false
-		});
-		_this3.sliderRef.addEventListener('touchend', _this3.handleTouchEnd);
-	};
-
-	this.handleMouseOver = function () {
-		_this3.isMouseOver = true;
-		_this3.stopAutoplay();
-	};
-
-	this.handleMouseOut = function () {
-		_this3.isMouseOver = false;
-		_this3.setupAutoplay();
-	};
-};
 
 exports.default = Slider;
 
