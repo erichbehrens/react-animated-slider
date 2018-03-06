@@ -355,6 +355,7 @@ var Slider = function (_React$PureComponent) {
 			    previousButton = _props$previousButton === undefined ? 'previous' : _props$previousButton,
 			    _props$nextButton = _props.nextButton,
 			    nextButton = _props$nextButton === undefined ? 'next' : _props$nextButton,
+			    touchDisabled = _props.touchDisabled,
 			    autoplay = _props.autoplay;
 
 			var classNames = this.getClassNames();
@@ -362,9 +363,8 @@ var Slider = function (_React$PureComponent) {
 			return _react2.default.createElement(
 				'div',
 				_extends({
-					className: className,
-					ref: this.initTouchEvents
-				}, autoplay && {
+					className: className
+				}, !touchDisabled && { ref: this.initTouchEvents }, autoplay && {
 					onMouseOver: this.handleMouseOver,
 					onMouseOut: this.handleMouseOut
 				}),

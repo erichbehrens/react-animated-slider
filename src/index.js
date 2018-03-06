@@ -257,6 +257,7 @@ class Slider extends React.PureComponent {
 			className,
 			previousButton = 'previous',
 			nextButton = 'next',
+			touchDisabled,
 			autoplay,
 		} = this.props;
 		const classNames = this.getClassNames();
@@ -264,7 +265,7 @@ class Slider extends React.PureComponent {
 		return (
 			<div
 				className={className}
-				ref={this.initTouchEvents}
+				{...!touchDisabled && { ref: this.initTouchEvents }}
 				{...autoplay && {
 					onMouseOver: this.handleMouseOver,
 					onMouseOut: this.handleMouseOut,
