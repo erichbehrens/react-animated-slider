@@ -66,6 +66,10 @@ Enable or disable infinite loop through slides. Sliders with only 2 children wil
 
 Autoplay interval in miliseconds. If `undefined` the slider will not play automatically. The timer will be paused and reset during user interactions such as mouse over or touch, to avoid sliding away the elements when the user wants to click them.
 
+**touchDisabled** `boolean`, default `false`
+
+Disable slider navigation through touch events
+
 **minSwipeOffset** - `number`, default `15`(px)
 
 Minimum distance to swipe for triggering a navigation event
