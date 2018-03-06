@@ -37,6 +37,25 @@ class Slider extends React.PureComponent {
 		this.swipeEventProperty = direction === HORIZONTAL ? 'clientX' : 'clientY';
 	}
 
+	componentDidMount() {
+		if (this.props.autoslide){
+			this.timerID = setInterval(
+				() => this.tick(), 
+				parseInt(this.props.autoslide)
+			);
+		}
+	}
+
+	componentWillUnmount() {
+		if (this.timerID){
+			clearInterval(this.timerID);
+		}
+	}
+	
+	tick() {
+		this.next();
+	}
+
 	onAnimationEnd = () => {
 		this.setState({
 			currentSlideIndex: this.nextSlideIndex,
