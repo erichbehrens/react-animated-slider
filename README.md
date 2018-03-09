@@ -1,5 +1,7 @@
 # react-animated-slider
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/erichbehrens/react-animated-slider.svg)](https://greenkeeper.io/)
+
 [![CircleCI](https://circleci.com/gh/erichbehrens/react-animated-slider/tree/master.svg?style=shield)](https://circleci.com/gh/erichbehrens/react-animated-slider/tree/master)
 [![dependencies](https://david-dm.org/erichbehrens/react-animated-slider.svg)](https://david-dm.org/erichbehrens/react-animated-slider)
 [![devDependencies](https://david-dm.org/erichbehrens/react-animated-slider/dev-status.svg)](https://david-dm.org/erichbehrens/react-animated-slider?type=dev)
