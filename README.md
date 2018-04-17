@@ -106,11 +106,11 @@ Object representing the CSS classNames that will be apllied to the slides.
 
 ### Classnames
 
-**buttons.previous** previous button
+**previousButton** previous button
 
-**buttons.next** next button
+**nextButton** next button
 
-**buttons.disabled** disabled state for previous and next button
+**buttonDisabled** disabled state for previous and next button
 
 **track** element wrapping all slides
 

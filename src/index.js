@@ -7,11 +7,9 @@ export const HORIZONTAL = 'horizontal';
 export const VERTICAL = 'vertical';
 
 const DEFAULT_CLASSNAMES = {
-	buttons: {
-		previous: 'previousButton',
-		next: 'nextButton',
-		disabled: 'disabled',
-	},
+	previousButton: 'previousButton',
+	nextButton: 'nextButton',
+	buttonDisabled: 'disabled',
 	track: 'track',
 	slide: 'slide',
 	hidden: 'hidden',
@@ -290,16 +288,14 @@ class Slider extends React.PureComponent {
 				}}
 			>
 				<a
-					href="javascript:void(0)"
 					onClick={this.previous}
-					className={`${classNames.buttons.previous}${isDisabled || !this.canGoPrevious() ? ` ${classNames.buttons.disabled}` : ''}`}
+					className={`${classNames.previousButton}${isDisabled || !this.canGoPrevious() ? ` ${classNames.buttonDisabled}` : ''}`}
 				>
 					{previousButton}
 				</a>
 				<a
-					href="javascript:void(0)"
 					onClick={this.next}
-					className={`${classNames.buttons.next}${isDisabled || !this.canGoNext() ? ` ${classNames.buttons.disabled}` : ''}`}
+					className={`${classNames.nextButton}${isDisabled || !this.canGoNext() ? ` ${classNames.buttonDisabled}` : ''}`}
 				>
 					{nextButton}
 				</a>

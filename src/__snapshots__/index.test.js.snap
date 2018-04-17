@@ -6,7 +6,6 @@ exports[`animate next classNames 1`] = `
 >
   <a
     className="previousButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -24,7 +23,6 @@ exports[`animate next classNames 1`] = `
   </a>
   <a
     className="nextButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -62,7 +60,6 @@ exports[`animate previous classNames 1`] = `
 >
   <a
     className="previousButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -80,7 +77,6 @@ exports[`animate previous classNames 1`] = `
   </a>
   <a
     className="nextButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -118,7 +114,6 @@ exports[`renders one child 1`] = `
 >
   <a
     className="previousButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -136,7 +131,6 @@ exports[`renders one child 1`] = `
   </a>
   <a
     className="nextButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -168,7 +162,6 @@ exports[`renders three children 1`] = `
 >
   <a
     className="previousButton"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -186,7 +179,6 @@ exports[`renders three children 1`] = `
   </a>
   <a
     className="nextButton"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -224,7 +216,6 @@ exports[`renders two children 1`] = `
 >
   <a
     className="previousButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -242,7 +233,6 @@ exports[`renders two children 1`] = `
   </a>
   <a
     className="nextButton"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -279,7 +269,6 @@ exports[`test autoslide enabled 1`] = `
 >
   <a
     className="previousButton"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -297,7 +286,6 @@ exports[`test autoslide enabled 1`] = `
   </a>
   <a
     className="nextButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -332,7 +320,6 @@ exports[`with one child can not navigate to next 1`] = `
 >
   <a
     className="previousButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -350,7 +337,6 @@ exports[`with one child can not navigate to next 1`] = `
   </a>
   <a
     className="nextButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -382,7 +368,6 @@ exports[`with one child can not navigate to previuous 1`] = `
 >
   <a
     className="previousButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -400,7 +385,6 @@ exports[`with one child can not navigate to previuous 1`] = `
   </a>
   <a
     className="nextButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -432,7 +416,6 @@ exports[`with two children can navigate to next 1`] = `
 >
   <a
     className="previousButton"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -450,7 +433,6 @@ exports[`with two children can navigate to next 1`] = `
   </a>
   <a
     className="nextButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -485,7 +467,6 @@ exports[`with two children can navigate to next only once 1`] = `
 >
   <a
     className="previousButton"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -503,7 +484,6 @@ exports[`with two children can navigate to next only once 1`] = `
   </a>
   <a
     className="nextButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -538,7 +518,6 @@ exports[`with two children can not navigate to previuous 1`] = `
 >
   <a
     className="previousButton disabled"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
@@ -556,7 +535,6 @@ exports[`with two children can not navigate to previuous 1`] = `
   </a>
   <a
     className="nextButton"
-    href="javascript:void(0)"
     onClick={[Function]}
   >
     <svg
