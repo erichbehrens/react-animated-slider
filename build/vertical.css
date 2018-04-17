@@ -1,34 +1,81 @@
+.slider {
+	position: relative;
+	width: 100%;
+	height: 200px;
+	overflow: hidden
+}
+
+.slider a.previousButton, .slider a.nextButton {
+	font-size: 22px;
+	line-height: 0;
+	display: block;
+	position: absolute;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+	z-index: 1;
+	color: #333;
+	padding: 10px
+}
+
+.slider a.previousButton:not(.disabled):hover, .slider a.nextButton:not(.disabled):hover {
+	-webkit-transform: translateX(-50%) scale(1.25);
+	        transform: translateX(-50%) scale(1.25);
+}
+
+.slider a.previousButton.disabled, .slider a.nextButton.disabled {
+	cursor: default;
+}
+
+.slider a.previousButton {
+	top: 20px;
+}
+
+.slider a.nextButton {
+	bottom: 20px;
+}
+
 .slide {
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	overflow: hidden
 }
+
 .slide.hidden {
 	visibility: hidden;
 }
+
 .slide.previous {
 	top: -100%;
 }
+
 .slide.current {
 	top: 0;
 }
+
 .slide.next {
 	top: 100%;
 }
+
 .slide.animateIn,
 	.slide.animateOut {
 	-webkit-transition: all 2s ease;
 	transition: all 2s ease;
 }
+
 .slide.animateIn.previous,
 		.slide.animateIn.next {
 	top: 0;
 	visibility: visible;
 }
+
 .slide.animateOut.previous {
 	top: 100%;
 }
+
 .slide.animateOut.next {
 	top: -100%;
 }
