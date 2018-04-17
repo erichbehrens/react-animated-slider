@@ -1,0 +1,213 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700,900);
+body {
+  font-family: "Lato", sans-serif;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding-top: 75px;
+}
+
+h1 {
+  text-align: center;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  background: #000000;
+  z-index: 10;
+}
+
+header h1 {
+  margin: 0
+}
+
+.styles__page__P58RD {
+  margin-top: 20px;
+}
+
+header section {
+  max-width: 1500px;
+  height: 35px;
+  margin: auto;
+  padding: 20px;
+  background: #ffd800;
+}
+
+header section .styles__logo__1tNzg {
+  -webkit-transform: translateX(-87px);
+          transform: translateX(-87px);
+}
+
+header section a {
+  float: right;
+  padding: 3px 0;
+}
+
+
+.horizontal__slider__L_RIt {
+	position: relative;
+	width: 100%;
+	height: 400px;
+	overflow: hidden
+}
+
+.horizontal__slider__L_RIt a.horizontal__previousButton__2WCyh, .horizontal__slider__L_RIt a.horizontal__nextButton__2stOl {
+	font-size: 22px;
+	line-height: 0;
+	display: block;
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	        transform: translateY(-50%);
+	-webkit-transition: all .3s linear;
+	transition: all .3s linear;
+	z-index: 1;
+	color: #333;
+	padding: 10px;
+	text-decoration: none;
+	-webkit-backface-visibility: hidden;
+	        backface-visibility: hidden
+	/* prevent jump effect when scaling */
+}
+
+.horizontal__slider__L_RIt a.horizontal__previousButton__2WCyh:not(.horizontal__disabled__19zUy):hover, .horizontal__slider__L_RIt a.horizontal__nextButton__2stOl:not(.horizontal__disabled__19zUy):hover {
+	-webkit-transform: translateY(-50%) scale(1.25);
+	        transform: translateY(-50%) scale(1.25);
+	cursor: pointer;
+}
+
+.horizontal__slider__L_RIt a.horizontal__previousButton__2WCyh {
+	left: 20px;
+}
+
+.horizontal__slider__L_RIt a.horizontal__nextButton__2stOl {
+	right: 20px;
+}
+
+.horizontal__slide__X6dwH {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	overflow: hidden
+}
+
+.horizontal__slide__X6dwH.horizontal__hidden__3vKt9 {
+	visibility: hidden;
+}
+
+.horizontal__slide__X6dwH.horizontal__previous__3qoez {
+	left: -100%;
+}
+
+.horizontal__slide__X6dwH.horizontal__current__3Z8d4 {
+	left: 0;
+}
+
+.horizontal__slide__X6dwH.horizontal__next__1qSNp {
+	left: 100%;
+}
+
+.horizontal__slide__X6dwH.horizontal__animateIn__1UtJ0,
+	.horizontal__slide__X6dwH.horizontal__animateOut__1VG3S {
+	-webkit-transition: all 2s ease;
+	transition: all 2s ease;
+}
+
+.horizontal__slide__X6dwH.horizontal__animateIn__1UtJ0.horizontal__previous__3qoez,
+		.horizontal__slide__X6dwH.horizontal__animateIn__1UtJ0.horizontal__next__1qSNp {
+	left: 0;
+	visibility: visible;
+}
+
+.horizontal__slide__X6dwH.horizontal__animateOut__1VG3S.horizontal__previous__3qoez {
+	left: 100%;
+}
+
+.horizontal__slide__X6dwH.horizontal__animateOut__1VG3S.horizontal__next__1qSNp {
+	left: -100%;
+}
+
+.vertical__slider__2b7iT {
+	position: relative;
+	width: 100%;
+	height: 400px;
+	overflow: hidden
+}
+
+.vertical__slider__2b7iT a.vertical__previousButton__2szq3, .vertical__slider__2b7iT a.vertical__nextButton__2JIzr {
+	font-size: 22px;
+	line-height: 0;
+	display: block;
+	position: absolute;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+	z-index: 1;
+	color: #333;
+	padding: 10px
+}
+
+.vertical__slider__2b7iT a.vertical__previousButton__2szq3:not(.vertical__disabled__vjSlS):hover, .vertical__slider__2b7iT a.vertical__nextButton__2JIzr:not(.vertical__disabled__vjSlS):hover {
+	-webkit-transform: translateX(-50%) scale(1.25);
+	        transform: translateX(-50%) scale(1.25);
+	cursor: pointer;
+}
+
+.vertical__slider__2b7iT a.vertical__previousButton__2szq3 {
+	top: 20px;
+}
+
+.vertical__slider__2b7iT a.vertical__nextButton__2JIzr {
+	bottom: 20px;
+}
+
+.vertical__slide__HvDLu {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	overflow: hidden
+}
+
+.vertical__slide__HvDLu.vertical__hidden__mOiMQ {
+	visibility: hidden;
+}
+
+.vertical__slide__HvDLu.vertical__previous__204Rs {
+	top: -100%;
+}
+
+.vertical__slide__HvDLu.vertical__current__1FsUx {
+	top: 0;
+}
+
+.vertical__slide__HvDLu.vertical__next__1WPqL {
+	top: 100%;
+}
+
+.vertical__slide__HvDLu.vertical__animateIn__3gcOm,
+	.vertical__slide__HvDLu.vertical__animateOut__3yNES {
+	-webkit-transition: all 2s ease;
+	transition: all 2s ease;
+}
+
+.vertical__slide__HvDLu.vertical__animateIn__3gcOm.vertical__previous__204Rs,
+		.vertical__slide__HvDLu.vertical__animateIn__3gcOm.vertical__next__1WPqL {
+	top: 0;
+	visibility: visible;
+}
+
+.vertical__slide__HvDLu.vertical__animateOut__3yNES.vertical__previous__204Rs {
+	top: 100%;
+}
+
+.vertical__slide__HvDLu.vertical__animateOut__3yNES.vertical__next__1WPqL {
+	top: -100%;
+}
+
+
+/*# sourceMappingURL=main.css.map*/
