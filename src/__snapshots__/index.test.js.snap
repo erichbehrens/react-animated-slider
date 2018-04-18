@@ -2,22 +2,42 @@
 
 exports[`animate next classNames 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
-  <button
-    className="previousButton"
-    disabled={true}
+  <a
+    className="previousButton disabled"
     onClick={[Function]}
   >
-    previous
-  </button>
-  <button
-    className="nextButton"
-    disabled={true}
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(180 10 15)"
+      />
+    </svg>
+  </a>
+  <a
+    className="nextButton disabled"
     onClick={[Function]}
   >
-    next
-  </button>
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(0 10 15)"
+      />
+    </svg>
+  </a>
   <div
     className="track"
   >
@@ -36,22 +56,42 @@ exports[`animate next classNames 1`] = `
 
 exports[`animate previous classNames 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
-  <button
-    className="previousButton"
-    disabled={true}
+  <a
+    className="previousButton disabled"
     onClick={[Function]}
   >
-    previous
-  </button>
-  <button
-    className="nextButton"
-    disabled={true}
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(180 10 15)"
+      />
+    </svg>
+  </a>
+  <a
+    className="nextButton disabled"
     onClick={[Function]}
   >
-    next
-  </button>
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(0 10 15)"
+      />
+    </svg>
+  </a>
   <div
     className="track"
   >
@@ -70,22 +110,42 @@ exports[`animate previous classNames 1`] = `
 
 exports[`renders one child 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
-  <button
-    className="previousButton"
-    disabled={true}
+  <a
+    className="previousButton disabled"
     onClick={[Function]}
   >
-    previous
-  </button>
-  <button
-    className="nextButton"
-    disabled={true}
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(180 10 15)"
+      />
+    </svg>
+  </a>
+  <a
+    className="nextButton disabled"
     onClick={[Function]}
   >
-    next
-  </button>
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(0 10 15)"
+      />
+    </svg>
+  </a>
   <div
     className="track"
   >
@@ -98,22 +158,42 @@ exports[`renders one child 1`] = `
 
 exports[`renders three children 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
-  <button
+  <a
     className="previousButton"
-    disabled={false}
     onClick={[Function]}
   >
-    previous
-  </button>
-  <button
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(180 10 15)"
+      />
+    </svg>
+  </a>
+  <a
     className="nextButton"
-    disabled={false}
     onClick={[Function]}
   >
-    next
-  </button>
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(0 10 15)"
+      />
+    </svg>
+  </a>
   <div
     className="track"
   >
@@ -132,22 +212,42 @@ exports[`renders three children 1`] = `
 
 exports[`renders two children 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
-  <button
-    className="previousButton"
-    disabled={true}
+  <a
+    className="previousButton disabled"
     onClick={[Function]}
   >
-    previous
-  </button>
-  <button
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(180 10 15)"
+      />
+    </svg>
+  </a>
+  <a
     className="nextButton"
-    disabled={false}
     onClick={[Function]}
   >
-    next
-  </button>
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(0 10 15)"
+      />
+    </svg>
+  </a>
   <div
     className="track"
   >
@@ -163,24 +263,44 @@ exports[`renders two children 1`] = `
 
 exports[`test autoslide enabled 1`] = `
 <div
-  className={undefined}
+  className="slider"
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
-  <button
+  <a
     className="previousButton"
-    disabled={false}
     onClick={[Function]}
   >
-    previous
-  </button>
-  <button
-    className="nextButton"
-    disabled={true}
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(180 10 15)"
+      />
+    </svg>
+  </a>
+  <a
+    className="nextButton disabled"
     onClick={[Function]}
   >
-    next
-  </button>
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(0 10 15)"
+      />
+    </svg>
+  </a>
   <div
     className="track"
   >
@@ -196,22 +316,42 @@ exports[`test autoslide enabled 1`] = `
 
 exports[`with one child can not navigate to next 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
-  <button
-    className="previousButton"
-    disabled={true}
+  <a
+    className="previousButton disabled"
     onClick={[Function]}
   >
-    previous
-  </button>
-  <button
-    className="nextButton"
-    disabled={true}
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(180 10 15)"
+      />
+    </svg>
+  </a>
+  <a
+    className="nextButton disabled"
     onClick={[Function]}
   >
-    next
-  </button>
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(0 10 15)"
+      />
+    </svg>
+  </a>
   <div
     className="track"
   >
@@ -224,22 +364,42 @@ exports[`with one child can not navigate to next 1`] = `
 
 exports[`with one child can not navigate to previuous 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
-  <button
-    className="previousButton"
-    disabled={true}
+  <a
+    className="previousButton disabled"
     onClick={[Function]}
   >
-    previous
-  </button>
-  <button
-    className="nextButton"
-    disabled={true}
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(180 10 15)"
+      />
+    </svg>
+  </a>
+  <a
+    className="nextButton disabled"
     onClick={[Function]}
   >
-    next
-  </button>
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(0 10 15)"
+      />
+    </svg>
+  </a>
   <div
     className="track"
   >
@@ -252,22 +412,42 @@ exports[`with one child can not navigate to previuous 1`] = `
 
 exports[`with two children can navigate to next 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
-  <button
+  <a
     className="previousButton"
-    disabled={false}
     onClick={[Function]}
   >
-    previous
-  </button>
-  <button
-    className="nextButton"
-    disabled={true}
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(180 10 15)"
+      />
+    </svg>
+  </a>
+  <a
+    className="nextButton disabled"
     onClick={[Function]}
   >
-    next
-  </button>
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(0 10 15)"
+      />
+    </svg>
+  </a>
   <div
     className="track"
   >
@@ -283,22 +463,42 @@ exports[`with two children can navigate to next 1`] = `
 
 exports[`with two children can navigate to next only once 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
-  <button
+  <a
     className="previousButton"
-    disabled={false}
     onClick={[Function]}
   >
-    previous
-  </button>
-  <button
-    className="nextButton"
-    disabled={true}
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(180 10 15)"
+      />
+    </svg>
+  </a>
+  <a
+    className="nextButton disabled"
     onClick={[Function]}
   >
-    next
-  </button>
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(0 10 15)"
+      />
+    </svg>
+  </a>
   <div
     className="track"
   >
@@ -314,22 +514,42 @@ exports[`with two children can navigate to next only once 1`] = `
 
 exports[`with two children can not navigate to previuous 1`] = `
 <div
-  className={undefined}
+  className="slider"
 >
-  <button
-    className="previousButton"
-    disabled={true}
+  <a
+    className="previousButton disabled"
     onClick={[Function]}
   >
-    previous
-  </button>
-  <button
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(180 10 15)"
+      />
+    </svg>
+  </a>
+  <a
     className="nextButton"
-    disabled={false}
     onClick={[Function]}
   >
-    next
-  </button>
+    <svg
+      height="30"
+      viewBox="0 0 20 30"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        fill="#000"
+        points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30"
+        transform="rotate(0 10 15)"
+      />
+    </svg>
+  </a>
   <div
     className="track"
   >

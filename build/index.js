@@ -99,8 +99,11 @@ var HORIZONTAL = exports.HORIZONTAL = 'horizontal';
 var VERTICAL = exports.VERTICAL = 'vertical';
 
 var DEFAULT_CLASSNAMES = {
-	previousButton: 'previousButton',
-	nextButton: 'nextButton',
+	buttons: {
+		previous: 'previousButton',
+		next: 'nextButton',
+		disabled: 'disabled'
+	},
 	track: 'track',
 	slide: 'slide',
 	hidden: 'hidden',
@@ -111,6 +114,23 @@ var DEFAULT_CLASSNAMES = {
 	animateOut: 'animateOut'
 };
 var DEFAULT_DURATION = 2000;
+
+var arrowTransforms = {
+	up: 'rotate(90 10 15)',
+	down: 'rotate(270 10 15)',
+	left: 'rotate(180 10 15)',
+	right: 'rotate(0 10 15)'
+};
+function Arrow(_ref) {
+	var _ref$direction = _ref.direction,
+	    direction = _ref$direction === undefined ? 'right' : _ref$direction;
+
+	return _react2.default.createElement(
+		'svg',
+		{ xmlns: 'http://www.w3.org/2000/svg', width: '20', height: '30', viewBox: '0 0 20 30' },
+		_react2.default.createElement('polygon', { fill: '#000', points: '20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30', transform: arrowTransforms[direction] })
+	);
+}
 
 var Slider = function (_React$PureComponent) {
 	_inherits(Slider, _React$PureComponent);
@@ -328,6 +348,7 @@ var Slider = function (_React$PureComponent) {
 			animating: false
 		};
 		_this.slideCount = _react2.default.Children.count(_this.props.children);
+		_this.direction = direction;
 		_this.swipeProperty = direction === HORIZONTAL ? 'left' : 'top';
 		_this.swipeEventProperty = direction === HORIZONTAL ? 'clientX' : 'clientY';
 		return _this;
@@ -350,11 +371,12 @@ var Slider = function (_React$PureComponent) {
 
 			var _props = this.props,
 			    children = _props.children,
-			    className = _props.className,
+			    _props$className = _props.className,
+			    className = _props$className === undefined ? 'slider' : _props$className,
 			    _props$previousButton = _props.previousButton,
-			    previousButton = _props$previousButton === undefined ? 'previous' : _props$previousButton,
+			    previousButton = _props$previousButton === undefined ? _react2.default.createElement(Arrow, { direction: this.direction === HORIZONTAL ? 'left' : 'down' }) : _props$previousButton,
 			    _props$nextButton = _props.nextButton,
-			    nextButton = _props$nextButton === undefined ? 'next' : _props$nextButton,
+			    nextButton = _props$nextButton === undefined ? _react2.default.createElement(Arrow, { direction: this.direction === HORIZONTAL ? 'right' : 'up' }) : _props$nextButton,
 			    touchDisabled = _props.touchDisabled,
 			    autoplay = _props.autoplay;
 
@@ -369,20 +391,20 @@ var Slider = function (_React$PureComponent) {
 					onMouseOut: this.handleMouseOut
 				}),
 				_react2.default.createElement(
-					'button',
+					'a',
 					{
+						href: 'javascript:void(0)',
 						onClick: this.previous,
-						className: classNames.previousButton,
-						disabled: isDisabled || !this.canGoPrevious()
+						className: '' + classNames.buttons.previous + (isDisabled || !this.canGoPrevious() ? ' ' + classNames.buttons.disabled : '')
 					},
 					previousButton
 				),
 				_react2.default.createElement(
-					'button',
+					'a',
 					{
+						href: 'javascript:void(0)',
 						onClick: this.next,
-						className: classNames.nextButton,
-						disabled: isDisabled || !this.canGoNext()
+						className: '' + classNames.buttons.next + (isDisabled || !this.canGoNext() ? ' ' + classNames.buttons.disabled : '')
 					},
 					nextButton
 				),

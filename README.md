@@ -87,9 +87,9 @@ Will be rendered inside the next button
 **classNames** `object`, default
 
 ```js
-{
   previousButton: 'previousButton',
   nextButton: 'nextButton',
+  buttonDisabled: 'disabled',
   track: 'track',
   slide: 'slide',
   hidden: 'hidden',
@@ -105,9 +105,11 @@ Object representing the CSS classNames that will be apllied to the slides.
 
 ### Classnames
 
-**previousButton**
+**previousButton** previous button
 
-**nextButton**
+**nextButton** next button
+
+**buttonDisabled** disabled state for previous and next button
 
 **track** element wrapping all slides
 

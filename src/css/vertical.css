@@ -1,3 +1,38 @@
+.slider {
+	position: relative;
+	width: 100%;
+	height: 400px;
+	overflow: hidden;
+
+	& a {
+		&.previousButton, &.nextButton {
+			font-size: 22px;
+			line-height: 0;
+			display: block;
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			transition: all .3s ease;
+			z-index: 1;
+			color: #333;
+			padding: 10px;
+
+			&:not(.disabled):hover {
+				transform: translateX(-50%) scale(1.25);
+				cursor: pointer;
+			}
+		}
+
+		&.previousButton {
+			top: 20px;
+		}
+
+		&.nextButton {
+			bottom: 20px;
+		}
+	}
+}
+
 .slide {
 	width: 100%;
 	height: 100%;

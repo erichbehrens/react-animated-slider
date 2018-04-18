@@ -9,6 +9,7 @@ export const VERTICAL = 'vertical';
 const DEFAULT_CLASSNAMES = {
 	previousButton: 'previousButton',
 	nextButton: 'nextButton',
+	buttonDisabled: 'disabled',
 	track: 'track',
 	slide: 'slide',
 	hidden: 'hidden',
@@ -19,6 +20,20 @@ const DEFAULT_CLASSNAMES = {
 	animateOut: 'animateOut',
 };
 const DEFAULT_DURATION = 2000;
+
+const arrowTransforms = {
+	up: 'rotate(90 10 15)',
+	down: 'rotate(270 10 15)',
+	left: 'rotate(180 10 15)',
+	right: 'rotate(0 10 15)',
+};
+function Arrow({ direction = 'right' }) {
+	return (
+		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="30" viewBox="0 0 20 30">
+			<polygon fill="#000" points="20 15 4.228 0 0 3.626 11.954 15 0 26.374 4.228 30" transform={arrowTransforms[direction]} />
+		</svg>
+	);
+}
 
 class Slider extends React.PureComponent {
 	constructor(props) {
@@ -32,6 +47,7 @@ class Slider extends React.PureComponent {
 			animating: false,
 		};
 		this.slideCount = React.Children.count(this.props.children);
+		this.direction = direction;
 		this.swipeProperty = direction === HORIZONTAL ? 'left' : 'top';
 		this.swipeEventProperty = direction === HORIZONTAL ? 'clientX' : 'clientY';
 	}
@@ -254,9 +270,9 @@ class Slider extends React.PureComponent {
 	render() {
 		const {
 			children,
-			className,
-			previousButton = 'previous',
-			nextButton = 'next',
+			className = 'slider',
+			previousButton = <Arrow direction={this.direction === HORIZONTAL ? 'left' : 'down'} />,
+			nextButton = <Arrow direction={this.direction === HORIZONTAL ? 'right' : 'up'} />,
 			touchDisabled,
 			autoplay,
 		} = this.props;
@@ -271,20 +287,18 @@ class Slider extends React.PureComponent {
 					onMouseOut: this.handleMouseOut,
 				}}
 			>
-				<button
+				<a
 					onClick={this.previous}
-					className={classNames.previousButton}
-					disabled={isDisabled || !this.canGoPrevious()}
+					className={`${classNames.previousButton}${isDisabled || !this.canGoPrevious() ? ` ${classNames.buttonDisabled}` : ''}`}
 				>
 					{previousButton}
-				</button>
-				<button
+				</a>
+				<a
 					onClick={this.next}
-					className={classNames.nextButton}
-					disabled={isDisabled || !this.canGoNext()}
+					className={`${classNames.nextButton}${isDisabled || !this.canGoNext() ? ` ${classNames.buttonDisabled}` : ''}`}
 				>
 					{nextButton}
-				</button>
+				</a>
 				<div className={classNames.track}>
 					{React.Children.map(children, (item, index) =>
 						React.cloneElement(item, {
@@ -292,7 +306,7 @@ class Slider extends React.PureComponent {
 							className: [classNames.slide, this.getSlideClass(index), item.props.className].filter(v => v).join(' '),
 						}))}
 				</div>
-			</div >
+			</div>
 		);
 	}
 }
