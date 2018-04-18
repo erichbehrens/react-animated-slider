@@ -1,8 +1,9 @@
 import React from 'react';
+import styles from './styles.css';
 
 function Shields() {
 	return (
-		<div className="center">
+		<div className={styles.shields}>
 			<a href="https://circleci.com/gh/erichbehrens/react-animated-slider/tree/master">
 				<img
 					src="https://circleci.com/gh/erichbehrens/react-animated-slider/tree/master.svg?style=shield"

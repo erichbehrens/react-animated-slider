@@ -6,7 +6,7 @@ export default [
 		button: 'Read More',
 		image: 'https://i.imgur.com/ZXBtVw7.jpg',
 		user: 'Daniel',
-		userProfile: '',
+		userProfile: 'https://s7.postimg.cc/abavelo3v/1_3x.png',
 	},
 	{
 		title: 'Tortor Dapibus Commodo Aenean Quam',
@@ -15,7 +15,7 @@ export default [
 		button: 'Discover',
 		image: 'https://i.imgur.com/DCdBXcq.jpg',
 		user: 'Samantha',
-		userProfile: '',
+		userProfile: 'https://s7.postimg.cc/ujy8zz7vv/5_3x.png',
 	},
 	{
 		title: 'Phasellus volutpat metus',
@@ -24,7 +24,7 @@ export default [
 		button: 'Buy now',
 		image: 'https://i.imgur.com/DvmN8Hx.jpg',
 		user: 'Michael',
-		userProfile: '',
+		userProfile: 'https://s7.postimg.cc/6exjimijv/3_3x.png',
 	},
 	{
 		title: 'Ultricies Vulputate Mollis Fermentum Parturient',
@@ -33,7 +33,7 @@ export default [
 		button: 'Read More',
 		image: 'https://i.imgur.com/ZXBtVw7.jpg',
 		user: 'Jessica',
-		userProfile: '',
+		userProfile: 'https://s7.postimg.cc/7ihnu80ij/4_3x.png',
 	},
 	{
 		title: 'Odo Aenean Quam Tortor Dapimodo Aenean Quam',
@@ -42,7 +42,7 @@ export default [
 		button: 'Discover',
 		image: 'https://i.imgur.com/DCdBXcq.jpg',
 		user: 'William',
-		userProfile: '',
+		userProfile: 'https://s7.postimg.cc/f9ydt4zmj/2_3x.png',
 	},
 	{
 		title: 'Volutpat Aenean metus',
@@ -51,6 +51,6 @@ export default [
 		button: 'Buy now',
 		image: 'https://i.imgur.com/DvmN8Hx.jpg',
 		user: 'Katerina',
-		userProfile: '',
+		userProfile: 'https://s7.postimg.cc/hsk2th5tn/6_3x.png',
 	},
 ];
