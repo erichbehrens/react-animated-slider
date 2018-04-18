@@ -17,6 +17,7 @@ const App = () => (
 
 		<h1>DEMO</h1>
 
+		<h2>Predefined horizontal slider</h2>
 		<Slider className={horizontalCss.slider} classNames={horizontalCss}>
 			{content.map((item, index) => (
 				<div
@@ -33,6 +34,7 @@ const App = () => (
 			))}
 		</Slider>
 
+		<h2>Predefined vertical slider</h2>
 		<Slider className={verticalCss.slider} classNames={verticalCss} direction="vertical">
 			{content.map((item, index) => (
 				<div
@@ -49,6 +51,7 @@ const App = () => (
 			))}
 		</Slider>
 
+		<h2>Custom style and animations</h2>
 		<Slider className={customCss.slider} classNames={customCss}>
 			{content.map((item, index) => (
 				<div
