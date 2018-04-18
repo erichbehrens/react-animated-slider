@@ -85,12 +85,9 @@ Will be rendered inside the next button
 **classNames** `object`, default
 
 ```js
-{
-  buttons: {
-    previous: 'previousButton',
-    next: 'nextButton',
-    disabled: 'disabled',
-  },
+  previousButton: 'previousButton',
+  nextButton: 'nextButton',
+  buttonDisabled: 'disabled',
   track: 'track',
   slide: 'slide',
   hidden: 'hidden',
