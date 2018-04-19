@@ -1,14 +1,15 @@
 # react-animated-slider
 
+[![npm version](https://img.shields.io/npm/v/react-animated-slider.svg)](https://www.npmjs.com/package/react-animated-slider)
+[![downloads](https://img.shields.io/npm/dt/react-animated-slider.svg)](https://www.npmjs.com/package/react-animated-slider)
 [![Greenkeeper badge](https://badges.greenkeeper.io/erichbehrens/react-animated-slider.svg)](https://greenkeeper.io/)
 [![CircleCI](https://circleci.com/gh/erichbehrens/react-animated-slider/tree/master.svg?style=shield)](https://circleci.com/gh/erichbehrens/react-animated-slider/tree/master)
 [![dependencies](https://david-dm.org/erichbehrens/react-animated-slider.svg)](https://david-dm.org/erichbehrens/react-animated-slider)
 [![devDependencies](https://david-dm.org/erichbehrens/react-animated-slider/dev-status.svg)](https://david-dm.org/erichbehrens/react-animated-slider?type=dev)
-[![downloads](https://img.shields.io/npm/dt/react-animated-slider.svg)](https://www.npmjs.com/package/react-animated-slider)
 
 Animated slider component for react.
 
-[Demo](https://p582xl40j.codesandbox.io/) - [Playground](https://codesandbox.io/s/p582xl40j)
+[Demo](http://erichbehrens.github.io/react-animated-slider/) - [Codesandbox Playground](https://codesandbox.io/s/p582xl40j)
 
 ![Preview](https://res.cloudinary.com/riangle/image/upload/v1511700118/react-animated-slider_qqedfm.png)
 

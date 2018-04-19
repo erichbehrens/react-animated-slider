@@ -1,7 +1,7 @@
 .slider {
 	position: relative;
 	width: 100%;
-	height: 200px;
+	height: 400px;
 	overflow: hidden
 }
 
@@ -27,10 +27,7 @@
 .slider a.previousButton:not(.disabled):hover, .slider a.nextButton:not(.disabled):hover {
 	-webkit-transform: translateY(-50%) scale(1.25);
 	        transform: translateY(-50%) scale(1.25);
-}
-
-.slider a.previousButton.disabled, .slider a.nextButton.disabled {
-	cursor: default;
+	cursor: pointer;
 }
 
 .slider a.previousButton {
@@ -83,3 +80,4 @@
 .slide.animateOut.next {
 	left: -100%;
 }
+
