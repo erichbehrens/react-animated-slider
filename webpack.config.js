@@ -51,30 +51,4 @@ const sliderConfig = {
 	],
 };
 
-const cssConfig = {
-	entry: {
-		horizontal: './src/css/horizontal.css',
-		vertical: './src/css/vertical.css',
-	},
-	output: {
-		path: path.resolve(__dirname, 'build'),
-	},
-	module: {
-		rules: [
-			{
-				test: /\.css$/,
-				use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
-			},
-		],
-	},
-	plugins: [
-		new MiniCssExtractPlugin({
-			filename: 'f-[name].css'
-		}),
-	],
-	externals: {
-		react: 'commonjs react', // this line is just to use the React dependency of our parent-testing-project instead of using our own React.
-	},
-};
-
 module.exports = [sliderConfig];
