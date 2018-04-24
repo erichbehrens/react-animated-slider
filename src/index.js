@@ -280,7 +280,7 @@ class Slider extends React.PureComponent {
 		const isDisabled = this.isDisabled();
 		return (
 			<div
-				className={className}
+				className={classNames.slider || className}
 				{...!touchDisabled && { ref: this.initTouchEvents }}
 				{...autoplay && {
 					onMouseOver: this.handleMouseOver,

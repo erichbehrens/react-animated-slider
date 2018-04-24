@@ -7,7 +7,7 @@
 [![dependencies](https://david-dm.org/erichbehrens/react-animated-slider.svg)](https://david-dm.org/erichbehrens/react-animated-slider)
 [![devDependencies](https://david-dm.org/erichbehrens/react-animated-slider/dev-status.svg)](https://david-dm.org/erichbehrens/react-animated-slider?type=dev)
 
-Animated slider component for react.
+A Slider/Carousel component for React supporting custom css animations.
 
 [Demo](http://erichbehrens.github.io/react-animated-slider/) - [Codesandbox Playground](https://codesandbox.io/s/p582xl40j)
 
@@ -87,6 +87,8 @@ Will be rendered inside the next button
 **classNames** `object`, default
 
 ```js
+{
+  slider: 'slider',
   previousButton: 'previousButton',
   nextButton: 'nextButton',
   buttonDisabled: 'disabled',
@@ -104,6 +106,8 @@ Will be rendered inside the next button
 Object representing the CSS classNames that will be apllied to the slides.
 
 ### Classnames
+
+**slider** the classname for the whole Slider element
 
 **previousButton** previous button
 
