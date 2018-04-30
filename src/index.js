@@ -116,6 +116,12 @@ class Slider extends React.PureComponent {
 		this.goTo(nextSlideIndex, NEXT);
 	};
 
+	setCurrentSlideByIndex = (index) => {
+		this.setState({
+			currentSlideIndex: index
+		});
+	}
+
 	getSlideClass = (index) => {
 		const {
 			currentSlideIndex,
