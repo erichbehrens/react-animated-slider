@@ -85,6 +85,26 @@
 		&.next {
 			left: 0;
 			visibility: visible;
+
+			& p {
+				transition-delay: 1.1s;
+			}
+
+			& button {
+				transition-delay: 1.3s;
+			}
+			
+			& section img {
+				transition-delay: 1.3s;
+			}
+
+			& section span {
+				transition-delay: 1.4s;
+			}
+
+			& section span strong {
+				transition-delay: 1.5s;
+			}
 		}
 	}
 
@@ -95,6 +115,22 @@
 
 		&.next {
 			left: -100%;
+		}
+
+		& h1 {
+			transition-delay: .3s;
+		}
+
+		& p {
+			transition-delay: .2s;
+		}
+
+		& section span {
+			transition-delay: .1s;
+		}
+
+		& section span strong {
+			transition-delay: 0s;
 		}
 	}
 
