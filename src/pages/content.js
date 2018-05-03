@@ -1,17 +1,17 @@
 export default [
 	{
-		title: 'Vulputate Mollis Ultricies Fermentum Parturient',
+		title: 'Vulputate Mollis Ultricies',
 		description:
-			'Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras justo odio, dapibus ac facilisis.',
+			'Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.',
 		button: 'Read More',
 		image: 'https://i.imgur.com/ZXBtVw7.jpg',
 		user: 'Daniel',
 		userProfile: 'https://s7.postimg.cc/abavelo3v/1_3x.png',
 	},
 	{
-		title: 'Tortor Dapibus Commodo Aenean Quam',
+		title: 'Tortor Dapibus',
 		description:
-			'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec sed odio dui.',
+			'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.',
 		button: 'Discover',
 		image: 'https://i.imgur.com/DCdBXcq.jpg',
 		user: 'Samantha',
@@ -20,14 +20,14 @@ export default [
 	{
 		title: 'Phasellus volutpat metus',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est non commodo luctus, nisi erat porttitor ligula.',
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.',
 		button: 'Buy now',
 		image: 'https://i.imgur.com/DvmN8Hx.jpg',
 		user: 'Michael',
 		userProfile: 'https://s7.postimg.cc/6exjimijv/3_3x.png',
 	},
 	{
-		title: 'Ultricies Vulputate Mollis Fermentum Parturient',
+		title: 'Ultricies Vulputate Mollis',
 		description:
 			'Aenean eu leo quam. Pellentesque ornare sem lacinia  nibh, ut fermentum massa justo sit amet risus. Cras justo odio, dapibus ac facilisis.',
 		button: 'Read More',
@@ -36,9 +36,9 @@ export default [
 		userProfile: 'https://s7.postimg.cc/7ihnu80ij/4_3x.png',
 	},
 	{
-		title: 'Odo Aenean Quam Tortor Dapimodo Aenean Quam',
+		title: 'Odo Aenean Quam Tortor',
 		description:
-			'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis  purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec sed odio dui.',
+			'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 		button: 'Discover',
 		image: 'https://i.imgur.com/DCdBXcq.jpg',
 		user: 'William',
@@ -47,7 +47,7 @@ export default [
 	{
 		title: 'Volutpat Aenean metus',
 		description:
-			'quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentumconsectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est non commodo luctus, nisi erat porttitor ligula.',
+			'quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentumconsectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis.',
 		button: 'Buy now',
 		image: 'https://i.imgur.com/DvmN8Hx.jpg',
 		user: 'Katerina',

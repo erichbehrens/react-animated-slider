@@ -28,6 +28,11 @@ module.exports = {
 				loaders: ['css-hot-loader', MiniCssExtractPlugin.loader, 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]', 'postcss-loader'],
 			},
 			{
+				test: /\.css$/,
+				include: /node_modules/,
+				loaders: [MiniCssExtractPlugin.loader, 'css-loader'],
+			},
+			{
 				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
 				exclude: /(node_modules|bower_components)/,
 				loader: 'url-loader?limit=10000&mimetype=image/svg+xml',

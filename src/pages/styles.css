@@ -73,10 +73,6 @@ header section {
 	background: #ffd800;
 }
 
-header section .logo {
-	transform: translateX(-87px);
-}
-
 header section a {
 	float: right;
 	padding: 3px 0;
@@ -103,4 +99,11 @@ header section a {
 		bottom: 0;
 		left: 0;
 	}
+}
+
+.page {
+	width: 100%;
+	max-width: 1000px;
+	margin: auto;
+	margin-bottom: 100px;
 }

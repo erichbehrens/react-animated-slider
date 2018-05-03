@@ -1,79 +1,37 @@
 import React from 'react';
 import { render } from 'react-dom'; // eslint-disable-line import/no-extraneous-dependencies
 import Header from './Header';
-import Slider from '../';
-import './styles.css';
-import horizontalCss from '../css/horizontal.css';
-import verticalCss from '../css/vertical.css';
-import content from './content';
+import styles from './styles.css';
 import Shields from './Shields';
-import customCss from './custom.css';
+import Horizontal from './examples/Horizontal';
+import Vertical from './examples/Vertical';
+import Custom from './examples/Custom';
+import Autoplay from './examples/Autoplay';
+import Gallery from './examples/Gallery';
 
-const App = () => (
-	<div>
-		<Header />
+function App() {
+	return (
+		<div className={styles.page}>
+			<Header />
 
-		<Shields />
+			<Shields />
 
-		<h1>DEMO</h1>
+			<h1>DEMO</h1>
 
-		<h2>Predefined horizontal slider</h2>
-		<Slider className={horizontalCss.slider} classNames={horizontalCss}>
-			{content.map((item, index) => (
-				<div
-					key={index}
-					className="slider-content"
-					style={{ background: `url('${item.image}') no-repeat center center` }}
-				>
-					<div className="center">
-						<h1>{item.title}</h1>
-						<p>{item.description}</p>
-						<button>{item.button}</button>
-					</div>
-				</div>
-			))}
-		</Slider>
+			Full source code for the examples is available on&nbsp;
+			<a href="https://github.com/erichbehrens/react-animated-slider/tree/master/src/pages">GitHub</a>
 
-		<h2>Predefined vertical slider</h2>
-		<Slider className={verticalCss.slider} classNames={verticalCss} direction="vertical">
-			{content.map((item, index) => (
-				<div
-					key={index}
-					className="slider-content"
-					style={{ background: `url('${item.image}') no-repeat center center` }}
-				>
-					<div className="center">
-						<h1>{item.title}</h1>
-						<p>{item.description}</p>
-						<button>{item.button}</button>
-					</div>
-				</div>
-			))}
-		</Slider>
+			<Gallery />
 
-		<h2>Custom style and animations</h2>
-		<Slider className={customCss.slider} classNames={customCss}>
-			{content.map((item, index) => (
-				<div
-					key={index}
-					className={customCss.sliderContent}
-					style={{ background: `url('${item.image}') no-repeat center center` }}
-				>
-					<div className={customCss.inner}>
-						<h1>{item.title}</h1>
-						<p>{item.description}</p>
-						<button>{item.button}</button>
-					</div>
-					<section>
-						<img src={item.userProfile} alt={item.user} />
-						<span>
-							Posted by <strong>{item.user}</strong>
-						</span>
-					</section>
-				</div>
-			))}
-		</Slider>
-	</div>
-);
+			<Horizontal />
+
+			<Vertical />
+
+			<Custom />
+
+			<Autoplay />
+		</div>
+	);
+}
 
 render(<App />, document.getElementById('app'));
