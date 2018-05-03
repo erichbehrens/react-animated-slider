@@ -83,6 +83,9 @@ class Slider extends React.PureComponent {
 			animation: undefined,
 		});
 		this.setupAutoplay();
+		if (typeof this.props.onSlideChange === 'function') {
+			this.props.onSlideChange({ slideIndex: this.nextSlideIndex });
+		}
 	};
 
 	isDisabled = () =>

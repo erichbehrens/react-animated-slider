@@ -77,13 +77,19 @@ Disable slider navigation through touch events
 
 Minimum distance to swipe for triggering a navigation event
 
-**previousButton** - `ReactElement`, default  `string "previous"`
+**previousButton** - `ReactElement`, default is an arrow svg
 
 Will be rendered inside the previous button
 
-**nextButton** - `ReactElement`, default `string "next"`
+**nextButton** - `ReactElement`, default is an arrow svg
 
 Will be rendered inside the next button
+
+**onSlideChange** - `function`, called after the current slide has changed; receives an object with the new slide index as argument:
+
+```js
+<Slider onSlideChange={event => console.log(event.slideIndex)>
+```
 
 **classNames** `object`, default
 

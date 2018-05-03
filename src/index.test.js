@@ -117,6 +117,15 @@ test('test autoslide disabled', () => {
 	expect(initialSnapshot).toEqual(slider.toJSON());
 });
 
+test('onSlideChange should be called with new slide index', () => {
+	const callback = jest.fn();
+	const slider = ReactTestRenderer.create(<Slider onSlideChange={callback}><div /><div /></Slider>);
+	slider.getInstance().next();
+	jest.runAllTimers();
+	expect(callback.mock.calls.length).toBe(1);
+	expect(callback.mock.calls[0][0]).toHaveProperty('slideIndex', 1);
+});
+
 test('test autoslide enabled', () => {
 	const autoplay = 2000;
 	const slider = ReactTestRenderer.create(<Slider autoplay={autoplay}><div /><div /></Slider>);
