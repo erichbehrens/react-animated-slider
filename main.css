@@ -84,11 +84,6 @@ header section {
 	background: #ffd800;
 }
 
-header section .styles__logo__1tNzg {
-	-webkit-transform: translateX(-87px);
-	        transform: translateX(-87px);
-}
-
 header section a {
 	float: right;
 	padding: 3px 0;
@@ -118,6 +113,13 @@ header section a {
 	bottom: 0;
 	left: 0;
 
+}
+
+.styles__page__P58RD {
+	width: 100%;
+	max-width: 1000px;
+	margin: auto;
+	margin-bottom: 100px;
 }
 
 .horizontal__slider__L_RIt {
@@ -201,6 +203,95 @@ header section a {
 
 .horizontal__slide__X6dwH.horizontal__animateOut__1VG3S.horizontal__next__1qSNp {
 	left: -100%;
+}
+
+/**
+ * GitHub Gist Theme
+ * Author : Louis Barranqueiro - https://github.com/LouisBarranqueiro
+ */
+
+.hljs {
+  display: block;
+  background: white;
+  padding: 0.5em;
+  color: #333333;
+  overflow-x: auto;
+}
+
+.hljs-comment,
+.hljs-meta {
+  color: #969896;
+}
+
+.hljs-string,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-strong,
+.hljs-emphasis,
+.hljs-quote {
+  color: #df5000;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-type {
+  color: #a71d5d;
+}
+
+.hljs-literal,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-attribute {
+  color: #0086b3;
+}
+
+.hljs-section,
+.hljs-name {
+  color: #63a35c;
+}
+
+.hljs-tag {
+  color: #333333;
+}
+
+.hljs-title,
+.hljs-attr,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #795da3;
+}
+
+.hljs-addition {
+  color: #55a532;
+  background-color: #eaffea;
+}
+
+.hljs-deletion {
+  color: #bd2c00;
+  background-color: #ffecec;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+.SourceView__sourceView__1fE8n .SourceView__toggleButton__1C87z {
+    border-radius: 0;
+    padding: 5px;
+    margin: 5px;
+}
+.SourceView__sourceView__1fE8n .SourceView__code__3dGGY {
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+}
+.SourceView__sourceView__1fE8n .SourceView__code__3dGGY.SourceView__expanded__19KEF {
+    height: auto;
+}
+.SourceView__sourceView__1fE8n .SourceView__code__3dGGY.SourceView__collapsed__1RuCl {
+    height: 0;
+    overflow: hidden;
 }
 
 .vertical__slider__2b7iT {
@@ -535,6 +626,91 @@ header section a {
 	opacity: 0;
 }
 
+
+.Gallery__slider__2Duv1 {
+	margin: auto;
+	position: relative;
+	width: 100%;
+	max-width: 600px;
+	height: 450px;
+	overflow: hidden
+}
+
+.Gallery__slider__2Duv1 a.Gallery__previousButton__3cUcQ, .Gallery__slider__2Duv1 a.Gallery__nextButton__2pPk2 {
+	font-size: 22px;
+	line-height: 0;
+	display: block;
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	        transform: translateY(-50%);
+	-webkit-transition: all .3s linear;
+	transition: all .3s linear;
+	z-index: 1;
+	color: #333;
+	padding: 10px;
+	text-decoration: none;
+	-webkit-backface-visibility: hidden;
+	        backface-visibility: hidden
+	/* prevent jump effect when scaling */
+}
+
+.Gallery__slider__2Duv1 a.Gallery__previousButton__3cUcQ:not(.Gallery__disabled__JhWd4):hover, .Gallery__slider__2Duv1 a.Gallery__nextButton__2pPk2:not(.Gallery__disabled__JhWd4):hover {
+	-webkit-transform: translateY(-50%) scale(1.25);
+	        transform: translateY(-50%) scale(1.25);
+	cursor: pointer;
+}
+
+.Gallery__slider__2Duv1 a.Gallery__previousButton__3cUcQ {
+	left: 20px;
+}
+
+.Gallery__slider__2Duv1 a.Gallery__nextButton__2pPk2 {
+	right: 20px;
+}
+
+.Gallery__slide__2tbQn {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	overflow: hidden
+}
+
+.Gallery__slide__2tbQn.Gallery__hidden__3H0Dc {
+	visibility: hidden;
+}
+
+.Gallery__slide__2tbQn.Gallery__previous__C4W7v {
+	left: -100%;
+}
+
+.Gallery__slide__2tbQn.Gallery__current__2qCws {
+	left: 0;
+}
+
+.Gallery__slide__2tbQn.Gallery__next__2e87c {
+	left: 100%;
+}
+
+.Gallery__slide__2tbQn.Gallery__animateIn__3iR_g,
+	.Gallery__slide__2tbQn.Gallery__animateOut__2p9jM {
+	-webkit-transition: all 2s ease;
+	transition: all 2s ease;
+}
+
+.Gallery__slide__2tbQn.Gallery__animateIn__3iR_g.Gallery__previous__C4W7v,
+		.Gallery__slide__2tbQn.Gallery__animateIn__3iR_g.Gallery__next__2e87c {
+	left: 0;
+	visibility: visible;
+}
+
+.Gallery__slide__2tbQn.Gallery__animateOut__2p9jM.Gallery__previous__C4W7v {
+	left: 100%;
+}
+
+.Gallery__slide__2tbQn.Gallery__animateOut__2p9jM.Gallery__next__2e87c {
+	left: -100%;
+}
 
 
 /*# sourceMappingURL=main.css.map*/
