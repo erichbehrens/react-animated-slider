@@ -1,0 +1,19 @@
+.sourceView {
+  & .toggleButton {
+    border-radius: 0;
+    padding: 5px;
+  }
+
+  & pre {
+    transition: all .5s ease;
+
+    &.expanded {
+      height: auto;
+    }
+
+    &.collapsed {
+      height: 0;
+      overflow: hidden;
+    }
+  }
+}
