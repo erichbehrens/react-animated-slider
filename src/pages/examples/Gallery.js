@@ -1,24 +1,24 @@
 import React from 'react';
 import Slider from '../../';
-import horizontalCss from '../../css/horizontal.css';
 import SourceView from '../SourceView';
+import styles from './Gallery.css';
 
 function Gallery() {
 	return (
-		<div>
+		<div className={styles.gallery}>
 			<h2>Simple image gallery</h2>
-			<Slider classNames={horizontalCss}>
-				<img src="https://i.imgur.com/ZXBtVw7.jpg" />
-				<img src="https://i.imgur.com/DCdBXcq.jpg" />
-				<img src="https://i.imgur.com/DvmN8Hx.jpg" />
+			<Slider classNames={styles}>
+				<img src="https://s18.postimg.cc/9vhgup22x/img1.jpg" />
+				<img src="https://s18.postimg.cc/vunvhvvrt/img2.jpg" />
+				<img src="https://s18.postimg.cc/tdc4amjl5/img3.jpg" />
 			</Slider>
 			<SourceView>{`import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 
 <Slider>
-	<img src="https://i.imgur.com/ZXBtVw7.jpg" />
-	<img src="https://i.imgur.com/DCdBXcq.jpg" />
-	<img src="https://i.imgur.com/DvmN8Hx.jpg" />
+	<img src="https://s18.postimg.cc/9vhgup22x/img1.jpg" />
+	<img src="https://s18.postimg.cc/vunvhvvrt/img2.jpg" />
+	<img src="https://s18.postimg.cc/tdc4amjl5/img3.jpg" />
 </Slider>`}
 			</SourceView>
 		</div>

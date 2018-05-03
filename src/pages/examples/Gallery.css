@@ -1,0 +1,84 @@
+.slider {
+	margin: auto;
+	position: relative;
+	width: 100%;
+	max-width: 600px;
+	height: 450px;
+	overflow: hidden;
+
+	& a {
+		&.previousButton, &.nextButton {
+			font-size: 22px;
+			line-height: 0;
+			display: block;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			transition: all .3s linear;
+			z-index: 1;
+			color: #333;
+			padding: 10px;
+			text-decoration: none;
+			backface-visibility: hidden; /* prevent jump effect when scaling */
+
+			&:not(.disabled):hover {
+				transform: translateY(-50%) scale(1.25);
+				cursor: pointer;
+			}
+		}
+
+		&.previousButton {
+			left: 20px;
+		}
+
+		&.nextButton {
+			right: 20px;
+		}
+	}
+}
+
+.slide {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	overflow: hidden;
+
+	&.hidden {
+		visibility: hidden;
+	}
+
+	&.previous {
+		left: -100%;
+	}
+
+	&.current {
+		left: 0;
+	}
+
+	&.next {
+		left: 100%;
+	}
+
+	&.animateIn,
+	&.animateOut {
+		transition: all 2s ease;
+	}
+
+	&.animateIn {
+		&.previous,
+		&.next {
+			left: 0;
+			visibility: visible;
+		}
+	}
+
+	&.animateOut {
+		&.previous {
+			left: 100%;
+		}
+
+		&.next {
+			left: -100%;
+		}
+	}
+}
