@@ -18,6 +18,9 @@ function App() {
 
 			<h1>DEMO</h1>
 
+			Full source code for the examples is available on&nbsp;
+			<a href="https://github.com/erichbehrens/react-animated-slider/tree/master/src/pages">GitHub</a>
+
 			<Gallery />
 
 			<Horizontal />
