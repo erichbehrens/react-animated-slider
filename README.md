@@ -23,6 +23,7 @@ A Slider/Carousel component for React supporting custom css animations.
 - Autoplay
 - Supports any element as children
 - Clean DOM without dirty manipulations
+- Support for CSS modules
 - Works with SSR
 - Works on IE11
 
