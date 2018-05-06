@@ -9,7 +9,7 @@
 
 A Slider/Carousel component for React supporting custom css animations.
 
-[Demo](http://erichbehrens.github.io/react-animated-slider/) - [Codesandbox Playground](https://codesandbox.io/s/p582xl40j)
+[Demo](https://erichbehrens.github.io/react-animated-slider/) - [Codesandbox Playground](https://codesandbox.io/s/p582xl40j)
 
 ![Preview](https://res.cloudinary.com/riangle/image/upload/v1511700118/react-animated-slider_qqedfm.png)
 
@@ -88,7 +88,7 @@ Will be rendered inside the next button
 **onSlideChange** - `function`, called after the current slide has changed; receives an object with the new slide index as argument:
 
 ```js
-<Slider onSlideChange={event => console.log(event.slideIndex)>
+<Slider onSlideChange={event => console.log(event.slideIndex)}>
 ```
 
 **classNames** `object`, default
