@@ -8,9 +8,9 @@
     "test": "jest",
     "build": "webpack-cli --mode production",
     "lint": "eslint src",
-    "deploy": "npm run build && npm run build:pages && npm publish && npm run deploy:pages",
-    "deploy:pages": "gh-pages -d pages",
-    "build:pages": "webpack --mode production --config webpack.config.pages.js"
+    "predeploy": "webpack --mode production --config webpack.config.pages.js",
+    "deploy": "gh-pages -d pages",
+    "prepublish": "npm run lint && npm run test && npm run build"
   },
   "repository": {
     "type": "git",
