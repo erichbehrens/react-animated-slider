@@ -70,7 +70,7 @@
     "react-dom": "^16.3.2",
     "react-test-renderer": "^16.2.0",
     "webpack": "^4.6.0",
-    "webpack-cli": "^2.0.14",
+    "webpack-cli": "^3.0.0",
     "webpack-dev-server": "^3.1.3"
   }
 }
