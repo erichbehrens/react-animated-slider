@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from '../../';
+import Slider from '../..';
 import SourceView from '../SourceView';
 import styles from './Gallery.css';
 

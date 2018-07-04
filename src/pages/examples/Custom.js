@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from '../../';
+import Slider from '../..';
 import customCss from '../custom.css';
 import content from '../content';
 

@@ -88,13 +88,14 @@ class Slider extends React.PureComponent {
 		}
 	};
 
-	isDisabled = () =>
-		this.slideCount < 2 ||
+	isDisabled = () => this.slideCount < 2 ||
 		this.state.animating ||
 		this.props.disabled;
 
 	isInfinite = () => this.slideCount > 2 && this.props.infinite !== false;
+
 	canGoPrevious = () => this.isInfinite() || this.state.currentSlideIndex > 0;
+
 	canGoNext = () => this.isInfinite() || this.state.currentSlideIndex < this.slideCount - 1;
 
 	goTo = (index, animation) => {
@@ -107,15 +108,13 @@ class Slider extends React.PureComponent {
 	previous = () => {
 		if (!this.canGoPrevious()) return;
 		const nextSlideIndex = this.state.currentSlideIndex - 1;
-		const actualNextSlide =
-			nextSlideIndex >= 0 ? nextSlideIndex : this.slideCount - 1;
+		const actualNextSlide = nextSlideIndex >= 0 ? nextSlideIndex : this.slideCount - 1;
 		this.goTo(actualNextSlide, PREVIOUS);
 	};
 
 	next = () => {
 		if (!this.canGoNext()) return;
-		const nextSlideIndex =
-			(this.state.currentSlideIndex + 1) % this.slideCount;
+		const nextSlideIndex = (this.state.currentSlideIndex + 1) % this.slideCount;
 		this.goTo(nextSlideIndex, NEXT);
 	};
 
@@ -129,17 +128,20 @@ class Slider extends React.PureComponent {
 		if (index === currentSlideIndex) {
 			if (animation) return `${classNames.animateOut} ${classNames[animation]}`;
 			return classNames.current;
-		} else if (this.slideCount === 2) {
+		}
+		if (this.slideCount === 2) {
 			if (animation) return `${classNames.animateIn} ${classNames[animation]}`;
 			return index < currentSlideIndex ? classNames.previous : classNames.next;
-		} else if (
+		}
+		if (
 			index === currentSlideIndex - 1 ||
 			(currentSlideIndex === 0 && index === lastSlideIndex)
 		) {
 			if (animation === PREVIOUS) return `${classNames.animateIn} ${classNames.previous}`;
 			if (animation === NEXT) return classNames.hidden;
 			return classNames.previous;
-		} else if (
+		}
+		if (
 			index === currentSlideIndex + 1 ||
 			(index === 0 && currentSlideIndex === lastSlideIndex)
 		) {
@@ -150,6 +152,7 @@ class Slider extends React.PureComponent {
 		return classNames.hidden;
 	};
 
+	/* eslint-disable lines-between-class-members */
 	isSwiping = false;
 	sliderRef;
 	pageStartPosition;
@@ -163,6 +166,7 @@ class Slider extends React.PureComponent {
 	nextElement;
 	nextElementStartPosition;
 	nextElementPosition;
+	/* eslint-enable lines-between-class-members */
 
 	handleTouchStart = (e) => {
 		if (this.isDisabled()) return;
@@ -195,10 +199,10 @@ class Slider extends React.PureComponent {
 	};
 
 	animating = false;
+
 	handleTouchMove = (e) => {
 		e.preventDefault();
-		this.animating =
-			this.animating ||
+		this.animating = this.animating ||
 			requestAnimationFrame(() => {
 				if (!this.isSwiping) {
 					this.animating = false;
@@ -303,11 +307,12 @@ class Slider extends React.PureComponent {
 					{nextButton}
 				</a>
 				<div className={classNames.track}>
-					{React.Children.map(children, (item, index) =>
+					{React.Children.map(children, (item, index) => (
 						React.cloneElement(item, {
 							key: index,
 							className: [classNames.slide, this.getSlideClass(index), item.props.className].filter(v => v).join(' '),
-						}))}
+						})
+					))}
 				</div>
 			</div>
 		);
