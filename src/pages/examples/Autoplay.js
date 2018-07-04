@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from '../../';
+import Slider from '../..';
 import horizontalCss from '../../css/horizontal.css';
 import content from '../content';
 import SourceView from '../SourceView';
