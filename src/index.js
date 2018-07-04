@@ -58,6 +58,9 @@ class Slider extends React.PureComponent {
 
 	componentWillUnmount() {
 		this.stopAutoplay();
+		if (this.animationTimerId) {
+			clearTimeout(this.animationTimerId);
+		}
 	}
 
 	setupAutoplay = () => {
@@ -102,7 +105,8 @@ class Slider extends React.PureComponent {
 		if (this.isDisabled()) return;
 		this.nextSlideIndex = index;
 		this.setState({ animating: true, animation });
-		setTimeout(this.onAnimationEnd, this.props.duration || DEFAULT_DURATION);
+		const timeout = this.props.duration || DEFAULT_DURATION;
+		this.animationTimerId = setTimeout(this.onAnimationEnd, timeout);
 	};
 
 	previous = () => {
