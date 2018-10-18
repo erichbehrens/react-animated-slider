@@ -137,3 +137,35 @@ test('test autoslide enabled', () => {
 	expect(animatedSnapshot).toMatchSnapshot();
 	expect(animatedSnapshot).not.toEqual(initialSnapshot);
 });
+
+test('can handle adding children', () => {
+	const slider = ReactTestRenderer.create(<Slider><div /><div /></Slider>);
+	expect(slider.getInstance().slideCount).toBe(2);
+	slider.update(<Slider><div /><div /><div /></Slider>);
+	expect(slider.getInstance().slideCount).toBe(3);
+});
+
+test('can handle removing children', () => {
+	const slider = ReactTestRenderer.create(<Slider><div /><div /><div /></Slider>);
+	expect(slider.getInstance().slideCount).toBe(3);
+	slider.update(<Slider><div /><div /></Slider>);
+	expect(slider.getInstance().slideCount).toBe(2);
+});
+
+test('should not reset currentSlideIndex when removing next slide(s)', () => {
+	const slider = ReactTestRenderer.create(<Slider slideIndex={1}><div /><div /><div /></Slider>);
+	expect(slider.getInstance().slideCount).toBe(3);
+	expect(slider.getInstance().state.currentSlideIndex).toBe(1);
+	slider.update(<Slider><div /><div /></Slider>);
+	expect(slider.getInstance().slideCount).toBe(2);
+	expect(slider.getInstance().state.currentSlideIndex).toBe(1);
+});
+
+test('should reset currentSlideIndex when removing current slide', () => {
+	const slider = ReactTestRenderer.create(<Slider slideIndex={2}><div /><div /><div /></Slider>);
+	expect(slider.getInstance().slideCount).toBe(3);
+	expect(slider.getInstance().state.currentSlideIndex).toBe(2);
+	slider.update(<Slider><div /><div /></Slider>);
+	expect(slider.getInstance().slideCount).toBe(2);
+	expect(slider.getInstance().state.currentSlideIndex).toBe(0);
+});
