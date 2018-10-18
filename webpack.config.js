@@ -23,11 +23,11 @@ const sliderConfig = {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['env'],
+						presets: ['@babel/preset-env'],
 						plugins: [
-							'transform-object-rest-spread',
-							'transform-class-properties',
-							'transform-react-jsx',
+							'@babel/proposal-class-properties',
+							'@babel/proposal-object-rest-spread',
+							'@babel/transform-react-jsx',
 						],
 					},
 				},
