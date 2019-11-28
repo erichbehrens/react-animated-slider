@@ -25,7 +25,15 @@ module.exports = {
 			{
 				test: /\.css$/,
 				exclude: /node_modules/,
-				loaders: ['css-hot-loader', MiniCssExtractPlugin.loader, 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]', 'postcss-loader'],
+				loaders: ['css-hot-loader', MiniCssExtractPlugin.loader, {
+					loader: 'css-loader',
+					options: {
+						importLoaders: true,
+						modules: {
+							localIdentName: '[name]__[local]__[hash:base64:5]',
+						},
+					},
+				}, 'postcss-loader'],
 			},
 			{
 				test: /\.css$/,
