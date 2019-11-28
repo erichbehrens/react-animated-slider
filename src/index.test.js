@@ -13,12 +13,16 @@ test('renders one child', () => {
 	const slider = ReactTestRenderer.create(<Slider><div /></Slider>);
 	expect(slider).toBeDefined();
 	expect(slider.toJSON()).toMatchSnapshot();
+	expect(slider.root.findByProps({ className: 'previousButton disabled' })).toBeDefined();
+	expect(slider.root.findByProps({ className: 'nextButton disabled' })).toBeDefined();
 });
 
 test('renders two children', () => {
 	const slider = ReactTestRenderer.create(<Slider><div /><div /></Slider>);
 	expect(slider).toBeDefined();
 	expect(slider.toJSON()).toMatchSnapshot();
+	expect(slider.root.findByProps({ className: 'previousButton disabled' })).toBeDefined();
+	expect(slider.root.findByProps({ className: 'nextButton' })).toBeDefined();
 });
 
 test('renders three children', () => {
@@ -61,6 +65,8 @@ test('with two children can navigate to next only once', () => {
 	const snapshot = slider.toJSON();
 	slider.getInstance().next();
 	jest.runAllTimers();
+	expect(slider.root.findByProps({ className: 'previousButton' })).toBeDefined();
+	expect(slider.root.findByProps({ className: 'nextButton disabled' })).toBeDefined();
 	expect(snapshot).toEqual(slider.toJSON());
 	expect(slider.toJSON()).toMatchSnapshot();
 });
@@ -150,6 +156,19 @@ test('can handle removing children', () => {
 	expect(slider.getInstance().slideCount).toBe(3);
 	slider.update(<Slider><div /><div /></Slider>);
 	expect(slider.getInstance().slideCount).toBe(2);
+});
+
+test('should disable next button when reducing to one child', () => {
+	const slider = ReactTestRenderer.create(<Slider><div /><div /></Slider>);
+	slider.update(<Slider><div /></Slider>);
+	expect(slider.root.findByProps({ className: 'nextButton disabled' })).toBeDefined();
+});
+
+test('should disable next button when reducing to current slide', () => {
+	const slider = ReactTestRenderer.create(<Slider><div /><div /><div /></Slider>);
+	slider.getInstance().setState({ currentSlideIndex: 1 });
+	slider.update(<Slider><div /><div /></Slider>);
+	expect(slider.root.findByProps({ className: 'nextButton disabled' })).toBeDefined();
 });
 
 test('should not reset currentSlideIndex when removing next slide(s)', () => {

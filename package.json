@@ -22,10 +22,12 @@
     "slider",
     "gallery",
     "slideshow",
+    "carousel",
     "react-component",
     "react-slider",
     "react-gallery",
     "react-slideshow",
+    "react-carousel",
     "image slider",
     "image gallery",
     "animations"
@@ -37,7 +39,10 @@
   },
   "homepage": "https://github.com/erichbehrens/react-animated-slider#readme",
   "dependencies": {
-    "react": "^16.6.3"
+    "react": "^16.12.0"
+  },
+  "peerDependencies": {
+    "react": "^16.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
@@ -68,8 +73,8 @@
     "postcss-cssnext": "^3.1.0",
     "postcss-loader": "^3.0.0",
     "raw-loader": "^0.5.1",
-    "react-dom": "^16.6.3",
-    "react-test-renderer": "^16.6.3",
+    "react-dom": "^16.12.0",
+    "react-test-renderer": "^16.12.0",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
