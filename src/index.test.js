@@ -13,12 +13,16 @@ test('renders one child', () => {
 	const slider = ReactTestRenderer.create(<Slider><div /></Slider>);
 	expect(slider).toBeDefined();
 	expect(slider.toJSON()).toMatchSnapshot();
+	expect(slider.root.findByProps({ className: 'previousButton disabled' })).toBeDefined();
+	expect(slider.root.findByProps({ className: 'nextButton disabled' })).toBeDefined();
 });
 
 test('renders two children', () => {
 	const slider = ReactTestRenderer.create(<Slider><div /><div /></Slider>);
 	expect(slider).toBeDefined();
 	expect(slider.toJSON()).toMatchSnapshot();
+	expect(slider.root.findByProps({ className: 'previousButton disabled' })).toBeDefined();
+	expect(slider.root.findByProps({ className: 'nextButton' })).toBeDefined();
 });
 
 test('renders three children', () => {
@@ -61,6 +65,8 @@ test('with two children can navigate to next only once', () => {
 	const snapshot = slider.toJSON();
 	slider.getInstance().next();
 	jest.runAllTimers();
+	expect(slider.root.findByProps({ className: 'previousButton' })).toBeDefined();
+	expect(slider.root.findByProps({ className: 'nextButton disabled' })).toBeDefined();
 	expect(snapshot).toEqual(slider.toJSON());
 	expect(slider.toJSON()).toMatchSnapshot();
 });
