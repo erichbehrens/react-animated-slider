@@ -46,7 +46,6 @@ class Slider extends React.PureComponent {
 			currentSlideIndex: slideIndex,
 			animating: false,
 		};
-		this.slideCount = React.Children.count(this.props.children);
 		this.direction = direction;
 		this.swipeProperty = direction === HORIZONTAL ? 'left' : 'top';
 		this.swipeEventProperty = direction === HORIZONTAL ? 'clientX' : 'clientY';
@@ -63,11 +62,12 @@ class Slider extends React.PureComponent {
 		}
 	}
 
-	componentWillReceiveProps(props) {
-		this.slideCount = React.Children.count(props.children);
-		if (this.state.currentSlideIndex >= this.slideCount) {
-			this.setState({ currentSlideIndex: 0 });
+	static getDerivedStateFromProps(props, state) {
+		const slideCount = React.Children.count(props.children);
+		if (state.currentSlideIndex >= slideCount) {
+			return { currentSlideIndex: 0 };
 		}
+		return null;
 	}
 
 	setupAutoplay = () => {
@@ -286,6 +286,7 @@ class Slider extends React.PureComponent {
 	}
 
 	render() {
+		this.slideCount = React.Children.count(this.props.children);
 		const {
 			children,
 			className = 'slider',

@@ -22,10 +22,12 @@
     "slider",
     "gallery",
     "slideshow",
+    "carousel",
     "react-component",
     "react-slider",
     "react-gallery",
     "react-slideshow",
+    "react-carousel",
     "image slider",
     "image gallery",
     "animations"
@@ -38,6 +40,9 @@
   "homepage": "https://github.com/erichbehrens/react-animated-slider#readme",
   "dependencies": {
     "react": "^16.12.0"
+  },
+  "peerDependencies": {
+    "react": "^16.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",

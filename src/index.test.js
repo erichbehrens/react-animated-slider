@@ -158,6 +158,19 @@ test('can handle removing children', () => {
 	expect(slider.getInstance().slideCount).toBe(2);
 });
 
+test('should disable next button when reducing to one child', () => {
+	const slider = ReactTestRenderer.create(<Slider><div /><div /></Slider>);
+	slider.update(<Slider><div /></Slider>);
+	expect(slider.root.findByProps({ className: 'nextButton disabled' })).toBeDefined();
+});
+
+test('should disable next button when reducing to current slide', () => {
+	const slider = ReactTestRenderer.create(<Slider><div /><div /><div /></Slider>);
+	slider.getInstance().setState({ currentSlideIndex: 1 });
+	slider.update(<Slider><div /><div /></Slider>);
+	expect(slider.root.findByProps({ className: 'nextButton disabled' })).toBeDefined();
+});
+
 test('should not reset currentSlideIndex when removing next slide(s)', () => {
 	const slider = ReactTestRenderer.create(<Slider slideIndex={1}><div /><div /><div /></Slider>);
 	expect(slider.getInstance().slideCount).toBe(3);
