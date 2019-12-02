@@ -63,7 +63,7 @@ const slides = [
 ## Properties
 
 | property | type | default | description |
-|-|-|-|-|-|
+|-|-|-|-|
 | **slideIndex** | `number` | `0` | Index of the slide that will be initially displayed. |
 | **duration** | `number` | `2000`(ms) | Duration of the animation in milliseconds. It is used to remove the `animateIn` and `animateOut` classNames and assign `current` after the transition has completed. |
 | **disabled** | `boolean` | `false` | Disable slider navigation |
