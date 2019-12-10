@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const sliderConfig = {
 	entry: {
@@ -47,7 +48,8 @@ const sliderConfig = {
 		new MiniCssExtractPlugin({
 			filename: '[name].css',
 			chunkFilename: '[name].css',
-		}),
+    }),
+    new CopyPlugin([{ from: './src/index.d.ts', to: './index.d.ts' }])
 	],
 };
 

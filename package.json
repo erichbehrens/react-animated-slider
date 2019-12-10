@@ -1,8 +1,9 @@
 {
   "name": "react-animated-slider",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Animated slider component for react",
   "main": "build/index.js",
+  "typings": "build/index.d.ts",
   "files": [
     "build"
   ],
@@ -58,6 +59,7 @@
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.0",
     "css-hot-loader": "^1.4.4",
     "css-loader": "^3.2.0",
     "eslint": "^6.7.1",
@@ -77,6 +79,7 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-test-renderer": "^16.4.0",
+    "typescript": "3.7.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
