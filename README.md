@@ -48,7 +48,7 @@ import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 
 const slides = [
-  { title: 'First item', description: 'Lorem ipsum'}
+  { title: 'First item', description: 'Lorem ipsum'},
   { title: 'Second item', description: 'Lorem ipsum'}
 ];
 
